@@ -14,5 +14,6 @@ In addition to location assignment automation, we aim to enhance inventory manag
 - **Flask**: Backend Development
 
 ### Additional Features
+- **General User Side**: Interface for users to see location statuses and upvote location priority.
 - **Cluster Tech Side**: Interface for CTs to view assigned locations and update inventory counts.
 - **Admin Side**: Interface for administrators to interact with the location scheduling algorithm and manage system settings.
