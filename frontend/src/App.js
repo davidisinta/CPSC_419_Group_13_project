@@ -7,7 +7,7 @@ function App() {
   const [getMessage, setGetMessage] = useState({})
 
   useEffect(()=>{
-    axios.get('http://localhost:5000/hello').then(response => {
+    axios.get('https://stc-app-02e4a1d4d843.herokuapp.com/hello').then(response => {
       console.log("SUCCESS", response)
       setGetMessage(response)
     }).catch(error => {
