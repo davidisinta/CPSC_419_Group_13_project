@@ -8,7 +8,7 @@ function App() {
 
   useEffect(()=>{
     axios.get('https://stc-app-02e4a1d4d843.herokuapp.com/hello').then(response => {
-      console.log("SUCCESS", response)
+      console.log("SUCCESS", response.data.message)
       setGetMessage(response)
     }).catch(error => {
       console.log(error)
