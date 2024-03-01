@@ -1,31 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios'
+import NavBar from './components/navbar';
+import Home from './components/pages/home';
+import Footer from './components/footer';
 
 function App() {
-  const [getMessage, setGetMessage] = useState({})
-
-  useEffect(()=>{
-    axios.get('https://stc-app-02e4a1d4d843.herokuapp.com/hello').then(response => {
-      console.log("SUCCESS", response.data.message)
-      setGetMessage(response)
-    }).catch(error => {
-      console.log(error)
-    })
-
-  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>CPSC 419</p>
-        <div>{getMessage.status === 200 ? 
-          <h3>{getMessage.data.message}</h3>
-          :
-          <h3>LOADING</h3>}</div>
-      </header>
-    </div>
+    <>
+      <Router>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+        <Footer/>
+      </Router>
+    </>
   );
 }
 
