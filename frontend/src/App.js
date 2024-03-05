@@ -1,7 +1,6 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import axios from 'axios'
 import NavBar from './components/navbar';
 import Home from './components/pages/home';
 import Footer from './components/footer';

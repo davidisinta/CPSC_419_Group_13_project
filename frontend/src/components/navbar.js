@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { Button } from "@tremor/react";
 import './navbar.css';
 
 export default function NavBar() {
@@ -8,9 +9,7 @@ export default function NavBar() {
     const [button, setButton] = useState(true);
     //  Menu onClick function
     const handleClick = () => setClick (!click);
-
     const closeMobileMenu = () =>  setClick(false);
-
     // Display button on mobile
     const showButton = () => {
         if (window.innerWidth <= 960) {
@@ -42,7 +41,7 @@ export default function NavBar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/technology" className="nav-links" onClick={closeMobileMenu}>
+                            <Link to="/report" className="nav-links" onClick={closeMobileMenu}>
                                 Report
                             </Link>
                         </li>
@@ -52,6 +51,7 @@ export default function NavBar() {
                             </Link>
                         </li>
                     </ul>
+                    {button && <Button buttonStyle="btn--outline" color="gray">Log in</Button>}
                 </div>
             </nav>
         </>

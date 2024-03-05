@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import Button from './button';
+import React from 'react';
 import './footer.css';
 import { Link } from 'react-router-dom';
 
