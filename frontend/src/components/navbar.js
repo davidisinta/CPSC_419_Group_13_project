@@ -28,7 +28,7 @@ export default function NavBar() {
             <nav className="navbar">
                 <div className="navbar-container">
                     <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
-                        STC Inventory App 
+                        STC Inventory App
                     </Link>
                     <div className="menu-icon" onClick={handleClick}>
                         <i className={click? "fas fa-times" : "fas fa-bars"}/>
@@ -39,11 +39,7 @@ export default function NavBar() {
                                 Home
                             </Link>
                         </li>
-                        <li className="nav-item">
-                            <Link to="/report" className="nav-links" onClick={closeMobileMenu}>
-                                Report
-                            </Link>
-                        </li>
+
                         <li className="nav-item">
                             <Link to="/about" className="nav-links" onClick={closeMobileMenu}>
                                 About
@@ -51,10 +47,18 @@ export default function NavBar() {
                         </li>
 
                         <li className="nav-item">
-                            <Link to="/login" className="nav-links" onClick={closeMobileMenu}>
-                                Login
+                            <Link to="/report" className="nav-links" onClick={closeMobileMenu}>
+                                Report
                             </Link>
                         </li>
+
+                        <li className="nav-item">
+                            <Link to="/login" className="nav-links" onClick={closeMobileMenu}>
+                                Profile
+                            </Link>
+                        </li>
+
+
                     </ul>
                 </div>
             </nav>

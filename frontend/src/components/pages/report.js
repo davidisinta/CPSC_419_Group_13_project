@@ -2,8 +2,10 @@
 
 export default function Report() {
     return (
-        <>
-            <h1>Report</h1>
-        </>
+        <div className={"report-page-container"}>
+
+            Report page
+
+        </div>
     )
 }
