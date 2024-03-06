@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function Home() {
+function Login() {
   return (
       <div className="login">
 
@@ -17,4 +17,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Login;
