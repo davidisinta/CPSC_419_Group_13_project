@@ -69,7 +69,7 @@ const Profile = (props) => {
 
             <div> Don't have an account?
 
-                <span> Sign Up</span>
+                <span className={"sign-up"}> Sign Up</span>
 
             </div>
 

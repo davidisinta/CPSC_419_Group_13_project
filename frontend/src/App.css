@@ -45,6 +45,10 @@
 
 
 /* Login page styling*/
+
+.sign-up{
+  color: cornflowerblue;
+}
 .mainContainer {
   flex-direction: column;
   display: flex;
@@ -137,3 +141,4 @@
     flex: 1;
 
 }
+
