@@ -9,15 +9,37 @@ import {
 } from '@tremor/react';
 import { RiFlag2Line } from '@remixicon/react';
 import { Card, Badge } from '@tremor/react';
-import data from './inventory_data';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+//import data from './inventory_data';
+//import React from 'react';
 
 
 export default function InventoryTable() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const r = await fetch('http://127.0.0.1:5000/summary'); 
+        if (!r.ok) {
+          throw new Error('failed to fetch');
+        }
+        const data = await r.json();
+        setData(data); 
+      } catch (error) {
+        console.error('setting data failed:', error);
+      }
+    }; fetchData(); }, []);
   return (
     <>
         <Card>
       <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">Printers Maintained by STC Cluster Technology</h3>
+      <div>{data.length > 0 ? (
+          <p>Data received.</p>
+        ) : (
+          <p>No data received.</p>
+        )}
+      </div>
       <Table className="mt-5" color='white'>
         <TableHead>
           <TableRow>
