@@ -63,7 +63,7 @@ export default function InventoryTable() {
             <TableRow key={item.name}>
               <TableCell>{item.id}</TableCell>
               <TableCell>
-                <Badge color="emerald" icon={RiFlag2Line}>
+                <Badge color={item.status === "Functional" ? "emerald" : 'red'} icon={RiFlag2Line}>
                   {item.status}
                 </Badge>
               </TableCell>

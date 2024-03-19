@@ -27,8 +27,8 @@ class Connection:
                           status, 
                           paper, 
                           zone, 
-                          string_agg(t.type, ', ') as toner_type, 
-                          string_agg(wt.type, ', ') as waste_toner, 
+                          string_agg(DISTINCT t.type, ', ') as toner_type, 
+                          string_agg(DISTINCT wt.type, ', ') as waste_toner, 
                           SUM(CASE WHEN t.color = 0 THEN ti.quantity ELSE 0 END) as black,
                           SUM(CASE WHEN t.color = 1 THEN ti.quantity ELSE 0 END) as cyan,
                           SUM(CASE WHEN t.color = 2 THEN ti.quantity ELSE 0 END) as magenta,
@@ -45,6 +45,7 @@ class Connection:
                 LEFT JOIN toner t ON t.id = ti.toner_id
                 LEFT JOIN toner_inventory wi ON l.id = wi.loc_id
                 LEFT JOIN toner wt ON wt.id = wi.toner_id
+                WHERE t.id is NULL or t.color <> 4  AND wt.color = 4
                 GROUP BY p.id, status, paper, zone, k_level, c_level, m_level, y_level, model, kyo_num
                 ORDER BY zone
                 """
@@ -77,6 +78,7 @@ class Connection:
                 ON CONFLICT (loc_id, toner_id)
                 DO UPDATE SET quantity = %s"""
         self._cursor.execute(query, (loc_id, toner_id, quantity, quantity))
+        self._connection.commit()
         return
 
     def get_toner_types(self, print_id):
@@ -104,7 +106,13 @@ class Connection:
         return self._cursor.fetchall()
 
 
-if __name__ == '__main__':
-    con = Connection("fisher.marks", "FgbxGdU60iXt")
-    print(con.get_summary())
+# if __name__ == '__main__':
+#     con = Connection("fisher.marks", "FgbxGdU60iXt")
+#     con.stock_toner("1", "1", "2")
+#     con.stock_toner("1", "20", "2")
+#     con.stock_toner("1", "39", "2")
+#     con.stock_toner("1", "58", "2")
+#     con.stock_toner("1", "81", "1")
+#     print(con.get_summary())
+#     con.close()
 
