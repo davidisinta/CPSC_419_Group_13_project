@@ -16,19 +16,21 @@ import LocationDialog from './locationDialog';
 export default function InventoryTable() {
   const [data, setData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
-
+  // Open location dialog when a row is clicked
   const handleRowClick = (item) => {
     setSelectedItem(item);
   };
-
+  // Close location dialog
   const handleCloseDialog = () => {
     setSelectedItem(null);
   };
+  // Get color for toner progress bars based on toner percentage
   const getColorByPercent = (p) => {
     if (p > 30) return "teal";
     else if (p > 10) return "yellow";
     else return "red";
   }
+  // Fetch inventory data from the backend
   useEffect(() => {
     const fetchInventory = async () => {
       try{
@@ -51,7 +53,7 @@ export default function InventoryTable() {
         <Table className="mt-5" color='white'>
           <TableHead>
             <TableRow>
-              <TableHeaderCell>ID</TableHeaderCell>
+              <TableHeaderCell>Location</TableHeaderCell>
               <TableHeaderCell>Functional</TableHeaderCell>
               <TableHeaderCell>Paper</TableHeaderCell>
               <TableHeaderCell>Zone</TableHeaderCell>
@@ -69,6 +71,7 @@ export default function InventoryTable() {
           <TableBody>
             {data.map((item) => (
               <TableRow key={item.id}>
+                {/* Make printer location clickable */}
                 <div key={item.id} onClick={() => handleRowClick(item)}>
                   <TableCell className="cursor-pointer hover:underline">{item.loc}</TableCell>
                 </div>
@@ -120,6 +123,7 @@ export default function InventoryTable() {
           </TableBody>
         </Table>
       </Card>
+      {/* Show location dialog when a row is clicked */}
       {selectedItem && <LocationDialog location={selectedItem.loc} onClose={handleCloseDialog} />}
     </>
   )

@@ -2,6 +2,7 @@ import { Card, Button } from '@tremor/react';
 import React from 'react';
 
 export default function LocationDialog({ location, onClose }) {
+  // Dialog to report a problem or update inventory for a location
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="rounded-lg">
