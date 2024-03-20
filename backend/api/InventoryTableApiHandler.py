@@ -58,7 +58,7 @@ class InventoryTableApiHandler(Resource):
                         LEFT JOIN toner wt ON wt.id = wi.toner_id
                         WHERE t.id is NULL or t.color <> 4  AND wt.color = 4
                         GROUP BY l.name, status, paper, zone, k_level, c_level, m_level, y_level, model, kyo_num
-                        ORDER BY zone
+                        ORDER BY zone, l.name
                         """
                 cursor.execute(query)
                 response = jsonify_printer_rows(cursor.fetchall())
