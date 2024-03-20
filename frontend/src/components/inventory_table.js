@@ -16,7 +16,11 @@ import React, { useState, useEffect } from 'react';
 
 export default function InventoryTable() {
   const [data, setData] = useState([]);
-
+  const getColorByPercent = (p) => {
+    if (p > 30) return "teal";
+    else if (p > 10) return "yellow";
+    else return "red";
+  }
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -75,25 +79,25 @@ export default function InventoryTable() {
                     <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content flex items-center justify-between">
                         <span>Black</span>
                     </p>
-                    <ProgressBar value={item.toner_percentage.black} color="teal" className="mt-3" />
+                    <ProgressBar value={item.toner_percentage.black} color={getColorByPercent(item.toner_percentage.black)} className="mt-3" />
                     </div>
                     <div className="mx-auto max-w-sm">
                     <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content flex items-center justify-between">
                         <span>Cyan</span>
                     </p>
-                    <ProgressBar value={item.toner_percentage.cyan} color="teal" className="mt-3" />
+                    <ProgressBar value={item.toner_percentage.cyan} color={getColorByPercent(item.toner_percentage.cyan)} className="mt-3" />
                     </div>
                     <div className="mx-auto max-w-sm">
                     <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content flex items-center justify-between">
                         <span>Magenta</span>
                     </p>
-                    <ProgressBar value={item.toner_percentage.magenta} color="teal" className="mt-3" />
+                    <ProgressBar value={item.toner_percentage.magenta} color={getColorByPercent(item.toner_percentage.magenta)} className="mt-3" />
                     </div>
                     <div className="mx-auto max-w-sm">
                     <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content flex items-center justify-between">
                         <span>Yellow</span>
                     </p>
-                    <ProgressBar value={item.toner_percentage.yellow} color="teal" className="mt-3" />
+                    <ProgressBar value={item.toner_percentage.yellow} color={getColorByPercent(item.toner_percentage.yellow)} className="mt-3" />
                     </div>
                 </div>
             </TableCell>
