@@ -1,8 +1,8 @@
 from flask_restful import Resource
-from flask import jsonify
+from flask import jsonify, Response
 from .config import establish_connection
 
-def jsonify_printer_rows(data):
+def jsonify_printer_rows(data) -> Response:
     """ Returns a jsonified list of inventory table rows from a list of tuples (database query result)."""
     out = []
     for tuple in data:
@@ -65,5 +65,4 @@ class InventoryTableApiHandler(Resource):
                 response.status_code = 200
                 return response
         except Exception as e:
-            return {
-                'message': str(e)}, 500
+            return {'message': str(e)}, 500
