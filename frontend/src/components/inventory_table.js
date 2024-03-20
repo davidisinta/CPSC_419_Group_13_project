@@ -20,7 +20,7 @@ export default function InventoryTable() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const r = await fetch('http://127.0.0.1:5000/summary'); 
+        const r = await fetch('http://127.0.0.1:5000/'); 
         if (!r.ok) {
           throw new Error('failed to fetch');
         }
@@ -34,16 +34,10 @@ export default function InventoryTable() {
     <>
         <Card>
       <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">Printers Maintained by STC Cluster Technology</h3>
-      <div>{data.length > 0 ? (
-          <p>Data received.</p>
-        ) : (
-          <p>No data received.</p>
-        )}
-      </div>
       <Table className="mt-5" color='white'>
         <TableHead>
           <TableRow>
-            <TableHeaderCell>ID</TableHeaderCell>
+            <TableHeaderCell>Location</TableHeaderCell>
             <TableHeaderCell>Functional</TableHeaderCell>
             <TableHeaderCell>Paper</TableHeaderCell>
             <TableHeaderCell>Zone</TableHeaderCell>
@@ -61,7 +55,7 @@ export default function InventoryTable() {
         <TableBody>
           {data.map((item) => (
             <TableRow key={item.name}>
-              <TableCell>{item.id}</TableCell>
+              <TableCell>{item.loc}</TableCell>
               <TableCell>
                 <Badge color={item.status === "Functional" ? "emerald" : 'red'} icon={RiFlag2Line}>
                   {item.status}
