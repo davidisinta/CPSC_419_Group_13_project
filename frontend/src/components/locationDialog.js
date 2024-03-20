@@ -1,13 +1,14 @@
 import { Card, Button } from '@tremor/react';
+import { Link } from 'react-router-dom';
 import React from 'react';
 
-export default function LocationDialog({ location, onClose }) {
+export default function LocationDialog({ loc, id, onClose }) {
   // Dialog to report a problem or update inventory for a location
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="rounded-lg">
         <Card className="mx-auto max-w-xs">
-          <p className="text-2xl text-center text-tremor-content-strong dark:text-dark-tremor-content">{location}</p>
+          <p className="text-2xl text-center text-tremor-content-strong dark:text-dark-tremor-content">{loc}</p>
           <div className="flex justify-center space-x-5 pt-5">
             <div className="space-y-3">
               <p className="text-center text-sm text-slate-500">Report a problem</p>
@@ -18,7 +19,7 @@ export default function LocationDialog({ location, onClose }) {
             <div className="space-y-3">
               <p className="text-center text-sm text-slate-500">Update inventory</p>
               <div className="flex justify-center">
-                <Button variant="primary">Update</Button>
+                <Button variant="primary"><Link to={`/update/${id}`}>Update</Link></Button>
               </div>
             </div>
           </div>
