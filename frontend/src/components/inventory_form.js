@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function InventoryForm({loc_id}) {
+  let navigate = useNavigate();
   const [tonerTypes, setData] = useState([]);
   const [quantityVal, setQuantityVal] = useState('');
   const [tonerId, setTonerId] = useState('');
@@ -31,6 +33,7 @@ export default function InventoryForm({loc_id}) {
     } catch (error) {
       console.error('Error:', error);
     }
+    navigate('/');
   };
 
   useEffect(() => {

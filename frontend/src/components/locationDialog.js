@@ -19,7 +19,7 @@ export default function LocationDialog({ loc, id, onClose }) {
             <div className="space-y-3">
               <p className="text-center text-sm text-slate-500">Update inventory</p>
               <div className="flex justify-center">
-                <Button variant="primary"><Link to={`/update/${id}`}>Update</Link></Button>
+                <Link to={`/update/${id}`}><Button variant="primary">Update</Button></Link>
               </div>
             </div>
           </div>
