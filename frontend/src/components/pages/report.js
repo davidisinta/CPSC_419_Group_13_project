@@ -2,8 +2,14 @@ import LocationCard from "../locationDialog"
 
 export default function Report() {
     return (
-        <>
-            <LocationCard location="Pierson College" />
-        </>
+
+        <div className={"report-page-container"}>
+
+            Report page
+            
+             <LocationCard location="Pierson College" />
+
+        </div>
+
     )
 }
