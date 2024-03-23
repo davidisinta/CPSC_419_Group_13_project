@@ -1,0 +1,16 @@
+# Ignore virtual environment files
+/.venv
+
+# Ignore any local development settings
+*.env
+*.pyc
+
+# Ignore system-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE or editor-specific files
+/.vscode
+/.idea
+*.sublime-project
+*.sublime-workspace

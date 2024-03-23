@@ -7,9 +7,7 @@ export default function Footer() {
   return (
       <div className="footer-container">
           <section className="footer-subscription">
-              <p className="footer-subscription-heading">
-                  
-              </p>
+              <p className="footer-subscription-heading"></p>
       <div className='social-media-wrap'>
         <div className='footer-logo'>
           <Link to='/' className='social-logo'>
