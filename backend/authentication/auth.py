@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
-import pydantic
+
 
 app = Flask("authentication")
 
@@ -11,7 +11,6 @@ users = []
 def register():
     if request.method == 'GET':
         return {'message': 'Heyy Thereee!'}
-
 
     # Extract email and password from the request
     first_name = request.json.get('first_name')
@@ -34,11 +33,11 @@ def register():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    # Extract email and password from the request
+
     email_address = request.json.get('email_address')
     password = request.json.get('password')
 
-    # Check if email or password is missing
+
     if not email_address or not password:
         return jsonify({'message': 'email or password missing'}), 400
 
@@ -51,3 +50,7 @@ def login():
 
 if __name__ == '__main__':
     app.run(debug=True, port = 3344)
+
+
+## create dummy sqlite database for testing and development
+## create pydantic models to enforce some API rules
