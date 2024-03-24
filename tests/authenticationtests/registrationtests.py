@@ -1,11 +1,11 @@
 import unittest
-from backend.authentication.auth import app
+from backend.authentication.auth import auth_app
 
 class UserRegistrationTestCase(unittest.TestCase):
 
     def setUp(self):
         # Create a test client
-        self.app = app.test_client()
+        self.app = auth_app.test_client()
 
         # Propagate exceptions to the test client
         self.app.testing = True

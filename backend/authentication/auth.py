@@ -1,13 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Blueprint
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-app = Flask("authentication")
+auth_app = Blueprint('authentication',__name__)
+
 
 # Dummy database to store user information
 users = []
 
-@app.route('/register', methods=['POST', 'GET'])
+@auth_app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'GET':
         return {'message': 'Heyy Thereee!'}
@@ -39,7 +40,7 @@ def register():
 
     return jsonify({'message': 'User registered successfully'}), 201
 
-@app.route('/login', methods=['POST', 'GET'])
+@auth_app.route('/login', methods=['POST', 'GET'])
 def login():
 
     email_address = request.json.get('email_address')
@@ -56,8 +57,6 @@ def login():
     else:
         return jsonify({'message': 'Invalid username or password'}), 401
 
-if __name__ == '__main__':
-    app.run(debug=True, port = 3344)
 
 
 ## create dummy sqlite database for testing and development
