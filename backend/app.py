@@ -1,14 +1,25 @@
 from flask import Flask
-from flask_restful import Api, Resource, reqparse
+from flask_restful import Api
 from flask_cors import CORS #comment this on deployment
 from api.InventoryTableApiHandler import InventoryTableApiHandler
 from api.StockTonerApiHandler import StockTonerApiHandler
 from api.TonerTypesApiHandler import TonerTypesApiHandler
 
-app = Flask(__name__, static_url_path='', static_folder='../frontend/build')
-CORS(app) #comment this on deployment
-api = Api(app)
+from authentication.auth import auth_app
 
+stc_app = Flask("STC Kilroy App")
+CORS(stc_app) #comment this on deployment
+api = Api(stc_app)
+
+
+# Register Flask-RESTful resources
 api.add_resource(InventoryTableApiHandler, '/')
 api.add_resource(StockTonerApiHandler, '/update_stock')
 api.add_resource(TonerTypesApiHandler, '/get_toner_types')
+
+
+# Register Blueprints
+stc_app.register_blueprint(auth_app)
+
+if __name__ == '__main__':
+    stc_app.run(debug=True, port=4444)
