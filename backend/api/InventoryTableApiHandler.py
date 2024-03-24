@@ -1,6 +1,6 @@
 from flask_restful import Resource
 from flask import jsonify, Response
-from .config import establish_connection
+from .productiondbconfig import establish_connection
 
 def jsonify_printer_rows(data) -> Response:
     """ Returns a jsonified list of inventory table rows from a list of tuples (database query result)."""
