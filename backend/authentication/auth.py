@@ -18,6 +18,14 @@ def register():
     email_address = request.json.get('email_address')
     password = request.json.get('password')
 
+    # Check if firstName and lastName are given
+    if not first_name:
+        return jsonify({'messaage':'missing first name'}), 400
+
+    if not last_name:
+        return jsonify({'messaage':'missing last name'}), 400
+
+
     # Check if email or password is missing
     if not email_address or not password:
         return jsonify({'message': 'email or password missing'}), 400
