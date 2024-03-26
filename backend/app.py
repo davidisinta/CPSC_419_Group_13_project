@@ -1,11 +1,11 @@
 from flask import Flask
 from flask_restful import Api
 from flask_cors import CORS #comment this on deployment
-from api.InventoryTableApiHandler import InventoryTableApiHandler
-from api.StockTonerApiHandler import StockTonerApiHandler
-from api.TonerTypesApiHandler import TonerTypesApiHandler
+from backend.api.InventoryTableApiHandler import InventoryTableApiHandler
+from backend.api.StockTonerApiHandler import StockTonerApiHandler
+from backend.api.TonerTypesApiHandler import TonerTypesApiHandler
 
-from authentication.auth import auth_app
+from backend.authentication.auth import auth_app
 
 stc_app = Flask("STC Kilroy App")
 CORS(stc_app) #comment this on deployment
