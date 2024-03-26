@@ -41,17 +41,12 @@ export default function NavBar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/report" className="nav-links" onClick={closeMobileMenu}>
-                                Report
-                            </Link>
-                        </li>
-                        <li className="nav-item">
                             <Link to="/about" className="nav-links" onClick={closeMobileMenu}>
                                 About
                             </Link>
                         </li>
                     </ul>
-                    {button && <Button buttonStyle="btn--outline" color="gray">Log in</Button>}
+                    {button && <Button buttonstyle="btn--outline" color="gray">Log in</Button>}
                 </div>
             </nav>
         </>

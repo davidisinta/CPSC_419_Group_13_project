@@ -70,9 +70,9 @@ export default function InventoryTable() {
           </TableHead>
           <TableBody>
             {data.map((item) => (
-              <TableRow key={item.loc}>
+              <TableRow key={item.id}>
                 {/* Make printer location clickable */}
-                <div key={item.loc} onClick={() => handleRowClick(item)}>
+                <div key={item.id} onClick={() => handleRowClick(item)}>
                   <TableCell className="cursor-pointer hover:underline">{item.loc}</TableCell>
                 </div>
                 <TableCell>
@@ -124,7 +124,7 @@ export default function InventoryTable() {
         </Table>
       </Card>
       {/* Show location dialog when a row is clicked */}
-      {selectedItem && <LocationDialog loc={selectedItem.loc} id={selectedItem.id} onClose={handleCloseDialog} />}
+      {selectedItem && <LocationDialog item={selectedItem} onClose={handleCloseDialog} />}
     </>
   )
 }
