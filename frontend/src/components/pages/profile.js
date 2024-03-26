@@ -1,85 +1,67 @@
-import React, { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
+const Profile = () => {
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-const Profile = (props) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [emailError, setEmailError] = useState('')
-  const [passwordError, setPasswordError] = useState('')
-
-  const navigate = useNavigate()
-
-  const login_authenticator = () =>
+  const log_out = async () =>
   {
-     // Set initial error values to empty
-  setEmailError('')
-  setPasswordError('')
-
-  // Check if the user has entered both fields correctly
-  if ('' === email) {
-    setEmailError('Please enter your email')
-    return
+    try {
+      // Call the logout endpoint
+      await axios.post('http://127.0.0.1:5000/logout', {}, { withCredentials: true });
+      // Successfully logged out
+      setIsLoggedIn(false);
+      navigate('/login'); // Redirect to login page
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Handle logout error
+    }
   }
 
-  if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-    setEmailError('Please enter a valid email')
-    return
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        // Adjust the URL to where your Flask backend is hosted
+        const response = await axios.get('http://127.0.0.1:5000/is_logged_in', { withCredentials:true });
+        if (response.data.loggedIn) {
+          setIsLoggedIn(true);
+        } else {
+          navigate('/login'); // Redirect to login if not logged in
+        }
+      } catch (error) {
+        console.error('Error checking login status:', error);
+        navigate('/login'); // Redirect to login on error
+      } finally {
+        setIsLoading(false); // Ensure loading state is updated
+      }
+    };
+
+    checkLoginStatus();
+  }, [navigate]);
+
+  if (isLoading) {
+    return <div>Loading...</div>; // Show a loading message or spinner while checking
   }
 
-  if ('' === password) {
-    setPasswordError('Please enter a password')
-    return
+  if (!isLoggedIn) {
+    // Redirect has already been handled by useEffect, but you could handle additional logic here if needed
+    return null; // or a fallback UI until the redirect takes effect
   }
 
-  if (password.length < 7) {
-    setPasswordError('The password must be 8 characters or longer')
-    return
-  }
-  }
-
+  // User is logged in if this part of the component is rendered
   return (
-    <div className={'mainContainer'}>
-      <div className={'titleContainer'}>
-        <div>Login</div>
-      </div>
-      <br />
-      <div className={'inputContainer'}>
-        <input
-          value={email}
-          placeholder="Email"
-          onChange={(ev) => setEmail(ev.target.value)}
-          className={'inputBox'}
-        />
-        <label className="errorLabel">{emailError}</label>
-      </div>
-      <br />
-      <div className={'inputContainer'}>
-        <input
-            type = "password"
-          value={password}
-          placeholder="Password"
-          onChange={(ev) => setPassword(ev.target.value)}
-          className={'inputBox'}
-        />
-        <label className="errorLabel">{passwordError}</label>
-      </div>
-      <br />
-        <div className={'inputContainer'}>
-            <input className={'inputButton'} type="button" onClick={login_authenticator} value={'Log in'}/>
-
-            <div> Don't have an account?
-
-                <Link to="/signup" className={"sign-up"}> Sign Up</Link>
-
-            </div>
-
-
-        </div>
-
-
+    <div>
+      <p>Profile</p>
+      <p>Task One</p>
+      <p>Task Two</p>
+      <p>...</p>
+      <br/>
+      <span onClick={log_out} className={"log-out"} style={{cursor: 'pointer'}}> Log Out</span>
     </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

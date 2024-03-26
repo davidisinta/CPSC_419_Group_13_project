@@ -46,7 +46,7 @@
 
 /* Login page styling*/
 
-.sign-up{
+.sign-up, .sign-in, .log-out{
   color: cornflowerblue;
 }
 .mainContainer {
