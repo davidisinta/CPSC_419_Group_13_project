@@ -1,8 +1,10 @@
 
 export default function About() {
     return (
-        <>
-            <h1>About</h1>
-        </>
+        <div className={"about-container"}>
+
+            About page
+
+        </div>
     )
 }

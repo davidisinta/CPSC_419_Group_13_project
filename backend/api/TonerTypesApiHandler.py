@@ -1,5 +1,5 @@
 from flask_restful import Resource, request
-from .config import establish_connection
+from .productiondbconfig import establish_connection
 from flask import jsonify, Response
 
 def jsonify_toner_types(data) -> Response:
