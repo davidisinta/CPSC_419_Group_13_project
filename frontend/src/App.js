@@ -9,6 +9,7 @@ import Footer from './components/footer';
 import Profile from "./components/pages/profile";
 import Report from "./components/pages/report";
 import About from "./components/pages/about";
+import Login from "./components/pages/login";
 
 
 function App() {
@@ -19,9 +20,10 @@ function App() {
         <Routes>
 
           <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Profile />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/about" element={<About />} />
           <Route path="/report" element={<Report />} />
+          <Route path="/login" element={<Login />} />
 
         </Routes>
         <Footer/>
