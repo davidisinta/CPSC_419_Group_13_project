@@ -5,6 +5,7 @@ import { useNavigate, Link } from 'react-router-dom'
 const Profile = (props) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [authenticate, setPassword2] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
 
@@ -41,7 +42,7 @@ const Profile = (props) => {
   return (
     <div className={'mainContainer'}>
       <div className={'titleContainer'}>
-        <div>Login</div>
+        <div>Sign Up</div>
       </div>
       <br />
       <div className={'inputContainer'}>
@@ -54,6 +55,16 @@ const Profile = (props) => {
         <label className="errorLabel">{emailError}</label>
       </div>
       <br />
+      <div className={'inputContainer'}>
+        <input
+            type = "password"
+          value={password}
+          placeholder="Password"
+          onChange={(ev) => setPassword(ev.target.value)}
+          className={'inputBox'}
+        />
+        <label className="errorLabel">{passwordError}</label>
+      </div>
       <div className={'inputContainer'}>
         <input
             type = "password"
