@@ -1,25 +1,30 @@
+import config
+from config import config
 from flask import Flask
 from flask_restful import Api
 from flask_cors import CORS #comment this on deployment
 from api.InventoryTableApiHandler import InventoryTableApiHandler
 from api.StockTonerApiHandler import StockTonerApiHandler
 from api.TonerTypesApiHandler import TonerTypesApiHandler
-
 from authentication.auth import auth_app
 
-stc_app = Flask("STC Kilroy App")
-CORS(stc_app) #comment this on deployment
-api = Api(stc_app)
+
+def create_app(config_name):
+    stc_app = Flask(__name__)
+    stc_app.config.from_object(config[config_name])
+    config[config_name].init_app(stc_app)
+
+    CORS(stc_app)  # comment this on deployment
+    api = Api(stc_app)
+
+    # Register Flask-RESTful resources
+    api.add_resource(InventoryTableApiHandler, '/')
+    api.add_resource(StockTonerApiHandler, '/update_stock')
+    api.add_resource(TonerTypesApiHandler, '/get_toner_types')
+
+    # Register Blueprints
+    stc_app.register_blueprint(auth_app)
 
 
-# Register Flask-RESTful resources
-api.add_resource(InventoryTableApiHandler, '/')
-api.add_resource(StockTonerApiHandler, '/update_stock')
-api.add_resource(TonerTypesApiHandler, '/get_toner_types')
 
-
-# Register Blueprints
-stc_app.register_blueprint(auth_app)
-
-if __name__ == '__main__':
-    stc_app.run(debug=True, port=4444)
+    return stc_app
