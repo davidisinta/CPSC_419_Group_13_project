@@ -79,9 +79,9 @@ const Profile = (props) => {
         <div className={'inputContainer'}>
             <input className={'inputButton'} type="button" onClick={login_authenticator} value={'Log in'}/>
 
-            <div> Don't have an account?
+            <div> Hve an account?
 
-                <Link to="/signup" className={"sign-up"}> Sign Up</Link>
+                <Link to="/profile" className={"sign-up"}> Sign In</Link>
 
             </div>
 
