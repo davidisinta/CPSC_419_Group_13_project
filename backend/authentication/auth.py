@@ -1,12 +1,10 @@
 from flask import Flask, request, jsonify, Blueprint
 from werkzeug.security import generate_password_hash, check_password_hash
+from backend.models.users import get_user_by_email, register_user, get_password_hash
 
 
 auth_app = Blueprint('authentication',__name__)
 
-
-# Dummy database to store user information
-users = []
 
 @auth_app.route('/register', methods=['POST', 'GET'])
 def register():
@@ -34,14 +32,35 @@ def register():
     # Hash the password
     hashed_password = generate_password_hash(password)
 
-    # Save email and hashed password in the database
-    users.append({'username': email_address, 'password_hash': hashed_password,
-                  'first_name': first_name, 'last_name': last_name})
+    #check if user exists in database
+    exists = get_user_by_email(email=email_address)
 
-    return jsonify({'message': 'User registered successfully'}), 201
+    if not exists:
+
+        # Save email and hashed password in the database
+        new_user = register_user(first_name, last_name, email_address, hashed_password)
+
+        if new_user:
+            return jsonify({'message': 'User registered successfully',
+                            'user': new_user}), 201
+
+
+        else:
+            return jsonify({'message': "Failed to create user"})
+
+
+
+
+    else:
+        return jsonify({'message': 'User already exists'}), 409
+
+
 
 @auth_app.route('/login', methods=['POST', 'GET'])
 def login():
+
+    if request.method == 'GET':
+        return jsonify({'message': "time to log in buddy"})
 
     email_address = request.json.get('email_address')
     password = request.json.get('password')
@@ -51,11 +70,20 @@ def login():
         return jsonify({'message': 'email or password missing'}), 400
 
     # Find the user in the database
-    user = next((u for u in users if u['username'] == email_address), None)
-    if user and check_password_hash(user['password_hash'], password):
+    get_user = get_user_by_email(email_address)
+
+    #check password
+    users_password_hash = get_password_hash(email_address)
+
+
+
+    verify_pass = check_password_hash(users_password_hash, password)
+
+    if get_user and verify_pass==True:
         return jsonify({'message': 'Login successful'}), 200
-    else:
-        return jsonify({'message': 'Invalid username or password'}), 401
+
+
+    return jsonify({'message': 'Invalid username or password'}), 401
 
 
 

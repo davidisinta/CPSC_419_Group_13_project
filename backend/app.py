@@ -1,18 +1,19 @@
 import config
-from config import config
+from backend.config import config
 from flask import Flask
 from flask_restful import Api
 from flask_cors import CORS #comment this on deployment
-from api.InventoryTableApiHandler import InventoryTableApiHandler
-from api.StockTonerApiHandler import StockTonerApiHandler
-from api.TonerTypesApiHandler import TonerTypesApiHandler
-from authentication.auth import auth_app
+from backend.authentication.auth import auth_app
+from backend.api.InventoryTableApiHandler import InventoryTableApiHandler
+from backend.api.StockTonerApiHandler import StockTonerApiHandler
+from backend.api.TonerTypesApiHandler import TonerTypesApiHandler
 
 
 def create_app(config_name):
     stc_app = Flask(__name__)
     stc_app.config.from_object(config[config_name])
     config[config_name].init_app(stc_app)
+
 
     CORS(stc_app)  # comment this on deployment
     api = Api(stc_app)
