@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, Blueprint
+from flask import request, jsonify, Blueprint
 from werkzeug.security import generate_password_hash, check_password_hash
 from backend.models.users import get_user_by_email, register_user, get_password_hash
 
