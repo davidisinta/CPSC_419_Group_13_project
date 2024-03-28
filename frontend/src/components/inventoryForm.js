@@ -15,7 +15,6 @@ import axios from 'axios';
 export default function InventoryForm({ location }) {
     // Declaring state variables
     const [tonerTypes, setTonerTypes] = useState([]);
-    const [selectedTonerId, setSelectedTonerId] = useState('');
     const [tonerCounts, setTonerCounts] = useState({
         id: '',
         black: '',
@@ -30,9 +29,6 @@ export default function InventoryForm({ location }) {
     });
     // Function to handle toner count changes in the Toner form
     const handleTonerCountChange = (value, color) => {
-        if(color === 'id') {
-            console.log(value);
-        };
         setTonerCounts({
             ...tonerCounts,
             [color]: value
@@ -58,7 +54,6 @@ export default function InventoryForm({ location }) {
             toner_counts: tonerCounts,
             paper_count: paperCount,
             equipment: equipment,
-            toner_id: selectedTonerId
         };
         console.log(msg);
         endpoint = endpoint + 'update_inventory';
@@ -108,7 +103,7 @@ export default function InventoryForm({ location }) {
                             <div>
                                 <div className='flex items-center whitespace-nowrap pb-2'>
                                     <label className='dark:text-dark-tremor-content pr-2'>Toner Type</label>
-                                    <SearchSelect searchValue={selectedTonerId} onSearchValueChange={() => {}} value={selectedTonerId} onValueChange={(value) => {setSelectedTonerId(value)}} placeholder='Start typing ...'>
+                                    <SearchSelect onValueChange={(value) => {handleTonerCountChange(value, 'id')}} placeholder='Start typing ...'>
                                         {tonerTypes.map((item) => (
                                             <SearchSelectItem key={item.id} value={item.id}>{item.type}</SearchSelectItem>
                                         ))}
