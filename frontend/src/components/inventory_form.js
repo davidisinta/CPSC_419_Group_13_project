@@ -15,7 +15,7 @@ export default function inventoryform({loc_id}) {
       toner_id: tonerId,
       quantity: quantityVal,
     };
-    const endpoint = 'http://127.0.0.1:5000/update_stock';
+    const endpoint = 'http://127.0.0.1:5000/get_toner_types';
     try {
       const response = await fetch(endpoint, {
         method: 'POST',

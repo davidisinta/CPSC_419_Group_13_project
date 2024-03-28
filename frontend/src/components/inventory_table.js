@@ -40,7 +40,7 @@ export default function InventoryTable() {
         });
       }
       catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching inventory table data:', error);
       }
     }
     fetchInventory();
