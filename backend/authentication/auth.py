@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, Blueprint, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from backend.api.productiondbconfig import establish_connection
+import psycopg2
 
 auth_app = Blueprint('authentication',__name__)
 
@@ -37,12 +38,12 @@ def register():
             cursor = connection.cursor()
 
             # Check if email already exists
-            cursor.execute("SELECT 1 FROM public.user WHERE email = %s", (email,))
+            cursor.execute("""SELECT 1 FROM users WHERE email = %s""", (email,))
             if cursor.fetchone():
                 return jsonify({'message': 'Email already exists'}), 409
             
             # Insert email and corresponding information into database
-            query = """INSERT INTO public.user (first_name, last_name, role, email, password_hash)
+            query = """INSERT INTO users (first_name, last_name, role, email, password_hash)
                     VALUES (%s, %s, %s, %s, %s) RETURNING id"""
             cursor.execute(query, (first_name, last_name, role, email, password_hash))
             user_id = cursor.fetchone()[0]
@@ -51,7 +52,11 @@ def register():
             session['user_id'] = user_id
             return {'message': 'User added successfully'}, 201
         
+    except psycopg2.Error as e:
+        print(e)
+        return {'message': str(e)}, 500
     except Exception as e:
+        print(e)
         return {'message': str(e)}, 500
 
 @auth_app.route('/authenticate', methods=['POST', 'GET'])
@@ -66,11 +71,10 @@ def authenticate():
     try:
         with establish_connection() as connection:
             cursor = connection.cursor()
-
             # Check if email exists
-            cursor.execute("SELECT id, password_hash FROM public.user WHERE email = %s", (email,))
+            cursor.execute("""SELECT id, password_hash FROM users WHERE email = %s""", (email,))
             user = cursor.fetchone()
-
+            print(user)
             if user:
                 # user[1] contains the password_hash due to fetchone()
                 if check_password_hash(user[1], password):
@@ -83,6 +87,9 @@ def authenticate():
             else:
                 # Email does not exist in database
                 return jsonify({'message': 'Invalid email or password'}), 401
+    except psycopg2.Error as e:
+        print(e)
+        return {'message': str(e)}, 500
 
     except Exception as e:
         return {'message': str(e)}, 500
