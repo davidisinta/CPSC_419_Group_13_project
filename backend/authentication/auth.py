@@ -1,9 +1,11 @@
-from flask import Flask, request, jsonify, Blueprint, session
+from flask import request, jsonify, Blueprint
 from werkzeug.security import generate_password_hash, check_password_hash
-from backend.api.productiondbconfig import establish_connection
-import psycopg2
+from backend.models.users import get_user_by_email, register_user, get_password_hash
+
 
 auth_app = Blueprint('authentication',__name__)
+
+
 
 @auth_app.route('/register', methods=['POST', 'GET'])
 def register():
@@ -32,74 +34,57 @@ def register():
     # Hash the password
     password_hash = generate_password_hash(password)
 
-    # Save email and hashed password in the database
-    try:
-        with establish_connection() as connection:
-            cursor = connection.cursor()
+    #check if user exists in database
+    exists = get_user_by_email(email=email_address)
 
-            # Check if email already exists
-            cursor.execute("""SELECT 1 FROM users WHERE email = %s""", (email,))
-            if cursor.fetchone():
-                return jsonify({'message': 'Email already exists'}), 409
-            
-            # Insert email and corresponding information into database
-            query = """INSERT INTO users (first_name, last_name, role, email, password_hash)
-                    VALUES (%s, %s, %s, %s, %s) RETURNING id"""
-            cursor.execute(query, (first_name, last_name, role, email, password_hash))
-            user_id = cursor.fetchone()[0]
-            connection.commit()
+    if not exists:
 
-            session['user_id'] = user_id
-            return {'message': 'User added successfully'}, 201
-        
-    except psycopg2.Error as e:
-        print(e)
-        return {'message': str(e)}, 500
-    except Exception as e:
-        print(e)
-        return {'message': str(e)}, 500
+        # Save email and hashed password in the database
+        new_user = register_user(first_name, last_name, email_address, hashed_password)
 
-@auth_app.route('/authenticate', methods=['POST', 'GET'])
-def authenticate():
+        if new_user:
+            return jsonify({'message': 'User registered successfully',
+                            'user': new_user}), 201
 
-    email = request.json.get('email')
+
+        else:
+            return jsonify({'message': "Failed to create user"})
+
+
+
+
+    else:
+        return jsonify({'message': 'User already exists'}), 409
+
+
+
+@auth_app.route('/login', methods=['POST', 'GET'])
+def login():
+
+    if request.method == 'GET':
+        return jsonify({'message': "time to log in buddy"})
+
+    email_address = request.json.get('email_address')
     password = request.json.get('password')
     if not email or not password:
         return jsonify({'message': 'email or password missing'}), 400
 
-    # Find the user in the database
-    try:
-        with establish_connection() as connection:
-            cursor = connection.cursor()
-            # Check if email exists
-            cursor.execute("""SELECT id, password_hash FROM users WHERE email = %s""", (email,))
-            user = cursor.fetchone()
-            print(user)
-            if user:
-                # user[1] contains the password_hash due to fetchone()
-                if check_password_hash(user[1], password):
-                    # Password is correct
-                    session['user_id'] = user[0] # Log session
-                    return jsonify({'message': 'Login successful'}), 200
-                else:
-                    # Password is incorrect
-                    return jsonify({'message': 'Invalid email or password'}), 401
-            else:
-                # Email does not exist in database
-                return jsonify({'message': 'Invalid email or password'}), 401
-    except psycopg2.Error as e:
-        print(e)
-        return {'message': str(e)}, 500
+    get_user = get_user_by_email(email_address)
 
-    except Exception as e:
-        return {'message': str(e)}, 500
-    
-@auth_app.route('/is_logged_in')
-def is_logged_in():
-    if 'user_id' in session:
-        return jsonify({'loggedIn': True}), 201
-    else:
-        return jsonify({'loggedIn': False}), 201
+    #check password
+    users_password_hash = get_password_hash(email_address)
+
+
+
+    verify_pass = check_password_hash(users_password_hash, password)
+
+    if get_user and verify_pass==True:
+        return jsonify({'message': 'Login successful'}), 200
+
+
+    return jsonify({'message': 'Invalid username or password'}), 401
+
+
 
 @auth_app.route('/logout', methods=['POST'])
 def logout():
