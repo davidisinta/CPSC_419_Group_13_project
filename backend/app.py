@@ -9,7 +9,8 @@ from backend.api.StockTonerApiHandler import StockTonerApiHandler
 from backend.api.TonerTypesApiHandler import TonerTypesApiHandler
 
 
-def create_app(config_name):
+
+def create_app(config_name='default'):
     stc_app = Flask(__name__)
     stc_app.config.from_object(config[config_name])
     config[config_name].init_app(stc_app)
@@ -25,7 +26,6 @@ def create_app(config_name):
 
     # Register Blueprints
     stc_app.register_blueprint(auth_app)
-
 
 
     return stc_app

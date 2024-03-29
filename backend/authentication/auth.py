@@ -6,6 +6,7 @@ from backend.models.users import get_user_by_email, register_user, get_password_
 auth_app = Blueprint('authentication',__name__)
 
 
+
 @auth_app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'GET':
@@ -14,23 +15,24 @@ def register():
     # Extract email and password from the request
     first_name = request.json.get('first_name')
     last_name = request.json.get('last_name')
-    email_address = request.json.get('email_address')
+    email = request.json.get('email')
     password = request.json.get('password')
+    role = 0 # Default role, 0:public, 1:employee, 2:admin
+
 
     # Check if firstName and lastName are given
     if not first_name:
-        return jsonify({'messaage':'missing first name'}), 400
+        return jsonify({'message':'missing first name'}), 400
 
     if not last_name:
-        return jsonify({'messaage':'missing last name'}), 400
-
+        return jsonify({'message':'missing last name'}), 400
 
     # Check if email or password is missing
-    if not email_address or not password:
+    if not email or not password:
         return jsonify({'message': 'email or password missing'}), 400
 
     # Hash the password
-    hashed_password = generate_password_hash(password)
+    password_hash = generate_password_hash(password)
 
     #check if user exists in database
     exists = get_user_by_email(email=email_address)
@@ -64,12 +66,9 @@ def login():
 
     email_address = request.json.get('email_address')
     password = request.json.get('password')
-
-
-    if not email_address or not password:
+    if not email or not password:
         return jsonify({'message': 'email or password missing'}), 400
 
-    # Find the user in the database
     get_user = get_user_by_email(email_address)
 
     #check password
@@ -87,5 +86,7 @@ def login():
 
 
 
-## create dummy sqlite database for testing and development
-## create pydantic models to enforce some API rules
+@auth_app.route('/logout', methods=['POST'])
+def logout():
+    session.pop('user_id', None)  # Remove user_id from session
+    return jsonify({'message': 'You have been logged out'}), 200

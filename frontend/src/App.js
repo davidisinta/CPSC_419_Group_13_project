@@ -9,6 +9,7 @@ import Footer from './components/footer';
 import Profile from "./components/pages/profile";
 import Report from "./components/pages/report";
 import About from "./components/pages/about";
+import Login from "./components/pages/login";
 
 
 function App() {
@@ -17,10 +18,12 @@ function App() {
       <Router>
         <NavBar />
         <Routes>
+
           <Route path="/" element={<Home/>} />
           <Route path="/login" element={<Profile/>} />
           <Route path="/report" element={<Report/>} />
           <Route path="/update/:id" element={<Update/>} />
+
         </Routes>
         <Footer/>
       </Router>
