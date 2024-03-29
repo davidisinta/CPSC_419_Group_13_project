@@ -1,11 +1,13 @@
-import InventoryForm from "../inventory_form";
-import { useParams } from 'react-router-dom';
+import InventoryForm from "../inventoryForm";
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 export default function Update() {
-    const { id } = useParams();
+    const location = useLocation(); 
+    const { item } = location.state;
     return (
         <>  
-            <InventoryForm loc_id={id} />
+            <InventoryForm location={ item }/>
         </>
     )
 }
