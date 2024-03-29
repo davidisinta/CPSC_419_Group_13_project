@@ -9,12 +9,12 @@ export default function Footer() {
           <section className="footer-subscription">
               <p className="footer-subscription-heading"></p>
       <div className='social-media-wrap'>
-        <div className='footer-logo'>
-          <Link to='/' className='social-logo'>
+        <div className='footer-logo text-white'>
+          <Link to='/' className='social-logo font-bold'>
               Student Technology Collaborative
           </Link>
         </div>
-        <small className='website-rights'>STC©2024</small>
+        <small className='website-rights text-white font-bold'>STC©2024</small>
               </div>
     </section>
       </div>

@@ -49,8 +49,7 @@ export default function InventoryTable() {
   return (
     <> 
       <Card>
-        <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">Printers Maintained by STC Cluster Technology</h3>
-        <Table className="mt-5" color='white'>
+        <Table color='white'>
           <TableHead>
             <TableRow>
               <TableHeaderCell>Location</TableHeaderCell>
