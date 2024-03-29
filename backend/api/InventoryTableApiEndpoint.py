@@ -25,12 +25,14 @@ def jsonify_printer_rows(data) -> Response:
                 "yellow": tuple[14]
             },
             "model": tuple[15],
-            "kyocera_serial": tuple[16]
+            "kyocera_serial": tuple[16],
+            "keyboards": tuple[17],
+            "mice": tuple[18]
         }
         out.append(formatted_tuple)
     return jsonify(out)
 
-class InventoryTableApiHandler(Resource):
+class InventoryTableApiEndpoint(Resource):
     def get(self):
         try:
             with establish_connection() as connection:
@@ -41,23 +43,23 @@ class InventoryTableApiHandler(Resource):
                                   paper, 
                                   zone, 
                                   string_agg(DISTINCT t.type, ', ') as toner_type, 
-                                  string_agg(DISTINCT wt.type, ', ') as waste_toner, 
-                                  SUM(CASE WHEN t.color = 0 THEN ti.quantity ELSE 0 END) / 2 as black,
-                                  SUM(CASE WHEN t.color = 1 THEN ti.quantity ELSE 0 END) / 2 as cyan,
-                                  SUM(CASE WHEN t.color = 2 THEN ti.quantity ELSE 0 END) / 2 as magenta,
-                                  SUM(CASE WHEN t.color = 3 THEN ti.quantity ELSE 0 END) / 2 as yellow, 
+                                  SUM(CASE WHEN t.color = 4 THEN ti.quantity ELSE 0 END) as waste_toner, 
+                                  SUM(CASE WHEN t.color = 0 THEN ti.quantity ELSE 0 END) as black,
+                                  SUM(CASE WHEN t.color = 1 THEN ti.quantity ELSE 0 END) as cyan,
+                                  SUM(CASE WHEN t.color = 2 THEN ti.quantity ELSE 0 END) as magenta,
+                                  SUM(CASE WHEN t.color = 3 THEN ti.quantity ELSE 0 END) as yellow, 
                                   k_level, 
                                   c_level, 
                                   m_level, 
                                   y_level, 
                                   model, 
-                                  kyo_num
+                                  kyo_num,
+                                  keyboards,
+                                  mice
                         FROM location l 
                         LEFT JOIN printer p ON p.loc_id = l.id
                         LEFT JOIN toner_inventory ti ON l.id = ti.loc_id
-                        LEFT JOIN toner t ON t.id = ti.toner_id AND t.color <> 4
-                        LEFT JOIN toner_inventory wi ON l.id = wi.loc_id
-                        LEFT JOIN toner wt ON wt.id = wi.toner_id AND wt.color = 4
+                        LEFT JOIN toner t ON t.id = ti.toner_id
                         GROUP BY l.id, l.name, status, paper, zone, k_level, c_level, m_level, y_level, model, kyo_num
                         ORDER BY zone, l.name
                         """

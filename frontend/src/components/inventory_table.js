@@ -47,7 +47,7 @@ export default function InventoryTable() {
   }, []);
 
   return (
-    <>
+    <> 
       <Card>
         <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">Printers Maintained by STC Cluster Technology</h3>
         <Table className="mt-5" color='white'>
@@ -58,12 +58,14 @@ export default function InventoryTable() {
               <TableHeaderCell>Paper</TableHeaderCell>
               <TableHeaderCell>Zone</TableHeaderCell>
               <TableHeaderCell>Toner Type</TableHeaderCell>
-              <TableHeaderCell>Waste Toner</TableHeaderCell>
               <TableHeaderCell>Black</TableHeaderCell>
               <TableHeaderCell>Cyan</TableHeaderCell>
               <TableHeaderCell>Magenta</TableHeaderCell>
               <TableHeaderCell>Yellow</TableHeaderCell>
+              <TableHeaderCell>Waste</TableHeaderCell>
               <TableHeaderCell>Toner Percentages</TableHeaderCell>
+              <TableHeaderCell>Keyboards</TableHeaderCell>
+              <TableHeaderCell>Mice</TableHeaderCell>
               <TableHeaderCell>Model</TableHeaderCell>
               <TableHeaderCell>Kyocera Serial</TableHeaderCell>
             </TableRow>
@@ -83,11 +85,11 @@ export default function InventoryTable() {
                 <TableCell>{item.paper}</TableCell>
                 <TableCell>{"Zone ".concat(item.zone)}</TableCell>
                 <TableCell >{item.toner_type}</TableCell>
-                <TableCell>{item.waste_toner}</TableCell>
                 <TableCell>{item.black_toner}</TableCell>
                 <TableCell>{item.cyan_toner}</TableCell>
                 <TableCell>{item.magenta_toner}</TableCell>
                 <TableCell>{item.yellow_toner}</TableCell>
+                <TableCell>{item.waste_toner}</TableCell>
                 <TableCell>
                   <div className="flex">
                       <div className="mx-auto max-w-sm pr-2">
@@ -116,6 +118,8 @@ export default function InventoryTable() {
                       </div>
                   </div>
                 </TableCell>
+                <TableCell>{item.keyboards}</TableCell>
+                <TableCell>{item.mice}</TableCell>
                 <TableCell>{item.model}</TableCell>
                 <TableCell>{item.kyocera_serial}</TableCell>
               </TableRow>

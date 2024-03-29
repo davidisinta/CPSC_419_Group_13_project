@@ -11,21 +11,25 @@ import {
     SearchSelectItem,
     NumberInput } from '@tremor/react';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 export default function InventoryForm({ location }) {
     // Declaring state variables
+    const navigate = useNavigate();
     const [tonerTypes, setTonerTypes] = useState([]);
     const [tonerCounts, setTonerCounts] = useState({
-        id: '',
-        black: '',
-        cyan: '',
-        magenta: '',
-        yellow: ''
+        type: '',
+        black: location.black_toner,
+        cyan: location.cyan_toner,
+        magenta: location.magenta_toner,
+        yellow: location.yellow_toner,
+        waste: location.waste_toner
     });
-    const [paperCount, setPaperCount] = useState('');
+    const [paperCount, setPaperCount] = useState(location.paper);
     const [equipment, setEquipment] = useState({
-        keyboards: '',
-        mice: '',
+        keyboards: location.keyboards,
+        mice: location.mice,
     });
     // Function to handle toner count changes in the Toner form
     const handleTonerCountChange = (value, color) => {
@@ -67,6 +71,7 @@ export default function InventoryForm({ location }) {
         catch (error) {
             console.error('Error:', error);
         }
+        navigate('/');
     };
     // Fetch toner types from the backend on page load
     useEffect(() => {
@@ -103,9 +108,9 @@ export default function InventoryForm({ location }) {
                             <div>
                                 <div className='flex items-center whitespace-nowrap pb-2'>
                                     <label className='dark:text-dark-tremor-content pr-2'>Toner Type</label>
-                                    <SearchSelect onValueChange={(value) => {handleTonerCountChange(value, 'id')}} placeholder='Start typing ...'>
+                                    <SearchSelect onValueChange={(value) => {handleTonerCountChange(value, 'type')}} placeholder='Start typing ...'>
                                         {tonerTypes.map((item) => (
-                                            <SearchSelectItem key={item.id} value={item.id}>{item.type}</SearchSelectItem>
+                                            <SearchSelectItem value={item.type}>{item.type}</SearchSelectItem>
                                         ))}
                                     </SearchSelect>
                                 </div>
@@ -114,19 +119,23 @@ export default function InventoryForm({ location }) {
                                 </div>
                                 <div className='flex items-center pb-4'>
                                     <label className='dark:text-dark-tremor-content pr-2'>Black</label>
-                                    <NumberInput min={0} max={20} step={1} placeholder={location.black_toner} onValueChange={(value) => handleTonerCountChange(value, 'black')}/>
+                                    <NumberInput min={0} max={20} step={1} value={tonerCounts['black']} onValueChange={(value) => handleTonerCountChange(value, 'black')}/>
                                 </div>
                                 <div className='flex items-center pb-4'>
                                     <label className='dark:text-dark-tremor-content pr-2'>Cyan</label>
-                                    <NumberInput min={0} max={20} step={1} placeholder={location.cyan_toner} onValueChange={(value) => handleTonerCountChange(value, 'cyan')}/>
+                                    <NumberInput min={0} max={20} step={1} value={tonerCounts['cyan']} onValueChange={(value) => handleTonerCountChange(value, 'cyan')}/>
                                 </div>
                                 <div className='flex items-center pb-4'>
                                     <label className='dark:text-dark-tremor-content pr-2'>Magenta</label>
-                                    <NumberInput min={0} max={20} step={1} placeholder={location.magenta_toner} onValueChange={(value) => handleTonerCountChange(value, 'magenta')}/>
+                                    <NumberInput min={0} max={20} step={1} value={tonerCounts['magenta']} onValueChange={(value) => handleTonerCountChange(value, 'magenta')}/>
                                 </div>
                                 <div className='flex items-center pb-2'>
                                     <label className='dark:text-dark-tremor-content pr-2'>Yellow</label>
-                                    <NumberInput min={0} max={20} step={1} placeholder={location.yellow_toner} onValueChange={(value) => handleTonerCountChange(value, 'yellow')}/> 
+                                    <NumberInput min={0} max={20} step={1} value={tonerCounts['yellow']} onValueChange={(value) => handleTonerCountChange(value, 'yellow')}/> 
+                                </div>
+                                <div className='flex items-center pb-2'>
+                                    <label className='dark:text-dark-tremor-content pr-2'>Waste</label>
+                                    <NumberInput min={0} max={20} step={1} value={tonerCounts['waste']} onValueChange={(value) => handleTonerCountChange(value, 'waste')}/> 
                                 </div>
                             </div>
                         </TabPanel>
@@ -135,7 +144,7 @@ export default function InventoryForm({ location }) {
                             <div>
                                 <div className='flex items-center'>
                                     <label className='dark:text-dark-tremor-content whitespace-nowrap pr-2'>Paper Count</label>
-                                    <NumberInput min={0} max={20} step={.1} placeholder={location.paper} onValueChange={(value) => handlePaperCountChange(value)}/>
+                                    <NumberInput min={0} max={20} step={.1} value={paperCount} onValueChange={(value) => handlePaperCountChange(value)}/>
                                 </div>
                             </div>
                         </TabPanel>
@@ -144,11 +153,11 @@ export default function InventoryForm({ location }) {
                             <div>
                                 <div className='flex items-center pb-2'>
                                     <label className='dark:text-dark-tremor-content whitespace-nowrap pr-2'>Keyboards</label>
-                                    <NumberInput min={0} max={20} step={1} onValueChange={(value) => handleEquipmentChange(value, 'keyboards')}/>
+                                    <NumberInput min={0} max={20} step={1} value={equipment["keyboards"]} onValueChange={(value) => handleEquipmentChange(value, 'keyboards')}/>
                                 </div>
                                 <div className='flex items-center'>
                                     <label className='dark:text-dark-tremor-content whitespace-nowrap pr-2'>Mice</label>
-                                    <NumberInput min={0} max={20} step={1} onValueChange={(value) => handleEquipmentChange(value, 'mice')}/>
+                                    <NumberInput min={0} max={20} step={1} value={equipment["mice"]} onValueChange={(value) => handleEquipmentChange(value, 'mice')}/>
                                 </div>
                             </div>
                         </TabPanel>
@@ -158,6 +167,9 @@ export default function InventoryForm({ location }) {
                 </div>
                 <div className="flex justify-center pt-5">
                     <Button size='xs' variant="secondary" onClick={handleSubmit}>Submit</Button>
+                    <div className="ml-2">
+                    <Link to='/'><Button size='xs' variant="secondary">Cancel</Button></Link>
+                    </div>
                 </div>
                 </Card>
             </div>
