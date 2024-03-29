@@ -3,9 +3,9 @@ from config import config
 from flask import Flask
 from flask_restful import Api
 from flask_cors import CORS #comment this on deployment
-from api.InventoryTableApiHandler import InventoryTableApiHandler
-from api.StockTonerApiHandler import StockTonerApiHandler
-from api.TonerTypesApiHandler import TonerTypesApiHandler
+from api.InventoryTableApiEndpoint import InventoryTableApiEndpoint
+from api.StockInventoryApiEndpoint import StockInventoryApiEndpoint
+from api.TonerTypesApiEndpoint import TonerTypesApiEndpoint
 from authentication.auth import auth_app
 
 
@@ -18,9 +18,9 @@ def create_app(config_name):
     api = Api(stc_app)
 
     # Register Flask-RESTful resources
-    api.add_resource(InventoryTableApiHandler, '/')
-    api.add_resource(StockTonerApiHandler, '/update_stock')
-    api.add_resource(TonerTypesApiHandler, '/get_toner_types')
+    api.add_resource(InventoryTableApiEndpoint, '/')
+    api.add_resource(StockInventoryApiEndpoint, '/update_inventory')
+    api.add_resource(TonerTypesApiEndpoint, '/get_toner_types')
 
     # Register Blueprints
     stc_app.register_blueprint(auth_app)
