@@ -6,6 +6,7 @@ const Profile = (props) => {
   const [password, setPassword] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
+  const [loggedIn, setLoggedIn] = useState(false)
 
   const navigate = useNavigate()
 
@@ -31,53 +32,85 @@ const Profile = (props) => {
     return
   }
 
-  if (password.length < 7) {
-    setPasswordError('The password must be 8 characters or longer')
-    return
+  // if (password.length < 7) {
+  //   setPasswordError('The password must be 8 characters or longer')
+  //   return
+  // }
+
+
+      login_user("http://127.0.0.1:5000/login", {
+          "email_address":email,
+          "password":password
+      }).then((data) => {
+  console.log(data); // JSON data parsed by `data.json()` call
+});
   }
-  }
+
+  // Example POST method implementation:
+async function login_user(url = "", data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify(data), // body data type must match "Content-Type" header
+  });
+
+  console.log(response)
+
+    if (response.status == 200){
+        setLoggedIn(true)
+    }
+  return response.json(); // parses JSON response into native JavaScript objects
+}
+
 
   return (
-    <div className={'mainContainer'}>
-      <div className={'titleContainer'}>
-        <div>Login</div>
-      </div>
-      <br />
-      <div className={'inputContainer'}>
-        <input
-          value={email}
-          placeholder="Email"
-          onChange={(ev) => setEmail(ev.target.value)}
-          className={'inputBox'}
-        />
-        <label className="errorLabel">{emailError}</label>
-      </div>
-      <br />
-      <div className={'inputContainer'}>
-        <input
-            type = "password"
-          value={password}
-          placeholder="Password"
-          onChange={(ev) => setPassword(ev.target.value)}
-          className={'inputBox'}
-        />
-        <label className="errorLabel">{passwordError}</label>
-      </div>
-      <br />
-        <div className={'inputContainer'}>
-            <input className={'inputButton'} type="button" onClick={login_authenticator} value={'Log in'}/>
+      <div className={'mainContainer'}>
 
-            <div> Don't have an account?
+              {loggedIn ? (
+                  <div>Welcome {email}!!!</div>
+              ) : (
+                  <div>
 
-                <span className={"sign-up"}> Sign Up</span>
+                      <div className={'titleContainer'}>
+                          <div>Login</div>
+                      </div>
+                      <br/>
+                      <div className={'inputContainer'}>
+                          <input
+                              value={email}
+                              placeholder="Email"
+                              onChange={(ev) => setEmail(ev.target.value)}
+                              className={'inputBox'}
+                          />
+                          <label className="errorLabel">{emailError}</label>
+                      </div>
+                      <br/>
+                      <div className={'inputContainer'}>
+                          <input
+                              type="password"
+                              value={password}
+                              placeholder="Password"
+                              onChange={(ev) => setPassword(ev.target.value)}
+                              className={'inputBox'}
+                          />
+                          <label className="errorLabel">{passwordError}</label>
+                      </div>
+                      <br/>
+                      <div className={'inputContainer'}>
+                          <input className={'inputButton'} type="button" onClick={login_authenticator}
+                                 value={'Log in'}/>
 
-            </div>
+                      </div>
+
+                  </div>
+              )}
+          </div>
 
 
-        </div>
-
-
-    </div>
   )
 }
 
