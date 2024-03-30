@@ -8,6 +8,7 @@ flask = "*"
 flask-restful = "*"
 flask-cors = "*"
 psycopg2-binary = "*"
+config = "*"
 
 [dev-packages]
 
