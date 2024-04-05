@@ -9,6 +9,7 @@ import Footer from './components/footer';
 import Profile from "./components/pages/profile";
 import Report from "./components/pages/report";
 import About from "./components/pages/about";
+import Map from "./components/pages/map"
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/report" element={<Report/>} />
           <Route path="/update/:id" element={<Update/>} />
           <Route path="/about" element={<About/>} />
+          <Route path="/map" element={<Map/>}/>
         </Routes>
         <Footer/>
       </Router>
