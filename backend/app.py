@@ -7,6 +7,7 @@ from backend.authentication.auth import auth_app
 from backend.api.InventoryTableApiEndpoint import InventoryTableApiEndpoint
 from backend.api.StockInventoryApiEndpoint import StockInventoryApiEndpoint
 from backend.api.TonerTypesApiEndpoint import TonerTypesApiEndpoint
+from backend.api.PrinterLocationApiEndpoint import PrinterLocationApiEndpoint
 
 
 
@@ -24,7 +25,8 @@ def create_app(config_name='default'):
     api.add_resource(InventoryTableApiEndpoint, '/')
     api.add_resource(StockInventoryApiEndpoint, '/update_inventory')
     api.add_resource(TonerTypesApiEndpoint, '/get_toner_types')
-
+    api.add_resource(PrinterLocationApiEndpoint, '/printers')
+    
     # Register Blueprints
     stc_app.register_blueprint(auth_app)
 
