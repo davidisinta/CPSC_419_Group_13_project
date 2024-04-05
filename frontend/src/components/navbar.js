@@ -1,14 +1,22 @@
 import { React, useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { Select, SelectItem } from '@tremor/react';
+import { useLocation } from 'react-router-dom';
 
-export default function NavBar() {
+export default function NavBar({ handleZoneChange }) {
     // Default setting for burger menu
     const [click, setClick] = useState(false);
+    const [displayZone, setDisplayZone] = useState(false);
     //  Menu onClick function
     const handleClick = () => setClick (!click);
+    // Selectively display zone dropdown
+    const location = useLocation();
+    useEffect(() => {
+        location.pathname === '/' ? setDisplayZone(true) : setDisplayZone(false);
+    }, [location]);
     return (
         <>
-            <nav className="bg-gray-800">
+            <nav className="navbar fixed top-0 w-full z-50 bg-gray-800">
                 <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-4">
                     <div className="flex items-center justify-between h-16">
                         <div className="flex-shrink-0">
@@ -20,6 +28,13 @@ export default function NavBar() {
                         <div className="flex items-center">
                             <div className="hidden md:block">
                                 <div className="ml-10 flex items-baseline space-x-4">
+                                    {displayZone && <Select className="tremor-content-emphasis" placeholder="All Zones" onValueChange={handleZoneChange}>
+                                        <SelectItem value="all" className="cursor-pointer">All Zones</SelectItem>
+                                        <SelectItem value="1" className="cursor-pointer">Zone 1</SelectItem>
+                                        <SelectItem value="2" className="cursor-pointer">Zone 2</SelectItem>
+                                        <SelectItem value="3" className="cursor-pointer">Zone 3</SelectItem>
+                                        <SelectItem value="4" className="cursor-pointer">Zone 4</SelectItem>
+                                    </Select>}
                                     <Link to="/about" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">About</Link>
                                     <Link to="/report" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Report</Link>
                                     <Link to="/login" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Profile</Link>
