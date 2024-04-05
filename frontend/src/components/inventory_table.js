@@ -13,7 +13,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import LocationDialog from './locationDialog';
 
-export default function InventoryTable() {
+export default function InventoryTable({ currentZone }) {
   const [data, setData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   // Open location dialog when a row is clicked
@@ -30,6 +30,10 @@ export default function InventoryTable() {
     else if (p > 10) return "yellow";
     else return "red";
   }
+  // Filter data based on the current zone
+  const filterData = data.filter((item) => {
+    return currentZone === 'all' || currentZone === String(item.zone);
+  });
   // Fetch inventory data from the backend
   useEffect(() => {
     const fetchInventory = async () => {
@@ -44,11 +48,11 @@ export default function InventoryTable() {
       }
     }
     fetchInventory();
-  }, []);
+  }, [currentZone]);
 
   return (
     <> 
-      <Card>
+      <Card className='pt-16'> {/* Padding to create room for fixed navbar */}
         <Table color='white'>
           <TableHead>
             <TableRow>
@@ -70,12 +74,10 @@ export default function InventoryTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((item) => (
-              <TableRow key={item.id}>
+            {filterData.map((item, index) => (
+              <TableRow key={index}>
                 {/* Make printer location clickable */}
-                <div key={item.id} onClick={() => handleRowClick(item)}>
-                  <TableCell className="cursor-pointer hover:underline">{item.loc}</TableCell>
-                </div>
+                  <TableCell onClick={() => handleRowClick(item)} className="cursor-pointer hover:underline">{item.loc}</TableCell>
                 <TableCell>
                   <Badge color={item.status === "Functional" ? "emerald" : 'red'} icon={RiFlag2Line}>
                     {item.status}
