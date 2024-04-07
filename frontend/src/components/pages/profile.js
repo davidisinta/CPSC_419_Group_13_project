@@ -10,6 +10,27 @@ const Profile = (props) => {
 
   const navigate = useNavigate()
 
+
+// Example POST method implementation:
+async function cas_login(url = "") {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: "GET", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors", // no-cors, *cors, same-origin
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: "same-origin", // include, *same-origin, omit
+    headers: {
+      "Content-Type": "application/json",
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+
+  });
+  return response.json();
+}
+
+
+
+
   const login_authenticator = () =>
   {
      // Set initial error values to empty
@@ -62,9 +83,14 @@ async function login_user(url = "", data = {}) {
 
     if (response.status == 200){
         setLoggedIn(true)
+
+      cas_login('http://localhost:5050/login');
+
     }
+
   return response.json(); // parses JSON response into native JavaScript objects
 }
+
 
 
   return (

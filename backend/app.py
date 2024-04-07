@@ -4,6 +4,7 @@ from flask import Flask
 from flask_restful import Api
 from flask_cors import CORS #comment this on deployment
 from backend.authentication.auth import auth_app
+from backend.authentication import cas_auth
 from backend.api.InventoryTableApiEndpoint import InventoryTableApiEndpoint
 from backend.api.StockInventoryApiEndpoint import StockInventoryApiEndpoint
 from backend.api.TonerTypesApiEndpoint import TonerTypesApiEndpoint
@@ -29,6 +30,7 @@ def create_app(config_name='default'):
     
     # Register Blueprints
     stc_app.register_blueprint(auth_app)
+    stc_app.register_blueprint(cas_auth, url_prefix='/cas')
 
 
     return stc_app

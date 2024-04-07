@@ -1,6 +1,7 @@
 from flask import request, jsonify, Blueprint
 from werkzeug.security import generate_password_hash, check_password_hash
 from backend.models.users import get_user_by_email, register_user, get_password_hash
+import requests
 
 
 auth_app = Blueprint('authentication',__name__)
@@ -68,6 +69,9 @@ def login():
 
     if not email_address or not password:
         return jsonify({'message': 'email or password missing'}), 400
+
+
+
 
     # Find the user in the database
     get_user = get_user_by_email(email_address)
