@@ -110,7 +110,7 @@ const Profile = (props) => {
           <div className={'inputContainer'}>
             <input
               value={email}
-              placeholder="Email"
+              placeholder=" yale email"
               onChange={(ev) => setEmail(ev.target.value)}
               className={'inputBox'}
             />
