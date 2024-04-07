@@ -4,7 +4,7 @@ from flask import Flask
 from flask_restful import Api
 from flask_cors import CORS #comment this on deployment
 from backend.authentication.auth import auth_app
-from backend.authentication import cas_auth
+from backend.authentication.cas_auth import cas_auth
 from backend.api.InventoryTableApiEndpoint import InventoryTableApiEndpoint
 from backend.api.StockInventoryApiEndpoint import StockInventoryApiEndpoint
 from backend.api.TonerTypesApiEndpoint import TonerTypesApiEndpoint
