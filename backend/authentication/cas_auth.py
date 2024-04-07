@@ -4,9 +4,11 @@ from cas import CASClient
 
 cas_auth = Blueprint('cas_auth', __name__)
 
+#original service url http://localhost:5050/login?next=%2Fprofile
+
 cas_client = CASClient(
     version=3,
-    service_url='http://localhost:3001/login',
+    service_url='http://localhost:5000/cas/login?next=%2F/cas/profile',
     server_url=('https://secure6.its.yale.edu/cas/login?'
                 'service=https://localhost:55555/index')
 )
@@ -38,7 +40,7 @@ def index():
 @cas_auth.route('/profile')
 def profile(method=['GET']):
     if 'username' in session:
-        return 'Logged in as %s. <a href="/logout">Logout</a>' % session['username']
+        return 'Welcome STC Tech!! Logged in as %s. <a href="/logout">Logout</a>' % session['username']
     return 'Login required. <a href="/login">Login</a>', 403
 
 
