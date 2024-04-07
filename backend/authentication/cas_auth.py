@@ -40,7 +40,7 @@ def index():
 @cas_auth.route('/profile')
 def profile(method=['GET']):
     if 'username' in session:
-        return 'Welcome STC Tech!! Logged in as %s. <a href="/logout">Logout</a>' % session['username']
+        return 'Welcome STC Tech!! You are Logged in as %s. <a href="/logout">Logout</a>' % session['username']
     return 'Login required. <a href="/login">Login</a>', 403
 
 
