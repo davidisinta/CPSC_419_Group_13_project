@@ -18,7 +18,6 @@ def create_app(config_name='default'):
     stc_app.config.from_object(config[config_name])
     config[config_name].init_app(stc_app)
 
-
     CORS(stc_app)  # comment this on deployment
     api = Api(stc_app)
 
