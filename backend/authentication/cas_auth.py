@@ -4,9 +4,11 @@ from cas import CASClient
 
 cas_auth = Blueprint('cas_auth', __name__)
 
+#original service url http://localhost:5050/login?next=%2Fprofile
+
 cas_client = CASClient(
     version=3,
-    service_url='http://localhost:5050/login?next=%2Fprofile',
+    service_url='http://localhost:5000/cas/login?next=%2F/cas/profile',
     server_url=('https://secure6.its.yale.edu/cas/login?'
                 'service=https://localhost:55555/index')
 )
@@ -38,7 +40,7 @@ def index():
 @cas_auth.route('/profile')
 def profile(method=['GET']):
     if 'username' in session:
-        return 'Logged in as %s. <a href="/logout">Logout</a>' % session['username']
+        return 'Welcome STC Tech!! You are Logged in as %s. <a href="/logout">Logout</a>' % session['username']
     return 'Login required. <a href="/login">Login</a>', 403
 
 
@@ -55,7 +57,7 @@ def login():
         # No ticket, the request come from end user, send to CAS login
         cas_login_url = cas_client.get_login_url()
         # app.logger.debug('CAS login URL: %s', cas_login_url)
-        return redirect(cas_login_url)
+        return {"login_url" :cas_login_url}
 
     # There is a ticket, the request come from CAS as callback.
     # need call `verify_ticket()` to validate ticket and get user profile.
@@ -92,4 +94,4 @@ def logout_callback():
 
 @cas_auth.route('/ping')
 def ping():
-    return 'pong'
+    return {'message': 'Pong!'}
