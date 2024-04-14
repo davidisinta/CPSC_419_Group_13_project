@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { Select, SelectItem } from '@tremor/react';
 import { useLocation } from 'react-router-dom';
+import ClockInButton from "./clockInButton";
 
 export default function NavBar({ handleZoneChange }) {
     // Default setting for burger menu
@@ -35,10 +36,12 @@ export default function NavBar({ handleZoneChange }) {
                                         <SelectItem value="3" className="cursor-pointer">Zone 3</SelectItem>
                                         <SelectItem value="4" className="cursor-pointer">Zone 4</SelectItem>
                                     </Select>}
+                                    <Link to="/shift" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Shift</Link>
                                     <Link to="/about" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">About</Link>
                                     <Link to="/report" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Report</Link>
                                     <Link to="/login" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Profile</Link>
                                     <Link to="/map" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Map</Link>
+                                    <ClockInButton />
                                 </div>
                             </div>
                         </div>

@@ -8,7 +8,8 @@ import Footer from './components/footer';
 import Profile from "./components/pages/profile";
 import Report from "./components/pages/report";
 import About from "./components/pages/about";
-import Map from "./components/pages/map"
+import Map from "./components/pages/map";
+import Shift from "./components/pages/shift";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/update/:id" element={<Update/>} />
           <Route path="/about" element={<About/>} />
           <Route path="/map" element={<Map/>}/>
+          <Route path="/shift" element={<Shift/>}/>
         </Routes>
         <Footer/>
       </Router>

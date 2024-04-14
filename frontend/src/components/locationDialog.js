@@ -27,13 +27,13 @@ export default function LocationDialog({ item, onClose }) {
                 <TabPanels>
                   <TabPanel>
                     <div className="flex justify-center">
-                      <Button variant="primary">Report</Button>
+                      <Button variant="secondary">Report</Button>
                     </div>
                   </TabPanel>
                   <TabPanel>
                     <div className="flex justify-center">
                       {/* Passing the 'item' object as a prop to the `/update/${id}` link for use in the InventoryForm */}
-                      <Link to={`/update/${item.id}`} state={{item:item}}><Button variant="primary">Update</Button></Link>
+                      <Link to={`/update/${item.id}`} state={{item:item}}><Button variant="secondary">Update</Button></Link>
                     </div>
                   </TabPanel>
                 </TabPanels>
