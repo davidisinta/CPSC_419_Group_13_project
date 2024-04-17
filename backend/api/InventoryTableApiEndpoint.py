@@ -27,7 +27,8 @@ def jsonify_printer_rows(data) -> Response:
             "model": tuple[15],
             "kyocera_serial": tuple[16],
             "keyboards": tuple[17],
-            "mice": tuple[18]
+            "mice": tuple[18],
+            "addr": tuple[19]
         }
         out.append(formatted_tuple)
     return jsonify(out)
@@ -55,7 +56,8 @@ class InventoryTableApiEndpoint(Resource):
                                   model, 
                                   kyo_num,
                                   keyboards,
-                                  mice
+                                  mice,
+                                  l.addr
                         FROM location l 
                         LEFT JOIN printer p ON p.loc_id = l.id
                         LEFT JOIN toner_inventory ti ON l.id = ti.loc_id

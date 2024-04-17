@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import LocationDialog from "./locationDialog"
 import axios from 'axios';
 
 export function PrinterMap() {
@@ -15,6 +16,7 @@ export function PrinterMap() {
     const [markers, setMarkers] = useState(null);
     const [printers, setPrinters] = useState([]);
     const [loadState, setLoadState] = useState(true);
+    const [selectedPrinter, setSelectedPrinter] = useState(null);
 
     useEffect(() => {
         const fetchPrinters = async () => {
@@ -53,9 +55,10 @@ export function PrinterMap() {
             const location = await geocodeAddress(item.addr);
             return (
             <Marker
-                key={item.name}
+                key={item.loc}
                 position={location}
                 icon={item.status === 0 ? 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' : 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'}
+                onClick={() => handleMarkerClick(item)}
             />
             );
         });
@@ -64,6 +67,13 @@ export function PrinterMap() {
         }
     };
 
+    const handleMarkerClick = (printer) => {
+        setSelectedPrinter(printer);
+      };
+    
+      const handleDialogClose = () => {
+        setSelectedPrinter(null);
+      };
 
     return (
         <>
@@ -75,6 +85,9 @@ export function PrinterMap() {
             </LoadScript>) :
             (<div>Loading</div>)
             }
+            {selectedPrinter && (
+            <LocationDialog item={selectedPrinter} onClose={handleDialogClose} />
+            )}
         </>
     )
 }
