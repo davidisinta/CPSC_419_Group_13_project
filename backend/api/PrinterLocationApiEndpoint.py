@@ -16,6 +16,16 @@ def jsonify_printer_rows(data) -> Response:
     return jsonify(out)
 
 class PrinterLocationApiEndpoint(Resource):
+    """
+        Endpoint for getting printer locations for map dashboard.
+
+        Parameters: 
+            None
+        
+        Returns:
+            Jsonified list of printer tuples formatted according to
+            jsonify_printer_rows function above.
+    """
     def get(self):
         try:
             with establish_connection() as connection:
