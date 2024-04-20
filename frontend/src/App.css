@@ -48,6 +48,7 @@
   font-weight: bolder;
   align-items: center;
   justify-content: center;
+  color: white;
 }
 
 .resultContainer,
@@ -66,14 +67,6 @@
   align-items: center;
   flex-grow: 5;
   justify-content: flex-start;
-}
-
-.buttonContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 260px;
 }
 
 .inputContainer {

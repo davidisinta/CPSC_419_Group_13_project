@@ -1,5 +1,6 @@
 import { React, useState, useEffect} from 'react';
 import { 
+    Divider,
     Card,
     Button,
     Tab,
@@ -90,14 +91,14 @@ export default function InventoryForm({ location }) {
     }, []);
 
     return (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div className="pt-16 bg-black bg-opacity-50 relative h-full w-full flex justify-center items-center z-50">
             <div className="rounded-lg">
                 <Card className="mx-auto max-w-xs">
-                <p className="text-2xl text-center text-tremor-content-strong dark:text-dark-tremor-content"> { location.loc }Cluster</p>
+                <p className="text-2xl text-center text-tremor-content-strong dark:text-dark-tremor-content"> { location.loc + ' Cluster'}</p>
                 <div className="flex justify-center space-x-5 pt-5">
                     <div className="space-y-3">
                     <TabGroup>
-                        <TabList>
+                        <TabList className='flex justify-center'>
                             <Tab>Toner</Tab>
                             <Tab>Paper</Tab>
                             <Tab>Equipment</Tab>
@@ -105,7 +106,7 @@ export default function InventoryForm({ location }) {
                         <TabPanels>
                         <TabPanel>
                             {/* Toner Form */}
-                            <div>
+                            <div className='space-y-3'>
                                 <div className='flex items-center whitespace-nowrap pb-2'>
                                     <label className='dark:text-dark-tremor-content pr-2'>Toner Type</label>
                                     <SearchSelect onValueChange={(value) => {handleTonerCountChange(value, 'type')}} placeholder='Start typing ...'>
@@ -114,26 +115,24 @@ export default function InventoryForm({ location }) {
                                         ))}
                                     </SearchSelect>
                                 </div>
-                                <div className="flex justify-center pb-2">
-                                    <span className="text-center text-white dark:text-dark-tremor-content">Toner Counts</span>
-                                </div>
-                                <div className='flex items-center pb-4'>
+                                <Divider>Toner Counts</Divider>
+                                <div className='flex items-center'>
                                     <label className='dark:text-dark-tremor-content pr-2'>Black</label>
                                     <NumberInput min={0} max={20} step={1} value={tonerCounts['black']} onValueChange={(value) => handleTonerCountChange(value, 'black')}/>
                                 </div>
-                                <div className='flex items-center pb-4'>
+                                <div className='flex items-center'>
                                     <label className='dark:text-dark-tremor-content pr-2'>Cyan</label>
                                     <NumberInput min={0} max={20} step={1} value={tonerCounts['cyan']} onValueChange={(value) => handleTonerCountChange(value, 'cyan')}/>
                                 </div>
-                                <div className='flex items-center pb-4'>
+                                <div className='flex items-center'>
                                     <label className='dark:text-dark-tremor-content pr-2'>Magenta</label>
                                     <NumberInput min={0} max={20} step={1} value={tonerCounts['magenta']} onValueChange={(value) => handleTonerCountChange(value, 'magenta')}/>
                                 </div>
-                                <div className='flex items-center pb-2'>
+                                <div className='flex items-center'>
                                     <label className='dark:text-dark-tremor-content pr-2'>Yellow</label>
                                     <NumberInput min={0} max={20} step={1} value={tonerCounts['yellow']} onValueChange={(value) => handleTonerCountChange(value, 'yellow')}/> 
                                 </div>
-                                <div className='flex items-center pb-2'>
+                                <div className='flex items-center'>
                                     <label className='dark:text-dark-tremor-content pr-2'>Waste</label>
                                     <NumberInput min={0} max={20} step={1} value={tonerCounts['waste']} onValueChange={(value) => handleTonerCountChange(value, 'waste')}/> 
                                 </div>

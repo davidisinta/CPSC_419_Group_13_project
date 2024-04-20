@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@tremor/react';
 
 const Profile = (props) => {
   const [email, setEmail] = useState('');
@@ -102,24 +103,19 @@ const Profile = (props) => {
       {loggedIn ? (
         <div>Welcome {email}!!!</div>
       ) : (
-        <div>
-          <div className={'titleContainer'}>
-            <div>Login</div>
-          </div>
-          <br />
+        <div className='space-y-4'>
+          <div className={'titleContainer'}>Login</div>
           <div className={'inputContainer'}>
             <input
               value={email}
-              placeholder=" yale email"
+              placeholder="yale email"
               onChange={(ev) => setEmail(ev.target.value)}
               className={'inputBox'}
             />
             <label className="errorLabel">{emailError}</label>
           </div>
-          <br />
-          <br />
-          <div className={'inputContainer'}>
-            <input className={'inputButton'} type="button" onClick={handleCasLogin} value={'Next'} />
+          <div className="flex justify-center">
+            <Button onClick={handleCasLogin}>Login with CAS</Button>
           </div>
         </div>
       )}

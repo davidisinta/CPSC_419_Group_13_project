@@ -20,20 +20,28 @@ export default function LocationDialog({ item, onClose }) {
           <div className="flex justify-center space-x-5 pt-5">
             <div className="space-y-3">
               <TabGroup>
-                <TabList>
+                <TabList className='flex justify-center'>
                   <Tab>Report</Tab>
                   <Tab>Inventory</Tab>
                 </TabList>
                 <TabPanels>
                   <TabPanel>
-                    <div className="flex justify-center">
+                    <div className='pb-2'>
+                      <p className="text-tremor-content-strong dark:text-dark-tremor-content text-center">Report a problem with this location</p>
+                    </div>
+                    <div className="flex justify-center space-x-4">
                       <Button variant="secondary">Report</Button>
+                      <Button size='xs' variant="secondary" onClick={onClose}>Close</Button>
                     </div>
                   </TabPanel>
                   <TabPanel>
-                    <div className="flex justify-center">
+                    <div className='pb-2'>
+                      <p className="text-tremor-content-strong dark:text-dark-tremor-content text-center">Update the inventory for this location during kilroy</p>
+                    </div>
+                    <div className="flex justify-center space-x-4">
                       {/* Passing the 'item' object as a prop to the `/update/${id}` link for use in the InventoryForm */}
                       <Link to={`/update/${item.id}`} state={{item:item}}><Button variant="secondary">Update</Button></Link>
+                      <Button size='xs' variant="secondary" onClick={onClose}>Close</Button>
                     </div>
                   </TabPanel>
                 </TabPanels>
@@ -41,7 +49,7 @@ export default function LocationDialog({ item, onClose }) {
             </div>
           </div>
           <div className="flex justify-center pt-5">
-            <Button size='xs' variant="secondary" onClick={onClose}>Close</Button>
+            
           </div>
         </Card>
       </div>
