@@ -17,6 +17,7 @@ export default function LocationDialog({ item, onClose }) {
       <div className="rounded-lg">
         <Card className="mx-auto max-w-xs">
           <p className="text-2xl text-center text-tremor-content-strong dark:text-dark-tremor-content">{item.loc + " Cluster"}</p>
+          <p className="text-l text-center text-tremor-content-strong dark:text-dark-tremor-content">{item.addr}</p>
           <div className="flex justify-center space-x-5 pt-5">
             <div className="space-y-3">
               <TabGroup>
