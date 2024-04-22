@@ -61,10 +61,12 @@ export default function NavBar({ handleZoneChange }) {
 
                 {/* Mobile menu, show/hide based on menu state */}
                 <div className={`${click ? 'block' : 'hidden'} md:hidden`}>
-                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex-col text-center">
+                        <Link to="/shift" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">Shift</Link>
                         <Link to="/about" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">About</Link>
                         <Link to="/report" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">Report</Link>
                         <Link to="/login" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">Profile</Link>
+                        <Link to="/map" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">Map</Link>
                     </div>
                 </div>
             </nav>
