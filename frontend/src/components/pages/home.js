@@ -1,4 +1,4 @@
-import InventoryTable from "../inventory_table"
+import InventoryTable from "../inventory_table";
 
 export default function Home({ currentZone }) {
     return (
@@ -6,4 +6,4 @@ export default function Home({ currentZone }) {
             <InventoryTable currentZone={ currentZone }/>
         </div>
     )
-}
+};

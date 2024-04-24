@@ -1,5 +1,4 @@
 from flask import Blueprint, request, session, redirect, url_for
-
 from cas import CASClient
 
 cas_auth = Blueprint('cas_auth', __name__)
@@ -67,13 +66,14 @@ def login():
     user, attributes, pgtiou = cas_client.verify_ticket(ticket)
 
     # app.logger.debug(
-    #     'CAS verify ticket response: user: %s, attributes: %s, pgtiou: %s', user, attributes, pgtiou)
+    #      'CAS verify ticket response: user: %s, attributes: %s, pgtiou: %s', user, attributes, pgtiou)
 
     if not user:
         return 'Failed to verify ticket. <a href="/login">Login</a>'
     else:  # Login successfully, redirect according `next` query parameter.
         session['username'] = user
-        return redirect(next)
+        session['attributes'] = attributes
+        return {"message": "Login successfully", "username": user, "attributes": attributes},200
 
 
 @cas_auth.route('/logout')

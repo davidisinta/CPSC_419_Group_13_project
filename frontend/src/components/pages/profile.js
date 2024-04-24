@@ -82,20 +82,20 @@ const Profile = (props) => {
     if(email.endsWith('@yale.edu'))
     {
       try {
-      await cas_login(); // Call cas_login asynchronously
-      // Additional logic after successful CAS login, if needed
-    } catch (error) {
-      console.error("CAS Login failed:", error);
+        await cas_login() // Call cas_login asynchronously
+        // Additional logic after successful CAS login, if needed
+        .then((data) => {
+          if (data.status === 200) {
+            console.log("Data body:", data.body)
+          }
+        });
+      } catch (error) {
+        console.error("CAS Login failed:", error);
+      } 
     }
-
-    }
-
     else{
-      console.log("please enter a valid yale email!!")
+      console.log("please enter a valid Yale email!!")
     }
-
-
-
   };
 
   return (

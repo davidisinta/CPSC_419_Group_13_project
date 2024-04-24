@@ -9,6 +9,10 @@ from backend.api.InventoryTableApiEndpoint import InventoryTableApiEndpoint
 from backend.api.StockInventoryApiEndpoint import StockInventoryApiEndpoint
 from backend.api.TonerTypesApiEndpoint import TonerTypesApiEndpoint
 from backend.api.PrinterLocationApiEndpoint import PrinterLocationApiEndpoint
+from backend.api.ClockInApiEndpoint import ClockInApiEndpoint
+from backend.api.ClockOutApiEndpoint import ClockOutApiEndpoint
+from backend.api.ShiftReportApiEndpoint import ShiftReportApiEndpoint
+from backend.api.LogActivityApiEndpoint import LogActivityApiEndpoint
 
 
 
@@ -26,6 +30,10 @@ def create_app(config_name='default'):
     api.add_resource(StockInventoryApiEndpoint, '/update_inventory')
     api.add_resource(TonerTypesApiEndpoint, '/get_toner_types')
     api.add_resource(PrinterLocationApiEndpoint, '/printers')
+    api.add_resource(ClockInApiEndpoint, '/clock_in')
+    api.add_resource(ClockOutApiEndpoint, '/clock_out')
+    api.add_resource(ShiftReportApiEndpoint, '/shift_report')
+    api.add_resource(LogActivityApiEndpoint, '/log_activity')
     
     # Register Blueprints
     stc_app.register_blueprint(auth_app)
