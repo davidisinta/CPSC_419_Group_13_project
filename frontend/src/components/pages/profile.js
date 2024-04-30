@@ -3,99 +3,40 @@ import { useNavigate } from 'react-router-dom';
 
 const Profile = (props) => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
-  const navigate = useNavigate();
 
-  // Example POST method implementation:
-  async function cas_login(url = "http://127.0.0.1:5000/cas/login") {
-  console.log("cas_login called");
-  try {
-    // Default options are marked with *
-    const response = await fetch(url, {
-      method: "GET",
-    });
-    const data = await response.json();
-    console.log(data);
-    // Extract the URL from the response
-    const redirectUrl = data.login_url; // Replace 'redirectUrl' with the actual key in your response JSON
-
-    // Redirect the user to the obtained URL
-    window.location.href = redirectUrl;
-  } catch (error) {
-    console.error("Error during CAS login:", error);
-    // Handle errors if needed
-  }
-}
-
-
-  const login_authenticator = () => {
-    // Set initial error values to empty
-    setEmailError('');
-    setPasswordError('');
-
-    // Check if the user has entered both fields correctly
-    if ('' === email) {
-      setEmailError('Please enter your email');
-      return;
-    }
-
-    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-      setEmailError('Please enter a valid email');
-      return;
-    }
-
-    if ('' === password) {
-      setPasswordError('Please enter a password');
-      return;
-    }
-
-    login_user("http://127.0.0.1:5000/login", {
-      "email_address": email,
-      "password": password
-    }).then((data) => {
-      console.log(data); // JSON data parsed by `data.json()` call
-      if (data.status === 200) {
-        setLoggedIn(true);
-      }
-    });
-  };
-
-  // Example POST method implementation:
-  async function login_user(url = "", data = {}) {
-    // Default options are marked with *
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data) // body data type must match "Content-Type" header
-    });
-
-    return response.json(); // parses JSON response into native JavaScript objects
-  }
-
+  // Function to handle CAS login
   const handleCasLogin = async () => {
-    if(email.endsWith('@yale.edu'))
-    {
+    if (email.endsWith('@yale.edu')) {
       try {
-      await cas_login(); // Call cas_login asynchronously
-      // Additional logic after successful CAS login, if needed
-    } catch (error) {
-      console.error("CAS Login failed:", error);
+        const response = await casLogin();
+        console.log(response);
+        if (response.login_url) {
+          // If login_url is received in response, redirect the user to CAS login page
+          window.open(response.login_url, "_blank");
+          // Additional logic after initiating CAS login, if needed
+        } else {
+          console.error("No login URL received in response.");
+        }
+      } catch (error) {
+        console.error("Error during CAS login:", error);
+      }
+    } else {
+      console.log("Please enter a valid Yale email!!");
     }
-
-    }
-
-    else{
-      console.log("please enter a valid yale email!!")
-    }
-
-
-
   };
+
+  // Function to initiate CAS login
+  async function casLogin() {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/cas/login");
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      throw new Error("Error during CAS login:", error);
+    }
+  }
 
   return (
     <div className={'mainContainer'}>
@@ -110,7 +51,7 @@ const Profile = (props) => {
           <div className={'inputContainer'}>
             <input
               value={email}
-              placeholder=" yale email"
+              placeholder="Yale email"
               onChange={(ev) => setEmail(ev.target.value)}
               className={'inputBox'}
             />

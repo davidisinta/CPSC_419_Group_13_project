@@ -8,7 +8,7 @@ cas_auth = Blueprint('cas_auth', __name__)
 
 cas_client = CASClient(
     version=3,
-    service_url='http://localhost:5000/cas/login?next=%2F/cas/profile',
+    service_url='http://localhost:3000/',
     server_url=('https://secure6.its.yale.edu/cas/login?'
                 'service=https://localhost:55555/index')
 )
@@ -23,14 +23,7 @@ def index():
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
   </head>
   <body>
-    <h1>Welcome to python-cas Flask example demo</h1>
-    <p><a href="/login">CAS Login</a></p>
-    <p>Related post:</p>
-    <ul>
-        <li><a href="https://djangocas.dev/blog/python-cas-flask-example/">python-cas Flask example</a></li>
-    </ul>
-    <hr>
-    <p><a href="https://djangocas.dev/">Project homepage</a></p>
+    <h1>Heyy Thereee!!</h1>
   </body>
 </html>
 """
@@ -46,9 +39,9 @@ def profile(method=['GET']):
 
 @cas_auth.route('/login')
 def login():
-    print("yeaaahhhh")
     if 'username' in session:
         # Already logged in
+
         return redirect(url_for('cas_auth.profile'))
 
     next = request.args.get('next')
