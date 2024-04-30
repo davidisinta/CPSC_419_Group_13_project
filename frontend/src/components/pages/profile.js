@@ -1,107 +1,66 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@tremor/react';
+import axios from 'axios';
+import Shift from './shift';
 
-const Profile = (props) => {
+export default function Profile ({ setLoginStatus, loginStatus }) {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
-  const navigate = useNavigate();
 
-  // Example POST method implementation:
-  async function cas_login(url = "http://127.0.0.1:5000/cas/login") {
-  console.log("cas_login called");
-  try {
-    // Default options are marked with *
-    const response = await fetch(url, {
-      method: "GET",
-    });
-    const data = await response.json();
-    console.log(data);
-    // Extract the URL from the response
-    const redirectUrl = data.login_url; // Replace 'redirectUrl' with the actual key in your response JSON
-
-    // Redirect the user to the obtained URL
-    window.location.href = redirectUrl;
-  } catch (error) {
-    console.error("Error during CAS login:", error);
-    // Handle errors if needed
-  }
-}
-
-
-  const login_authenticator = () => {
-    // Set initial error values to empty
-    setEmailError('');
-    setPasswordError('');
-
-    // Check if the user has entered both fields correctly
-    if ('' === email) {
-      setEmailError('Please enter your email');
-      return;
+  async function cas_login(url = "http://127.0.0.1:5000/login") {
+    console.log("cas_login called");
+    try {
+      // Default options are marked with *
+      axios.get(url)
+        .then(response => {
+          const data = response.data;
+          // Extract the URL from the response
+          const redirectUrl = data.login_url; 
+          // Redirect the user to the obtained URL
+          window.location.href = redirectUrl;
+        })
+        .catch(error => {
+          console.error("Error during CAS login:", error);
+          // Handle errors if needed
+        });
+    } catch (error) {
+      console.error("Error during CAS login:", error);
+      // Handle errors if needed
     }
-
-    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-      setEmailError('Please enter a valid email');
-      return;
-    }
-
-    if ('' === password) {
-      setPasswordError('Please enter a password');
-      return;
-    }
-
-    login_user("http://127.0.0.1:5000/login", {
-      "email_address": email,
-      "password": password
-    }).then((data) => {
-      console.log(data); // JSON data parsed by `data.json()` call
-      if (data.status === 200) {
-        setLoggedIn(true);
-      }
-    });
-  };
-
-  // Example POST method implementation:
-  async function login_user(url = "", data = {}) {
-    // Default options are marked with *
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data) // body data type must match "Content-Type" header
-    });
-
-    return response.json(); // parses JSON response into native JavaScript objects
   }
 
   const handleCasLogin = async () => {
-    if(email.endsWith('@yale.edu'))
-    {
+    if (email.endsWith('@yale.edu')) {
       try {
-        await cas_login() // Call cas_login asynchronously
-        // Additional logic after successful CAS login, if needed
-        .then((data) => {
-          if (data.status === 200) {
-            console.log("Data body:", data.body)
-          }
-        });
+        // Call cas_login asynchronously
+        await cas_login() ;
       } catch (error) {
         console.error("CAS Login failed:", error);
-      } 
+      }
     }
-    else{
+    else {
       console.log("please enter a valid Yale email!!")
     }
   };
 
+  useEffect(() => {
+    try{
+      // Create a URLSearchParams object with the query string of the current URL
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('ticket')) {
+        // If the URL has a 'ticket' query parameter, the user is logged in
+        setLoginStatus(true);
+      }
+    }
+    catch (error) {
+      console.error("Error during CAS login (Profile page):", error);
+    }
+  },[]);
+
   return (
     <div className={'mainContainer'}>
-      {loggedIn ? (
-        <div>Welcome {email}!!!</div>
+      {loginStatus ? (
+        <Shift />
       ) : (
         <div className='space-y-4'>
           <div className={'titleContainer'}>Login</div>
@@ -123,4 +82,3 @@ const Profile = (props) => {
   );
 };
 
-export default Profile;

@@ -3,8 +3,7 @@ from backend.config import config
 from flask import Flask
 from flask_restful import Api
 from flask_cors import CORS #comment this on deployment
-from backend.authentication.auth import auth_app
-from backend.authentication.cas_auth import cas_auth
+from backend.authentication.cas_auth import Login, Logout, LogoutCallBack
 from backend.api.InventoryTableApiEndpoint import InventoryTableApiEndpoint
 from backend.api.StockInventoryApiEndpoint import StockInventoryApiEndpoint
 from backend.api.TonerTypesApiEndpoint import TonerTypesApiEndpoint
@@ -34,10 +33,8 @@ def create_app(config_name='default'):
     api.add_resource(ClockOutApiEndpoint, '/clock_out')
     api.add_resource(ShiftReportApiEndpoint, '/shift_report')
     api.add_resource(LogActivityApiEndpoint, '/log_activity')
-    
-    # Register Blueprints
-    stc_app.register_blueprint(auth_app)
-    stc_app.register_blueprint(cas_auth, url_prefix='/cas')
-
+    api.add_resource(Login, '/login')
+    api.add_resource(Logout, '/logout')
+    api.add_resource(LogoutCallBack, '/logout_callback')
 
     return stc_app

@@ -13,28 +13,33 @@ import Shift from "./components/pages/shift";
 
 
 function App() {
+  // Check if user is logged in
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   // Determine which zone to display in the inventory table
   const [displayZone, setDisplayZone] = useState('all');
   // Function to set the zone to display
   const handleZoneChange = (zone) => {
     setDisplayZone(zone);
   };
+  // Handle login status
+  const handleLoginStatus = (status) => {
+    setIsLoggedIn(status);
+  };
 
   return (
     <>
       <Router>
-        <NavBar handleZoneChange={handleZoneChange}/>
+        <NavBar handleZoneChange={handleZoneChange} setLoginStatus={handleLoginStatus} loginStatus={isLoggedIn} />
         <Routes>
-          <Route path="/" element={<Home currentZone={displayZone}/>} />
-          <Route path="/login" element={<Profile/>} />
-          <Route path="/report" element={<Report/>} />
-          <Route path="/update/:id" element={<Update/>} />
-          <Route path="/about" element={<About/>} />
-          <Route path="/map" element={<Map/>}/>
-          <Route path="/shift" element={<Shift/>}/>
-          <Route path="/profile" element={<Profile/>}/>
+          <Route path="/" element={<Home currentZone={displayZone} />} />
+          <Route path="/report" element={<Report />} />
+          <Route path="/update/:id" element={<Update />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/map" element={<Map />} />
+          <Route path="/shift" element={<Shift />} />
+          <Route path="/profile" element={<Profile setLoginStatus={handleLoginStatus} loginStatus={isLoggedIn} />} />
         </Routes>
-        <Footer/>
+        <Footer />
       </Router>
     </>
   );
