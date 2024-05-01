@@ -6,8 +6,8 @@ export default function Update() {
     const location = useLocation(); 
     const { item } = location.state;
     return (
-        <>  
+        <div>  
             <InventoryForm location={ item }/>
-        </>
+        </div>
     )
 }

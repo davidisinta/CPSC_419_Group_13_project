@@ -1,19 +1,33 @@
 import { React, useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import { Select, SelectItem } from '@tremor/react';
+import { Select, SelectItem, Button } from '@tremor/react';
 import { useLocation } from 'react-router-dom';
+import axios from "axios";
 
-export default function NavBar({ handleZoneChange }) {
+
+export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }) {
     // Default setting for burger menu
     const [click, setClick] = useState(false);
     const [displayZone, setDisplayZone] = useState(false);
     //  Menu onClick function
-    const handleClick = () => setClick (!click);
+    const handleClick = () => setClick(!click);
     // Selectively display zone dropdown
     const location = useLocation();
+    // Handle CAS logout
+    const handleCasLogout = async () => {
+        try {
+          axios.get("http://localhost:5000/logout")
+          .then(() => {
+            setLoginStatus(false);
+          })
+        }
+        catch (error) {
+          console.error("Error during CAS logout:", error);
+        }};
+    
     useEffect(() => {
         location.pathname === '/' ? setDisplayZone(true) : setDisplayZone(false);
-    }, [location]);
+    }, [location, loginStatus]);
     return (
         <>
             <nav className="navbar fixed top-0 w-full z-50 bg-gray-800">
@@ -37,8 +51,13 @@ export default function NavBar({ handleZoneChange }) {
                                     </Select>}
                                     <Link to="/about" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">About</Link>
                                     <Link to="/report" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Report</Link>
-                                    <Link to="/login" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Profile</Link>
+                                    <Link to="/profile" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Profile</Link>
                                     <Link to="/map" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Map</Link>
+                                    {loginStatus ?
+                                        <Button variant="secondary" size="sm" onClick={handleCasLogout} className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Logout</Button>
+                                        :
+                                        <Link to="/profile"><Button variant="primary" size="sm" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Login</Button></Link>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -59,10 +78,16 @@ export default function NavBar({ handleZoneChange }) {
 
                 {/* Mobile menu, show/hide based on menu state */}
                 <div className={`${click ? 'block' : 'hidden'} md:hidden`}>
-                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex-col text-center">
                         <Link to="/about" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">About</Link>
                         <Link to="/report" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">Report</Link>
-                        <Link to="/login" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">Profile</Link>
+                        <Link to="/profile" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">Profile</Link>
+                        <Link to="/map" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">Map</Link>
+                        {loginStatus ?
+                            <Button variant="secondary" size="sm" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Logout</Button>
+                            :
+                            <Link to="/profile"><Button variant="primary" size="sm" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Login</Button></Link>
+                        }
                     </div>
                 </div>
             </nav>
