@@ -1,10 +1,10 @@
 from psycopg2 import connect
+from config import DB_PASSWORD
 
 DB = "stcdb"
 HOST = "ep-bold-morning-a5urtgao.us-east-2.aws.neon.tech"
 PORT = "5432"
 USER = "fisher.marks"
-PASSWORD = "FgbxGdU60iXt"
 
 def establish_connection():
     connection = connect(
@@ -12,7 +12,7 @@ def establish_connection():
         host=HOST,
         port=PORT,
         user=USER,
-        password=PASSWORD
+        password=DB_PASSWORD
     )
     return connection
 
