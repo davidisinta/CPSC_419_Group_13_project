@@ -1,14 +1,19 @@
-from flask import Blueprint, request, session, redirect, url_for
+from flask import Blueprint, request, session, redirect, url_for, jsonify
 
 from cas import CASClient
+from urllib.parse import urlencode
 
 cas_auth = Blueprint('cas_auth', __name__)
 
 #original service url http://localhost:5050/login?next=%2Fprofile
 
+
+
+# Create a CASClient object
+encode_path = urlencode({'next': '/login'})
 cas_client = CASClient(
     version=3,
-    service_url='http://localhost:3000/',
+    service_url=f'http://localhost:3000/login?{encode_path}',
     server_url=('https://secure6.its.yale.edu/cas/login?'
                 'service=https://localhost:55555/index')
 )
@@ -46,6 +51,10 @@ def login():
 
     next = request.args.get('next')
     ticket = request.args.get('ticket')
+
+    print("first checker of ticket is:{}".format(ticket) )
+
+
     if not ticket:
         # No ticket, the request come from end user, send to CAS login
         cas_login_url = cas_client.get_login_url()
@@ -57,6 +66,9 @@ def login():
     # app.logger.debug('ticket: %s', ticket)
     # app.logger.debug('next: %s', next)
 
+    print("ticket:", ticket)
+    print("were validating the ticket")
+
     user, attributes, pgtiou = cas_client.verify_ticket(ticket)
 
     # app.logger.debug(
@@ -66,7 +78,8 @@ def login():
         return 'Failed to verify ticket. <a href="/login">Login</a>'
     else:  # Login successfully, redirect according `next` query parameter.
         session['username'] = user
-        return redirect(next)
+        print("user:", session['username'])
+        return jsonify({'username': session['username']})
 
 
 @cas_auth.route('/logout')

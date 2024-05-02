@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Profile = (props) => {
+const Profile = () => {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const [cas_ticket, setCasTicket] = useState(null);
 
   // Function to handle CAS login
   const handleCasLogin = async () => {
@@ -14,10 +15,8 @@ const Profile = (props) => {
         const response = await casLogin();
         console.log(response);
         if (response.login_url) {
-          // If login_url is received in response, redirect the user to CAS login page
-          window.open(response.login_url, "_blank");
-          // Additional logic after initiating CAS login, if needed
-
+          // Redirect the user to CAS login page
+          window.location.href = response.login_url;
         } else {
           console.error("No login URL received in response.");
         }
@@ -25,7 +24,7 @@ const Profile = (props) => {
         console.error("Error during CAS login:", error);
       }
     } else {
-      console.log("Please enter a valid Yale email!!");
+      setEmailError("Please enter a valid Yale email!");
     }
   };
 
@@ -40,53 +39,67 @@ const Profile = (props) => {
     }
   }
 
-  // Function to retrieve session data
-  async function getSessionData() {
-    try {
-      const response = await fetch("http://127.0.0.1:5000/cas/session_data");
-      const sessionData = await response.json();
-      // Handle session data as needed
-      console.log("Session Data:", sessionData);
-      // Example: Update loggedIn state based on session data
-      setLoggedIn(true);
-    } catch (error) {
-      console.error("Error retrieving session data:", error);
-    }
-  }
-
-  // useEffect to trigger getSessionData when loggedIn state changes
+  // Check for a CAS ticket in the URL when component mounts
   useEffect(() => {
-    if (loggedIn) {
-      getSessionData();
+    console.log("ticket validator called")
+    const urlParams = new URLSearchParams(window.location.search);
+    const ticket = urlParams.get('ticket');
 
+    console.log("the ticket is:", ticket);
+    if (ticket) {
+      validateCasTicket(ticket);
     }
-  }, [loggedIn]);
+  }, []);
+
+  // Validate CAS ticket
+
+    async function validateCasTicket(ticket) {
+          console.log("tryna validate cas ticket")
+
+  try {
+    const response = await fetch(`http://localhost:5000/cas/login?ticket=${ticket}`);
+    //data represents the username
+    const data = await response.json();
+    console.log(data); // Assuming the response contains user data or error messages
+
+    if (response.ok) {
+
+      console.log("Been waveeyyyyyy!!!!")
+
+    } else {
+      console.error("Error validating ticket:", data.error);
+    }
+  } catch (error) {
+    console.error("Error validating ticket:", error);
+  }
+}
+
 
   return (
     <div className={'mainContainer'}>
       {loggedIn ? (
         <div>Welcome {email}!!!</div>
       ) : (
-        <div>
-          <div className={'titleContainer'}>
-            <div>Login</div>
-          </div>
-          <br />
-          <div className={'inputContainer'}>
+          <div>
+            <div className={'titleContainer'}>
+              <div>Login</div>
+            </div>
             <input
-              value={email}
-              placeholder="Yale email"
-              onChange={(ev) => setEmail(ev.target.value)}
-              className={'inputBox'}
+                value={email}
+                placeholder="Yale email"
+                onChange={(ev) => {
+                  setEmail(ev.target.value);
+                  setEmailError('');
+                }}
+                className={'inputBox'}
             />
-            <label className="errorLabel">{emailError}</label>
+            {emailError && <label className="errorLabel">{emailError}</label>}
+
+
+            <div className={'inputContainer'}>
+              <input className={'inputButton'} type="button" onClick={handleCasLogin} value={'Next'}/>
+            </div>
           </div>
-          <br />
-          <br />
-          <div className={'inputContainer'}>
-            <input className={'inputButton'} type="button" onClick={handleCasLogin} value={'Next'} />
-          </div>
-        </div>
       )}
     </div>
   );
