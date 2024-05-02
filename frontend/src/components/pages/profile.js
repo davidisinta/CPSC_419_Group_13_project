@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const Profile = () => {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
-  const [cas_ticket, setCasTicket] = useState(null);
+  const [username,setUsername] = useState('');
 
   // Function to handle CAS login
   const handleCasLogin = async () => {
@@ -64,7 +65,16 @@ const Profile = () => {
 
     if (response.ok) {
 
-      console.log("Been waveeyyyyyy!!!!")
+     console.log("Been waveeyyyyyy!!!!")
+
+    setUsername(data.username);
+    setLoggedIn(true);
+
+      Cookies.set('username', data.username, { expires: 7 } )
+      const yutes_name = Cookies.get('username'); // Retrieve the token from cookie
+      console.log('Yutes id:', yutes_name);
+
+
 
     } else {
       console.error("Error validating ticket:", data.error);
@@ -78,7 +88,7 @@ const Profile = () => {
   return (
     <div className={'mainContainer'}>
       {loggedIn ? (
-        <div>Welcome {email}!!!</div>
+        <div>Welcome {username}!!!</div>
       ) : (
           <div>
             <div className={'titleContainer'}>
