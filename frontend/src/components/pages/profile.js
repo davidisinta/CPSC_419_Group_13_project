@@ -85,6 +85,24 @@ const Profile = () => {
 }
 
 
+
+
+
+  useEffect(() => {
+    const lastInput = Cookies.get('lastEmail');
+    if (lastInput) {
+      setEmail(lastInput);
+    }
+  }, []);
+
+  const handleChange = (e) => {
+     setEmail(e.target.value);
+     setEmailError('');
+     const value = e.target.value;
+
+    Cookies.set('lastEmail', value, { expires: 7 }); // Set cookie to expire in 7 days
+  };
+
   return (
     <div className={'mainContainer'}>
       {loggedIn ? (
@@ -96,18 +114,15 @@ const Profile = () => {
             </div>
             <input
                 value={email}
-                placeholder="Yale email"
-                onChange={(ev) => {
-                  setEmail(ev.target.value);
-                  setEmailError('');
-                }}
+                placeholder="yale email"
+                onChange={handleChange}
                 className={'inputBox'}
             />
             {emailError && <label className="errorLabel">{emailError}</label>}
 
 
             <div className={'inputContainer'}>
-              <input className={'inputButton'} type="button" onClick={handleCasLogin} value={'Next'}/>
+              <input className={'inputButton'} type="button"  onClick={handleCasLogin} value={'Next'}/>
             </div>
           </div>
       )}
