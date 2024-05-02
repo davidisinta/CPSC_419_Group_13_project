@@ -3,131 +3,68 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 const Profile = () => {
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
-  const navigate = useNavigate();
-  const [username,setUsername] = useState('');
+    const navigate = useNavigate();
+    const [isLoggedIn, setLoginStatus] = useState(false);
 
-  // Function to handle CAS login
-  const handleCasLogin = async () => {
-    if (email.endsWith('@yale.edu')) {
-      try {
-        const response = await casLogin();
-        console.log(response);
-        if (response.login_url) {
-          // Redirect the user to CAS login page
-          window.location.href = response.login_url;
+    // Function to check if the user is authenticated
+    function isAuthenticated() {
+        return !!Cookies.get('username');  // Checks if the 'username' cookie exists
+    }
+
+    // Effect to check login status and redirect if not logged in
+    useEffect(() => {
+        console.log("Checking for login status");
+        if (!isAuthenticated()) {
+
+
+            // Redirect to the login page if not authenticated
+            console.log("User not authenticated, redirecting to login page...");
+            navigate('/login');
         } else {
-          console.error("No login URL received in response.");
+
+            console.log("user is:", Cookies.get('username'))
+            // Update state to reflect that user is logged in
+            setLoginStatus(true);
+            console.log("User authenticated, proceeding...");
         }
-      } catch (error) {
-        console.error("Error during CAS login:", error);
-      }
-    } else {
-      setEmailError("Please enter a valid Yale email!");
+    }, [navigate]);  // Dependency array includes navigate to re-check when navigate changes
+
+    if (!isLoggedIn) {
+        // Optional: Render nothing or a loading indicator while checking authentication
+        return <div>Loading...</div>;
     }
-  };
-
-  // Function to initiate CAS login
-  async function casLogin() {
-    try {
-      const response = await fetch("http://127.0.0.1:5000/cas/login");
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      throw new Error("Error during CAS login:", error);
-    }
-  }
-
-  // Check for a CAS ticket in the URL when component mounts
-  useEffect(() => {
-    console.log("ticket validator called")
-    const urlParams = new URLSearchParams(window.location.search);
-    const ticket = urlParams.get('ticket');
-
-    console.log("the ticket is:", ticket);
-    if (ticket) {
-      validateCasTicket(ticket);
-    }
-  }, []);
-
-  // Validate CAS ticket
-
-    async function validateCasTicket(ticket) {
-          console.log("tryna validate cas ticket")
-
-  try {
-    const response = await fetch(`http://localhost:5000/cas/login?ticket=${ticket}`);
-    //data represents the username
-    const data = await response.json();
-    console.log(data); // Assuming the response contains user data or error messages
-
-    if (response.ok) {
-
-     console.log("Been waveeyyyyyy!!!!")
-
-    setUsername(data.username);
-    setLoggedIn(true);
-
-      Cookies.set('username', data.username, { expires: 7 } )
-      const yutes_name = Cookies.get('username'); // Retrieve the token from cookie
-      console.log('Yutes id:', yutes_name);
 
 
+    const logout = () => {
+        console.log('Logging out...');
+        // Add your logout logic here, such as clearing cookies or local storage
 
-    } else {
-      console.error("Error validating ticket:", data.error);
-    }
-  } catch (error) {
-    console.error("Error validating ticket:", error);
-  }
-}
+         Cookies.remove('username');
+    };
 
-
-
-
-
-  useEffect(() => {
-    const lastInput = Cookies.get('lastEmail');
-    if (lastInput) {
-      setEmail(lastInput);
-    }
-  }, []);
-
-  const handleChange = (e) => {
-     setEmail(e.target.value);
-     setEmailError('');
-     const value = e.target.value;
-
-    Cookies.set('lastEmail', value, { expires: 7 }); // Set cookie to expire in 7 days
-  };
-
-  return (
-    <div className={'mainContainer'}>
-      {loggedIn ? (
-        <div>Welcome {username}!!!</div>
-      ) : (
-          <div>
-            <div className={'titleContainer'}>
-              <div>Login</div>
-            </div>
-            <input
-                value={email}
-                placeholder="yale email"
-                onChange={handleChange}
-                className={'inputBox'}
-            />
-            {emailError && <label className="errorLabel">{emailError}</label>}
+    // Main component content for authenticated users
+    return (
+        <div className={'mainContainer'}>
+            heyyy there, welcome to your profile
 
 
-            <div className={'inputContainer'}>
-              <input className={'inputButton'} type="button"  onClick={handleCasLogin} value={'Next'}/>
-            </div>
-          </div>
-      )}
-    </div>
-  );
+            <button
+                onClick={logout}
+                style={{
+                    backgroundColor: '#0090ff', // Bootstrap primary blue
+                    color: 'white',
+                    padding: '10px 20px',
+                    fontSize: '16px',
+                    border: 'none',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                    outline: 'none'
+                }}
+            >
+                Logout
+            </button>
+        </div>
+    );
 };
 
 export default Profile;
