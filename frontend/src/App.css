@@ -229,6 +229,10 @@
         /*border: 1px solid red; !* Just for visualization *!*/
     }
 
+    .nav-item{
+        flex:1;
+    }
+
 
 
     .logout-button {
@@ -236,15 +240,21 @@
     color: white;
     padding: 10px 20px;
     font-size: 16px;
-    border: none;
+    border: white;
     border-radius: 5px;
     cursor: pointer;
     outline: none;
+        border-style: solid;
 }
 
     .logout-button:hover{
       background-color: white;
       color: #000026FF;
       border-style: solid;
+    }
+
+
+    .welcome-user{
+        color:white;
     }
 

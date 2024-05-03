@@ -49,11 +49,6 @@ const Profile = () => {
             heyyy there, welcome to your profile {Cookies.get('username')}
 
 
-            <button className="logout-button"
-                onClick={logout}>
-                Logout
-            </button>
-
         </div>
     );
 };
