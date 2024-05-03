@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import LocationDialog from "./locationDialog"
 import axios from 'axios';
 
@@ -17,6 +17,10 @@ export function PrinterMap() {
     const [printers, setPrinters] = useState([]);
     const [loadState, setLoadState] = useState(true);
     const [selectedPrinter, setSelectedPrinter] = useState(null);
+    const { isLoaded } = useJsApiLoader({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+    });
+    
 
     useEffect(() => {
         const fetchPrinters = async () => {
@@ -34,60 +38,61 @@ export function PrinterMap() {
         fetchPrinters();
     }, []);
 
-    const geocodeAddress = (address) => {
-        return new Promise((resolve, reject) => {
-            const geocoder = new window.google.maps.Geocoder();
-            geocoder.geocode({ address: address }, (results, status) => {
-            if (status === 'OK') {
-                const location = results[0].geometry.location;
-                resolve(location);
-            } else {
-                console.error('Address not found:' + address);
-                //reject(new Error('Geocoding failed: ' + status));
-                resolve(undefined);
-            }});
-        });
-    };
-
-    const geocodeAddresses = async () => {
-        if (!loadState){
-            const promises = printers.map(async (item) => {
-            const location = await geocodeAddress(item.addr);
-            return (
-            <Marker
-                key={item.loc}
-                position={location}
-                icon={item.status === 0 ? 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' : 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'}
-                onClick={() => handleMarkerClick(item)}
-            />
-            );
-        });
-        const resolvedMarkers = await Promise.all(promises);
-        setMarkers(resolvedMarkers);
-        }
-    };
+    useEffect(() => {
+        const geocodeAddress = address => {
+            return new Promise((resolve, reject) => {
+                const geocoder = new window.google.maps.Geocoder();
+                geocoder.geocode({ address: address }, (results, status) => {
+                if (status === 'OK') {
+                    const location = results[0].geometry.location;
+                    resolve(location);
+                } else {
+                    console.error('Address not found:' + address);
+                    resolve(undefined);
+                }
+                });
+            });
+        };
+        const geocodeAddresses = async () => {
+            if (!loadState && isLoaded) {
+                const promises = printers.map(async item => {
+                const location = await geocodeAddress(item.addr);
+                return (
+                    <Marker
+                    key={item.loc}
+                    position={location}
+                    icon={item.status === 0 ? 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' 
+                    : 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'}
+                    onClick={() => handleMarkerClick(item)}
+                    />
+                );
+            });
+            const resolvedMarkers = await Promise.all(promises);
+            setMarkers(resolvedMarkers);
+            }
+        };
+    geocodeAddresses();
+    }, [printers, loadState, isLoaded]);
 
     const handleMarkerClick = (printer) => {
         setSelectedPrinter(printer);
-      };
+    };
     
-      const handleDialogClose = () => {
+    const handleDialogClose = () => {
         setSelectedPrinter(null);
-      };
+    };
 
     return (
         <>
-            {!loadState ? 
-            (<LoadScript googleMapsApiKey='AIzaSyBiQbVIpUF5kiFmxUD9IrAtvfYYMsCdnAo' onLoad={geocodeAddresses}>
-                <GoogleMap mapContainerStyle={style} zoom={15} center={center} options={{disableDefaultUI:true}}>
-                    {markers}
-                </GoogleMap>
-            </LoadScript>) :
-            (<div>Loading</div>)
-            }
-            {selectedPrinter && (
-            <LocationDialog item={selectedPrinter} onClose={handleDialogClose} />
-            )}
+        {isLoaded ? (
+            <GoogleMap mapContainerStyle={style} zoom={15} center={center} options={{ disableDefaultUI: true }}>
+            {markers}
+            </GoogleMap>
+            ) : (
+            <div>Loading</div>
+            )   
+        }
+        {selectedPrinter && <LocationDialog item={selectedPrinter} onClose={handleDialogClose} />}
         </>
     )
 }
