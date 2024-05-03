@@ -18,7 +18,7 @@ export function PrinterMap() {
     const [loadState, setLoadState] = useState(true);
     const [selectedPrinter, setSelectedPrinter] = useState(null);
     const { isLoaded } = useJsApiLoader({
-        googleMapsApiKey: 'AIzaSyBiQbVIpUF5kiFmxUD9IrAtvfYYMsCdnAo',
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
     });
     
 
