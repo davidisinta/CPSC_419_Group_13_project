@@ -49,19 +49,8 @@ const Profile = () => {
             heyyy there, welcome to your profile {Cookies.get('username')}
 
 
-            <button
-                onClick={logout}
-                style={{
-                    backgroundColor: '#000026FF', // Bootstrap primary blue
-                    color: 'white',
-                    padding: '10px 20px',
-                    fontSize: '16px',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                    outline: 'none'
-                }}
-            >
+            <button className="logout-button"
+                onClick={logout}>
                 Logout
             </button>
 

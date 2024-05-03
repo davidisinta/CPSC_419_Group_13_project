@@ -159,6 +159,9 @@
 .inputButton:hover{
 
   transform: scale(1.1);
+  color: #000026FF;
+  background-color:white ;
+  border-style: solid;
 
 }
 
@@ -225,3 +228,23 @@
         height: 30px; /* Example height */
         /*border: 1px solid red; !* Just for visualization *!*/
     }
+
+
+
+    .logout-button {
+    background-color: #000026FF; /* Bootstrap primary blue */
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+}
+
+    .logout-button:hover{
+      background-color: white;
+      color: #000026FF;
+      border-style: solid;
+    }
+
