@@ -50,8 +50,6 @@ export default function NavBar({ handleZoneChange }) {
                                           className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Map</Link>
                                     <Link to="/about"
                                           className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">About</Link>
-                                    <Link to="/report"
-                                          className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Report</Link>
                                     <Link to="/profile"
                                           className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium profile-icon flex-row">
 
@@ -93,8 +91,7 @@ export default function NavBar({ handleZoneChange }) {
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         <Link to="/about"
                               className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">About</Link>
-                        <Link to="/report"
-                              className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">Report</Link>
+
                         <Link to="/profile"
                               className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">
                             <FaRegUser/> </Link>

@@ -6,7 +6,6 @@ import Home from './components/pages/home';
 import Update from './components/pages/update';
 import Footer from './components/footer';
 import Login from "./components/pages/Login";
-import Report from "./components/pages/report";
 import About from "./components/pages/about";
 import Map from "./components/pages/map"
 import Profile from "./components/pages/profile";
@@ -28,7 +27,6 @@ function App() {
           <Route path="/" element={<Home currentZone={displayZone}/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/profile" element={<Profile/>} />
-          <Route path="/report" element={<Report/>} />
           <Route path="/update/:id" element={<Update/>} />
           <Route path="/about" element={<About/>} />
           <Route path="/map" element={<Map/>}/>

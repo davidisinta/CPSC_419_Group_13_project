@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
+
 const Profile = () => {
     const navigate = useNavigate();
 
@@ -63,6 +64,7 @@ const Profile = () => {
             >
                 Logout
             </button>
+
         </div>
     );
 };

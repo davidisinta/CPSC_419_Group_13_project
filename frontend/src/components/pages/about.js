@@ -1,12 +1,48 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { VscGithub } from "react-icons/vsc";
 import { TiSocialLinkedinCircular } from "react-icons/ti";
 import { LuLinkedin } from "react-icons/lu";
+import Cookies from "js-cookie";
+import {useNavigate} from "react-router-dom";
 
 
 
 
 const About = () => {
+
+    const navigate = useNavigate();
+
+
+     function isAuthenticated() {
+        return !!Cookies.get('username');
+    }
+
+    // Effect to check login status and redirect if not logged in
+    useEffect(() => {
+        console.log("Checking for login status");
+        if (!isAuthenticated()) {
+
+
+            // Redirect to the login page if not authenticated
+            console.log("User not authenticated, redirecting to login page...");
+            navigate('/login');
+        } else {
+
+            console.log("user is:", Cookies.get('username'))
+
+            console.log("User authenticated, proceeding...");
+        }
+    }, [navigate]);
+
+
+
+
+
+
+
+
+
+
     return (
         <div className="mainContainer">
 
