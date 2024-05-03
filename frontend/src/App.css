@@ -34,7 +34,8 @@
 /* Login page styling*/
 
 .sign-up, .sign-in, .log-out{
-  color: cornflowerblue;
+  color: #000026FF;
+
 }
 .mainContainer {
   flex-direction: column;
@@ -86,6 +87,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: #000026FF;
 
 }
 
@@ -154,7 +156,15 @@
 
 
 
-.encapsulator{
+.inputButton:hover{
+
+  transform: scale(1.1);
+
+}
+
+.inputButton{
+
+  background-color: #000026FF;
 
 }
 
