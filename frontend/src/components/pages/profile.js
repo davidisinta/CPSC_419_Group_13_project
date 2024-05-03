@@ -51,7 +51,7 @@ const Profile = () => {
             <button
                 onClick={logout}
                 style={{
-                    backgroundColor: '#0090ff', // Bootstrap primary blue
+                    backgroundColor: '#000026FF', // Bootstrap primary blue
                     color: 'white',
                     padding: '10px 20px',
                     fontSize: '16px',
