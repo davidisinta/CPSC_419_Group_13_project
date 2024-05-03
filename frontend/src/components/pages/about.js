@@ -25,47 +25,44 @@ const About = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
                         {/* Profile 1 */}
                         <div className="bg-white p-6 rounded-lg shadow-md">
-                            <img src={process.env.PUBLIC_URL + 'David_Nyakawa_photo.png'} alt="Profile 1"
+                            <img src={process.env.PUBLIC_URL + 'David_Nyakawa_photo.png'} alt="David Nyakawa Photo"
                                  className="w-300 h-320 rounded-full mx-auto mb-4"/>
-                            <h3 className="text-xl font-bold text-gray-800 mb-2">Developer 1</h3>
-                            <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <h3 className="text-xl font-bold text-gray-800 mb-2">David Nyakawa</h3>
                             <div className="mt-4">
                                 {/* Social links */}
-                                <a href="#" className="text-gray-600 hover:text-blue-500 mr-4">Twitter</a>
-                                <a href="#" className="text-gray-600 hover:text-blue-500">LinkedIn</a>
+                                <a href="https://github.com/davidisinta" className="text-gray-600 hover:text-blue-500 mr-4">Github</a>
+                                <a href="https://www.linkedin.com/in/davidnyakawa/" className="text-gray-600 hover:text-blue-500">LinkedIn</a>
                             </div>
                         </div>
                         {/* Profile 2 */}
                         <div className="bg-white p-6 rounded-lg shadow-md">
-
-                            <img src="profile2.jpg" alt="Profile 2" className="w-32 h-32 rounded-full mx-auto mb-4"/>
-                            <h3 className="text-xl font-bold text-gray-800 mb-2">Developer 2</h3>
-                            <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <img src="profile2.jpg" alt="Tony Munene Photo" className="w-32 h-32 rounded-full mx-auto mb-4"/>
+                            <h3 className="text-xl font-bold text-gray-800 mb-2">Tony Munene</h3>
                             <div className="mt-4">
                                 {/* Social links */}
-                                <a href="#" className="text-gray-600 hover:text-blue-500 mr-4">Twitter</a>
+                                <a href="#" className="text-gray-600 hover:text-blue-500 mr-4">Github</a>
                                 <a href="#" className="text-gray-600 hover:text-blue-500">LinkedIn</a>
                             </div>
                         </div>
                         {/* Profile 3 */}
                         <div className="bg-white p-6 rounded-lg shadow-md">
-                            <img src="profile3.jpg" alt="Profile 3" className="w-32 h-32 rounded-full mx-auto mb-4"/>
-                            <h3 className="text-xl font-bold text-gray-800 mb-2">Developer 3</h3>
-                            <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <img src="profile3.jpg" alt="Fisher Marks Photo" className="w-32 h-32 rounded-full mx-auto mb-4"/>
+                            <h3 className="text-xl font-bold text-gray-800 mb-2">Fisher Marks</h3>
+
                             <div className="mt-4">
                                 {/* Social links */}
-                                <a href="#" className="text-gray-600 hover:text-blue-500 mr-4">Twitter</a>
+                                <a href="#" className="text-gray-600 hover:text-blue-500 mr-4">Github</a>
                                 <a href="#" className="text-gray-600 hover:text-blue-500">LinkedIn</a>
                             </div>
                         </div>
                         {/* Profile 4 */}
                         <div className="bg-white p-6 rounded-lg shadow-md">
                             <img src="profile4.jpg" alt="Profile 4" className="w-32 h-32 rounded-full mx-auto mb-4"/>
-                            <h3 className="text-xl font-bold text-gray-800 mb-2">Developer 4</h3>
-                            <p className="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <h3 className="text-xl font-bold text-gray-800 mb-2">Jinwoo Kim</h3>
+
                             <div className="mt-4">
                                 {/* Social links */}
-                                <a href="#" className="text-gray-600 hover:text-blue-500 mr-4">Twitter</a>
+                                <a href="#" className="text-gray-600 hover:text-blue-500 mr-4">Github</a>
                                 <a href="#" className="text-gray-600 hover:text-blue-500">LinkedIn</a>
                             </div>
                         </div>
