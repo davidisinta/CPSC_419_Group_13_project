@@ -14,7 +14,7 @@ export default function Footer() {
               Student Technology Collaborative
           </Link>
         </div>
-        <small className='website-rights text-white font-bold'>STC©2024</small>
+
               </div>
     </section>
       </div>

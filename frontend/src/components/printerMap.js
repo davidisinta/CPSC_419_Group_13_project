@@ -73,7 +73,8 @@ export function PrinterMap() {
                     {markers}
                 </GoogleMap>
             </LoadScript>) :
-            (<div>Loading</div>)
+            (<div className="loader">
+            </div>)
             }
         </>
     )
