@@ -163,7 +163,7 @@
 .loader {
   width: 40px;
   aspect-ratio: 1;
-  color: #f03355;
+  color: #335ff0;
   position: relative;
   background:
     conic-gradient(from 134deg at top   ,currentColor 92deg,#0000 0) top,
@@ -199,3 +199,19 @@
 
   flex-shrink: 1;
 }
+
+
+.socials-container{
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  /*height: 200px; !* Example height *!*/
+  /*border: 1px solid black; !* Just for visualization *!*/
+}
+
+
+    .github, .linkedin {
+        flex: 1; /* Each child takes half of the container */
+        height: 30px; /* Example height */
+        /*border: 1px solid red; !* Just for visualization *!*/
+    }

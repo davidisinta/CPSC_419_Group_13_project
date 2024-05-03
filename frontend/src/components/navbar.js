@@ -57,7 +57,7 @@ export default function NavBar({ handleZoneChange }) {
 
                                         <div className="outer-div">
                                             <div className="inner-div">  <FaRegUser/> </div>
-                                            {/*<div className="inner-div"> welcome {Cookies.get("username")}</div>*/}
+
                                         </div>
 
 
