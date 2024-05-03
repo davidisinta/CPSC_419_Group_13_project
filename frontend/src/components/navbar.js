@@ -7,12 +7,13 @@ import Cookies from "js-cookie";
 import { useNavigate } from 'react-router-dom';
 
 
-
-
-
-
+function isLoggedIn() {
+    return !!Cookies.get('username');
+}
 
 export default function NavBar({ handleZoneChange }) {
+
+
     const navigate = useNavigate();
     // Default setting for burger menu
     const [click, setClick] = useState(false);
@@ -79,10 +80,17 @@ export default function NavBar({ handleZoneChange }) {
 
                                     </Link>
 
-                                    <button className="logout-button"
-                                            onClick={logout}>
-                                        Logout
-                                    </button>
+                                    <div>
+                                        {isLoggedIn() ? (
+                                            <button className="logout-button" onClick={logout}>
+                                                Logout
+                                            </button>
+                                        ) : (
+                                            <button className="login-button">
+                                                Login
+                                            </button>
+                                        )}
+                                    </div>
 
 
                                 </div>

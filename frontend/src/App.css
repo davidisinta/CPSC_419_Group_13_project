@@ -235,7 +235,7 @@
 
 
 
-    .logout-button {
+    .logout-button, .login-button {
     background-color: #000026FF; /* Bootstrap primary blue */
     color: white;
     padding: 10px 20px;
@@ -247,7 +247,7 @@
         border-style: solid;
 }
 
-    .logout-button:hover{
+    .logout-button:hover,.login-button:hover{
       background-color: white;
       color: #000026FF;
       border-style: solid;
