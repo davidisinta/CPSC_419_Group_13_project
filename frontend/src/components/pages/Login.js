@@ -74,6 +74,8 @@ const Login = () => {
       const yutes_name = Cookies.get('username'); // Retrieve the token from cookie
       console.log('Yutes id:', yutes_name);
 
+      navigate("/")
+
 
 
     } else {

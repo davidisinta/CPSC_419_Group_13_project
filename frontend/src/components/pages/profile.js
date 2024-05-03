@@ -40,6 +40,7 @@ const Profile = () => {
         // Add your logout logic here, such as clearing cookies or local storage
 
          Cookies.remove('username');
+         navigate("/login")
     };
 
     // Main component content for authenticated users
