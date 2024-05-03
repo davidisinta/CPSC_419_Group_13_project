@@ -1,7 +1,7 @@
 from flask_restful import Resource, request
 from .productiondbconfig import establish_connection
 
-class StockInventoryApiEndpoint(Resource):
+class ClockInApiEndpoint(Resource):
     """
         Api endpoint for clocking into a shift.
 

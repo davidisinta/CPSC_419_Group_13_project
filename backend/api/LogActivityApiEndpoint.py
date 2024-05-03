@@ -1,7 +1,7 @@
 from flask_restful import Resource, request
 from .productiondbconfig import establish_connection
 
-class StockInventoryApiEndpoint(Resource):
+class LogActivityApiEndpoint(Resource):
     """
         Api endpoint for logging an activity into the activity log.
 
