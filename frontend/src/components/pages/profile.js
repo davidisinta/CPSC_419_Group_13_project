@@ -43,9 +43,12 @@ const Profile = () => {
          navigate("/login")
     };
 
+
     // Main component content for authenticated users
     return (
         <div className={'mainContainer'}>
+
+
             heyyy there, welcome to your profile
 
 
