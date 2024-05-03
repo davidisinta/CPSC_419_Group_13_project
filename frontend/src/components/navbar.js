@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Select, SelectItem } from '@tremor/react';
 import { useLocation } from 'react-router-dom';
 import { FaRegUser } from "react-icons/fa";
+import Cookies from "js-cookie";
 
 
 
@@ -52,7 +53,15 @@ export default function NavBar({ handleZoneChange }) {
                                     <Link to="/report"
                                           className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Report</Link>
                                     <Link to="/profile"
-                                          className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium profile-icon"><FaRegUser/></Link>
+                                          className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium profile-icon flex-row">
+
+                                        <div className="outer-div">
+                                            <div className="inner-div">  <FaRegUser/> </div>
+                                            {/*<div className="inner-div"> welcome {Cookies.get("username")}</div>*/}
+                                        </div>
+
+
+                                    </Link>
                                 </div>
                             </div>
                         </div>

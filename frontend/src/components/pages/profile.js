@@ -4,11 +4,10 @@ import Cookies from 'js-cookie';
 
 const Profile = () => {
     const navigate = useNavigate();
-    const [isLoggedIn, setLoginStatus] = useState(false);
 
     // Function to check if the user is authenticated
     function isAuthenticated() {
-        return !!Cookies.get('username');  // Checks if the 'username' cookie exists
+        return !!Cookies.get('username');
     }
 
     // Effect to check login status and redirect if not logged in
@@ -23,16 +22,12 @@ const Profile = () => {
         } else {
 
             console.log("user is:", Cookies.get('username'))
-            // Update state to reflect that user is logged in
-            setLoginStatus(true);
+
             console.log("User authenticated, proceeding...");
         }
-    }, [navigate]);  // Dependency array includes navigate to re-check when navigate changes
+    }, [navigate]);
 
-    if (!isLoggedIn) {
-        // Optional: Render nothing or a loading indicator while checking authentication
-        return <div>Loading...</div>;
-    }
+
 
 
     const logout = () => {
@@ -49,7 +44,8 @@ const Profile = () => {
         <div className={'mainContainer'}>
 
 
-            heyyy there, welcome to your profile
+
+            heyyy there, welcome to your profile {Cookies.get('username')}
 
 
             <button
