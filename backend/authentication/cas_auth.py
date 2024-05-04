@@ -18,7 +18,6 @@ cas_client = CASClient(
                 'service=https://localhost:55555/index')
 )
 
-
 @cas_auth.route('/')
 def index():
     body = """<!DOCTYPE html>
@@ -34,12 +33,6 @@ def index():
 """
     return body
 
-
-@cas_auth.route('/profile')
-def profile(method=['GET']):
-    if 'username' in session:
-        return 'Welcome STC Tech!! You are Logged in as %s. <a href="/logout">Logout</a>' % session['username']
-    return 'Login required. <a href="/login">Login</a>', 403
 
 
 @cas_auth.route('/login')

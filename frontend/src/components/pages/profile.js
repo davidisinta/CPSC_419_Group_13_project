@@ -48,9 +48,7 @@ const Profile = () => {
 
             heyyy there, welcome to your profile {Cookies.get('username')}
 
-
         </div>
     );
 };
 
-export default Profile;

@@ -1,7 +1,8 @@
 import { React, useState, useEffect,  } from "react";
 import { Link } from 'react-router-dom';
-import { Select, SelectItem } from '@tremor/react';
+import { Select, SelectItem, Button } from '@tremor/react';
 import { useLocation } from 'react-router-dom';
+<<<<<<< HEAD
 import { FaRegUser } from "react-icons/fa";
 import Cookies from "js-cookie";
 import { useNavigate } from 'react-router-dom';
@@ -15,15 +16,34 @@ export default function NavBar({ handleZoneChange }) {
 
 
     const navigate = useNavigate();
+=======
+import axios from "axios";
+
+
+export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }) {
+>>>>>>> main
     // Default setting for burger menu
     const [click, setClick] = useState(false);
     const [displayZone, setDisplayZone] = useState(false);
     //  Menu onClick function
-    const handleClick = () => setClick (!click);
+    const handleClick = () => setClick(!click);
     // Selectively display zone dropdown
     const location = useLocation();
+    // Handle CAS logout
+    const handleCasLogout = async () => {
+        try {
+          axios.get("http://localhost:5000/logout")
+          .then(() => {
+            setLoginStatus(false);
+          })
+        }
+        catch (error) {
+          console.error("Error during CAS logout:", error);
+        }};
+    
     useEffect(() => {
         location.pathname === '/' ? setDisplayZone(true) : setDisplayZone(false);
+<<<<<<< HEAD
     }, [location]);
 
 
@@ -37,6 +57,9 @@ export default function NavBar({ handleZoneChange }) {
 
 
 
+=======
+    }, [location, loginStatus]);
+>>>>>>> main
     return (
         <>
             <nav className="navbar fixed top-0 w-full z-50 bg-gray-800">
@@ -51,6 +74,7 @@ export default function NavBar({ handleZoneChange }) {
                         </div>
                         <div className="flex items-center align-items-center">
                             <div className="hidden md:block">
+<<<<<<< HEAD
                                 <div className="ml-10 flex items-center space-x-2">
                                     {displayZone &&
                                         <Select className="tremor-content-emphasis nav-item" placeholder="All Zones"
@@ -93,6 +117,25 @@ export default function NavBar({ handleZoneChange }) {
                                     </div>
 
 
+=======
+                                <div className="ml-10 flex items-baseline space-x-4">
+                                    {displayZone && <Select className="tremor-content-emphasis" placeholder="All Zones" onValueChange={handleZoneChange}>
+                                        <SelectItem value="all" className="cursor-pointer">All Zones</SelectItem>
+                                        <SelectItem value="1" className="cursor-pointer">Zone 1</SelectItem>
+                                        <SelectItem value="2" className="cursor-pointer">Zone 2</SelectItem>
+                                        <SelectItem value="3" className="cursor-pointer">Zone 3</SelectItem>
+                                        <SelectItem value="4" className="cursor-pointer">Zone 4</SelectItem>
+                                    </Select>}
+                                    <Link to="/about" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">About</Link>
+                                    <Link to="/report" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Report</Link>
+                                    <Link to="/profile" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Profile</Link>
+                                    <Link to="/map" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Map</Link>
+                                    {loginStatus ?
+                                        <Button variant="secondary" size="sm" onClick={handleCasLogout} className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Logout</Button>
+                                        :
+                                        <Link to="/profile"><Button variant="primary" size="sm" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Login</Button></Link>
+                                    }
+>>>>>>> main
                                 </div>
                             </div>
                         </div>
@@ -121,6 +164,7 @@ export default function NavBar({ handleZoneChange }) {
 
                 {/* Mobile menu, show/hide based on menu state */}
                 <div className={`${click ? 'block' : 'hidden'} md:hidden`}>
+<<<<<<< HEAD
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         <Link to="/about"
                               className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">About</Link>
@@ -128,6 +172,18 @@ export default function NavBar({ handleZoneChange }) {
                         <Link to="/profile"
                               className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">
                             <FaRegUser/> </Link>
+=======
+                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex-col text-center">
+                        <Link to="/about" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">About</Link>
+                        <Link to="/report" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">Report</Link>
+                        <Link to="/profile" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">Profile</Link>
+                        <Link to="/map" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">Map</Link>
+                        {loginStatus ?
+                            <Button variant="secondary" size="sm" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Logout</Button>
+                            :
+                            <Link to="/profile"><Button variant="primary" size="sm" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Login</Button></Link>
+                        }
+>>>>>>> main
                     </div>
                 </div>
             </nav>
