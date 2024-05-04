@@ -74,7 +74,7 @@ export default function InventoryForm({ location }) {
         catch (error) {
             console.error('Error:', error);
         }
-        navigate('/');
+        navigate('/inventory');
     };
     // Fetch toner types from the backend on page load
     useEffect(() => {
@@ -169,7 +169,7 @@ export default function InventoryForm({ location }) {
                     <div className="flex justify-center pt-5">
                         <Button size='xs' variant="secondary" onClick={handleSubmit}>Submit</Button>
                         <div className="ml-2">
-                            <Link to='/'><Button size='xs' variant="secondary">Cancel</Button></Link>
+                            <Link to='/inventory'><Button size='xs' variant="secondary">Cancel</Button></Link>
                         </div>
                     </div>
                 </Card>

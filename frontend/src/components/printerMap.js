@@ -58,8 +58,7 @@ export function PrinterMap() {
                     <Marker
                     key={item.loc}
                     position={location}
-                    icon={item.status === 0 ? 'http://maps.google.com/mapfiles/ms/icons/green-dot.png' 
-                    : 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'}
+                    icon={'http://maps.google.com/mapfiles/ms/icons/green-dot.png'}
                     onClick={() => handleMarkerClick(item)}
                     />
                 );

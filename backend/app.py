@@ -12,7 +12,9 @@ from backend.api.ClockInApiEndpoint import ClockInApiEndpoint
 from backend.api.ClockOutApiEndpoint import ClockOutApiEndpoint
 from backend.api.ShiftReportApiEndpoint import ShiftReportApiEndpoint
 from backend.api.LogActivityApiEndpoint import LogActivityApiEndpoint
-
+from backend.api.PrinterTableApiEndpoint import PrinterTableApiEndpoint
+from backend.api.ReportPrinterApiEndpoint import ReportPrinterApiEndpoint
+from backend.api.TonerPercentApiEndpoint import TonerPercentApiEndpoint
 
 
 
@@ -36,5 +38,8 @@ def create_app(config_name='default'):
     api.add_resource(Login, '/login')
     api.add_resource(Logout, '/logout')
     api.add_resource(LogoutCallBack, '/logout_callback')
+    api.add_resource(PrinterTableApiEndpoint, '/p_table')
+    api.add_resource(ReportPrinterApiEndpoint, '/report')
+    api.add_resource(TonerPercentApiEndpoint, '/percent')
 
     return stc_app
