@@ -81,7 +81,7 @@ const About = () => {
                         {/* Profile 2 */}
                         <div className="bg-white p-6 rounded-lg shadow-md">
 
-                            <img src={process.env.PUBLIC_URL + "Tony_Munene.jpg"} alt="Tony Munene Photo" className="w-32 h-32 rounded-full mx-auto mb-4"/>
+                            <img src="profile2.jpg" alt="Tony Munene Photo" className="w-32 h-32 rounded-full mx-auto mb-4"/>
                             <h3 className="text-xl font-bold text-gray-800 mb-2">Tony Munene</h3>
 
                             <div className="mt-4 socials-container">
