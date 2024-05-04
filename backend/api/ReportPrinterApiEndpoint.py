@@ -25,6 +25,12 @@ class ReportPrinterApiEndpoint(Resource):
                         """
                 param_list = (data["type"], data["printer_id"], data["time"], data["desc"])
                 cursor.execute(query, param_list)
+                query = """
+                        UPDATE printer
+                        SET status = 2
+                        WHERE id = %s
+                        """
+                cursor.execute(query, (data["printer_id"],))
                 connection.commit()
             return {
                 'message': 'Reported printer successfully'

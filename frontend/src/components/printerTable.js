@@ -71,8 +71,8 @@ export default function PrinterTable({currentZone}) {
                 {/* Make printer location clickable */}
                   <TableCell onClick={() => handleRowClick(item)} className="cursor-pointer hover:underline">{item.loc}</TableCell>
                 <TableCell>
-                  <Badge color={item.status === "Functional" ? "emerald" : item.status === "Not Working" ? "red" : "yellow"} icon={RiFlag2Line}>
-                    {item.status}
+                  <Badge color={item.status === 0 ? "emerald" : item.status === 1 ? "red" : "yellow"} icon={RiFlag2Line}>
+                    {item.status === 0 ? "Functional" : item.status === 1 ? "Not Working" : "Reported Problems"}
                   </Badge>
                 </TableCell>
                 <TableCell>{"Zone ".concat(item.zone)}</TableCell>

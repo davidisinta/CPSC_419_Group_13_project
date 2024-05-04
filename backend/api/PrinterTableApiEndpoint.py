@@ -9,7 +9,7 @@ def jsonify_printer_rows(data) -> Response:
         formatted_tuple = {
             "id": tuple[0],
             "loc": tuple[1],
-            "status": "Functional" if tuple[2] == 0 else "Not Working", 
+            "status": tuple[2],
             "zone": tuple[3],
             "toner_percentage":{
                 "black": tuple[4],
