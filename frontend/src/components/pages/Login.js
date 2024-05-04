@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import { Button } from '@tremor/react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
-  const [username,setUsername] = useState('');
+  const [username, setUsername] = useState('');
 
   // Function to handle CAS login
   const handleCasLogin = async () => {
@@ -54,41 +55,32 @@ const Login = () => {
 
   // Validate CAS ticket
 
-    async function validateCasTicket(ticket) {
-          console.log("tryna validate cas ticket")
+  async function validateCasTicket(ticket) {
+    console.log("tryna validate cas ticket")
 
-  try {
-    const response = await fetch(`http://localhost:5000/cas/login?ticket=${ticket}`);
-    //data represents the username
-    const data = await response.json();
-    console.log(data); // Assuming the response contains user data or error messages
+    try {
+      const response = await fetch(`http://localhost:5000/cas/login?ticket=${ticket}`);
+      //data represents the username
+      const data = await response.json();
+      console.log(data); // Assuming the response contains user data or error messages
 
-    if (response.ok) {
-
-     console.log("Been waveeyyyyyy!!!!")
-
-    setUsername(data.username);
-    setLoggedIn(true);
-
-      Cookies.set('username', data.username, { expires: 7 } )
-      const yutes_name = Cookies.get('username'); // Retrieve the token from cookie
-      console.log('Yutes id:', yutes_name);
-
-      navigate("/")
-
-
-
-    } else {
-      console.error("Error validating ticket:", data.error);
+      if (response.ok) {
+        console.log("Been waveeyyyyyy!!!!")
+        setUsername(data.username);
+        setLoggedIn(true);
+        // Set the token in a cookie
+        Cookies.set('username', data.username, { expires: 7 })
+        const yutes_name = Cookies.get('username'); // Retrieve the token from cookie
+        console.log('Yutes id:', yutes_name);
+        // Redirect the user to the home page
+        navigate("/")
+      } else {
+        console.error("Error validating ticket:", data.error);
+      }
+    } catch (error) {
+      console.error("Error validating ticket:", error);
     }
-  } catch (error) {
-    console.error("Error validating ticket:", error);
   }
-}
-
-
-
-
 
   useEffect(() => {
     const lastInput = Cookies.get('lastEmail');
@@ -98,36 +90,31 @@ const Login = () => {
   }, []);
 
   const handleChange = (e) => {
-     setEmail(e.target.value);
-     setEmailError('');
-     const value = e.target.value;
-
+    setEmail(e.target.value);
+    setEmailError('');
+    const value = e.target.value;
     Cookies.set('lastEmail', value, { expires: 7 }); // Set cookie to expire in 7 days
   };
 
   return (
     <div className={'mainContainer'}>
-      {loggedIn ? (
-        <div>Welcome {username}!!!</div>
-      ) : (
-          <div>
-            <div className={'titleContainer'}>
-              <div>Login</div>
-            </div>
-            <input
-                value={email}
-                placeholder="yale email"
-                onChange={handleChange}
-                className={'inputBox'}
-            />
-            {emailError && <label className="errorLabel">{emailError}</label>}
-
-
-            <div className={'inputContainer'}>
-              <input className={'inputButton'} type="button"  onClick={handleCasLogin} value={'Next'}/>
-            </div>
+        <div className='space-y-4'>
+          <div className={'titleContainer'}>
+            <div>Login</div>
           </div>
-      )}
+          <input
+            value={email}
+            placeholder="yale email"
+            onChange={handleChange}
+            className={'inputBox'}
+          />
+          {emailError && <label className="errorLabel">{emailError}</label>}
+
+
+          <div className='flex align-center justify-center'>
+            <Button variant="primary" onClick={handleCasLogin}>Login with CAS</Button>
+          </div>
+        </div>
     </div>
   );
 };

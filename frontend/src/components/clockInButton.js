@@ -1,27 +1,33 @@
 import { React, useState } from 'react';
 import { Dialog, DialogPanel, Button, Card } from '@tremor/react';
 import axios from 'axios';  
+import Cookies from 'js-cookie';
 
 export default function ClockInButton() {
     const [open, setOpen] = useState(false);
     const [clockedIn, setClockedIn] = useState(false);
     const handleClockIn = () => {
         // Send time stamp to backend
-        try {
-            axios.post('http://127.0.0.1:5000/clockin', {
-                time: new Date().toISOString()
-            })
-            .then((response) => {
-                console.log(response);
-            });
-        }
-        catch (error) {
-            console.error(error);
-        };
-        // Close dialog
-        setOpen(!open);
-        // Update clockedIn state 
-        setClockedIn(!clockedIn)
+        axios.post('http://127.0.0.1:5000/clock_in', {
+            body: {
+                time: new Date().toISOString(),
+                user_id: Cookies.get('username')
+            }
+        })
+        .then((response) => {
+            if (response.status === 200) {
+                console.log('Clocked in successfully');
+                // Set shift_id cookie
+                Cookies.set('shift_id', response.data.shift_id);
+                // Close dialog
+                setOpen(!open);
+                // Update clockedIn state 
+                setClockedIn(!clockedIn);
+            }
+        })
+        .catch((error) => {
+            console.error('Error clocking in:', error);
+        });
     };
     return (
         <div>

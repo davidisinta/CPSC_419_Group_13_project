@@ -8,7 +8,6 @@ import Footer from './components/footer';
 import About from "./components/pages/about";
 import Profile from "./components/pages/profile";
 import Map from "./components/pages/map";
-import Shift from "./components/pages/shift";
 import Inventory from './components/pages/inventory';
 import Percent from './components/pages/percent';
 import Login from './components/pages/Login';
@@ -39,7 +38,6 @@ function App() {
           <Route path="/update/:id" element={<Update />} />
           <Route path="/about" element={<About />} />
           <Route path="/map" element={<Map />} />
-          <Route path="/shift" element={<Shift />} />
           <Route path="/inventory" element={<Inventory currentZone={displayZone} />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/profile" element={<Profile setLoginStatus={handleLoginStatus} loginStatus={isLoggedIn} />} />
