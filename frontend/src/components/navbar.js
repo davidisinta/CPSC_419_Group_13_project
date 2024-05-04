@@ -8,13 +8,12 @@ import Cookies from "js-cookie";
 import { useNavigate } from 'react-router-dom';
 
 
-function isLoggedIn() {
-    return !!Cookies.get('username');
-}
+
+
+
+
 
 export default function NavBar({ handleZoneChange }) {
-
-
     const navigate = useNavigate();
 =======
 import axios from "axios";
@@ -104,17 +103,10 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
 
                                     </Link>
 
-                                    <div>
-                                        {isLoggedIn() ? (
-                                            <button className="logout-button" onClick={logout}>
-                                                Logout
-                                            </button>
-                                        ) : (
-                                            <button className="login-button">
-                                                Login
-                                            </button>
-                                        )}
-                                    </div>
+                                    <button className="logout-button"
+                                            onClick={logout}>
+                                        Logout
+                                    </button>
 
 
 =======
