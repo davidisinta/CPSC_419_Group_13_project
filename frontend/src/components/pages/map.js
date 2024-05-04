@@ -2,6 +2,7 @@ import {PrinterMap} from "../printerMap"
 import React, {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
+import UserTable from "../usersTable";
 
 
 export default function Map() {
