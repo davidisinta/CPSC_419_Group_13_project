@@ -18,7 +18,7 @@ code {
 }
 
 input[type='button'] {
-  border: none;
+   border: solid white;
   color: white;
   padding: 12px 24px;
   margin: 8px;
