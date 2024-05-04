@@ -12,7 +12,8 @@ import Inventory from './components/pages/inventory';
 import Percent from './components/pages/percent';
 import Login from './components/pages/Login';
 import Report from './components/pages/report';
-
+import Tasks from './components/pages/tasks';
+import Assign from './components/pages/assign';
 
 
 function App() {
@@ -43,6 +44,8 @@ function App() {
           <Route path="/login" element={<Login/>} />
           <Route path="/profile" element={<Profile setLoginStatus={handleLoginStatus} loginStatus={isLoggedIn} />} />
           <Route path="/report" element={<Report />} />
+          <Route path="/tasks" element={<Tasks />} />
+          <Route path="/assign" element={<Assign />} />
         </Routes>
         <Footer />
       </Router>
