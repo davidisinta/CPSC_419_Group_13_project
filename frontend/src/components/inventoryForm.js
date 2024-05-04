@@ -67,9 +67,9 @@ export default function InventoryForm({ location }) {
             await axios.post(endpoint, {
                 body: msg
             })
-                .then(response => {
-                    console.log('Success:', response);
-                });
+            .then(response => {
+                console.log('Success:', response);
+            });
         }
         catch (error) {
             console.error('Error:', error);
