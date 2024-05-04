@@ -34,6 +34,16 @@ def jsonify_printer_rows(data) -> Response:
     return jsonify(out)
 
 class InventoryTableApiEndpoint(Resource):
+    """
+        Endpoint for getting info for main inventory table.
+
+        Parameters: 
+            None
+        
+        Returns:
+            Jsonified list of inventory table rows formatted according to
+            jsonified_printer_rows function.
+    """
     def get(self):
         try:
             with establish_connection() as connection:

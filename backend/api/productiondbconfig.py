@@ -1,12 +1,15 @@
 from psycopg2 import connect
+from dotenv import load_dotenv
+import os
 
 DB = "stcdb"
 HOST = "ep-bold-morning-a5urtgao.us-east-2.aws.neon.tech"
 PORT = "5432"
 USER = "fisher.marks"
-PASSWORD = "FgbxGdU60iXt"
 
 def establish_connection():
+    load_dotenv()
+    PASSWORD = os.getenv("DB_PASSWORD")
     connection = connect(
         database=DB,
         host=HOST,

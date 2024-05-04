@@ -20,13 +20,16 @@ class ClockInApiEndpoint(Resource):
                 cursor = connection.cursor()
                 query = """
                         INSERT INTO shifts (clock_in, clock_out, user_id)
-                        VALUES (?, NULL, ?)
+                        VALUES (%s, NULL, %s)
+                        RETURNING id
                         """
                 param_list = (data["time"], data["user_id"])
                 cursor.execute(query, param_list)
+                shift_id = cursor.fetchone()[0]
                 connection.commit()
             return {
-                'message': 'Clocked in successfully'
+                'message': 'Clocked in successfully',
+                'shift_id': shift_id
             }, 200
         except Exception as e:
             return {'message': str(e)}, 500
