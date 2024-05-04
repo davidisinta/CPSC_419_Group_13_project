@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import About from "./about";
 
 
 const Profile = () => {
@@ -52,3 +53,5 @@ const Profile = () => {
     );
 };
 
+
+export default Profile;

@@ -17,8 +17,6 @@ export default function Footer() {
               </div>
     </section>
 
-      </div>
-      <small className='text-white font-bold'>STC©2024</small>
     </div>
   );
 }

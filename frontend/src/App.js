@@ -9,7 +9,6 @@ import Login from "./components/pages/Login";
 import About from "./components/pages/about";
 import Map from "./components/pages/map"
 import Profile from "./components/pages/profile";
-import Map from "./components/pages/map";
 import Shift from "./components/pages/shift";
 import Inventory from './components/pages/inventory';
 import Percent from './components/pages/percent';
@@ -36,10 +35,10 @@ function App() {
         <NavBar handleZoneChange={handleZoneChange} setLoginStatus={handleLoginStatus} loginStatus={isLoggedIn} />
         <Routes>
           <Route path="/" element={<Home currentZone={displayZone} />} />
-          <Route path="/report" element={<Report />} />
           <Route path="/percent" element={<Percent />} />
           <Route path="/update/:id" element={<Update />} />
           <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/map" element={<Map />} />
           <Route path="/shift" element={<Shift />} />
           <Route path="/inventory" element={<Inventory currentZone={displayZone} />} />
