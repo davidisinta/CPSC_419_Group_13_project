@@ -17,7 +17,10 @@ export function PrinterMap() {
     const [printers, setPrinters] = useState([]);
     const [loadState, setLoadState] = useState(true);
     const [selectedPrinter, setSelectedPrinter] = useState(null);
-    const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+    const { isLoaded } = useJsApiLoader({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+    });
+    
 
     useEffect(() => {
         const fetchPrinters = async () => {
@@ -80,18 +83,15 @@ export function PrinterMap() {
 
     return (
         <>
-            {!loadState ? 
-            (<LoadScript googleMapsApiKey={GOOGLE_MAPS_API_KEY} onLoad={geocodeAddresses}>
-                <GoogleMap mapContainerStyle={style} zoom={15} center={center} options={{disableDefaultUI:true}}>
-                    {markers}
-                </GoogleMap>
-            </LoadScript>) :
-            (<div className="loader">
-            </div>)
-            }
-            {selectedPrinter && (
-            <LocationDialog item={selectedPrinter} onClose={handleDialogClose} />
-            )}
+        {isLoaded ? (
+            <GoogleMap mapContainerStyle={style} zoom={15} center={center} options={{ disableDefaultUI: true }}>
+            {markers}
+            </GoogleMap>
+            ) : (
+            <div>Loading</div>
+            )   
+        }
+        {selectedPrinter && <LocationDialog item={selectedPrinter} onClose={handleDialogClose} />}
         </>
     )
 }
