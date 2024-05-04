@@ -40,7 +40,7 @@ class InventoryTableApiEndpoint(Resource):
             with establish_connection() as connection:
                 cursor = connection.cursor()
                 query = """SELECT l.id,
-                                ln.name, 
+                                l.name, 
                                 paper, 
                                 zone, 
                                 (
@@ -56,15 +56,13 @@ class InventoryTableApiEndpoint(Resource):
                                 SUM(CASE WHEN t.color = 3 THEN ti.quantity ELSE 0 END) as yellow, 
                                 keyboards,
                                 mice,
-                                la.addr
+                                l.addr
                         FROM location l
-                        LEFT JOIN location_name ln on ln.id = l.id 
-                        LEFT JOIN location_addr la on la.id = l.id
                         LEFT JOIN printer p ON p.loc_id = l.id
                         LEFT JOIN toner_inventory ti ON l.id = ti.loc_id
                         LEFT JOIN toner t ON t.id = ti.toner_id
-                        GROUP BY l.id, ln.name, paper, zone, keyboards, mice, la.addr
-                        ORDER BY zone, ln.name
+                        GROUP BY l.id, l.name, paper, zone, keyboards, mice, l.addr
+                        ORDER BY zone, l.name
                         """
                 cursor.execute(query)
                 response = jsonify_printer_rows(cursor.fetchall())
