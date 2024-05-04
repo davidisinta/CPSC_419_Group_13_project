@@ -11,6 +11,7 @@ import Map from "./components/pages/map";
 import Inventory from './components/pages/inventory';
 import Percent from './components/pages/percent';
 import Login from './components/pages/Login';
+import Report from './components/pages/report';
 
 
 
@@ -41,6 +42,7 @@ function App() {
           <Route path="/inventory" element={<Inventory currentZone={displayZone} />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/profile" element={<Profile setLoginStatus={handleLoginStatus} loginStatus={isLoggedIn} />} />
+          <Route path="/report" element={<Report />} />
         </Routes>
         <Footer />
       </Router>

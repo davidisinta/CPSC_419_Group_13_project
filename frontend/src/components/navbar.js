@@ -79,8 +79,6 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
                                         className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium"> Profile</Link>
                                     <Link to="/map"
                                         className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Map</Link>
-                                    <Link to="/report"
-                                        className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Report</Link>
                                     <Link to="/about"
                                         className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">About</Link>
                                     <div>
@@ -127,8 +125,6 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
                             className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium"> Profile</Link>
                         <Link to="/map"
                             className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Map</Link>
-                        <Link to="/report"
-                            className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Report</Link>
                         <Link to="/about"
                             className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">About</Link>
                         <div>

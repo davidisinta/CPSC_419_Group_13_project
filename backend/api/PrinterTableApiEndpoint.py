@@ -29,7 +29,7 @@ class PrinterTableApiEndpoint(Resource):
             with establish_connection() as connection:
                 cursor = connection.cursor()
                 query = """SELECT p.id,
-                                pn.name, 
+                                p.name, 
                                 status,  
                                 zone,
                                 k_level, 
@@ -40,9 +40,8 @@ class PrinterTableApiEndpoint(Resource):
                                 kyo_num
                         FROM printer p
                         LEFT JOIN location l on p.loc_id = l.id
-                        LEFT JOIN printer_name pn on p.id = pn.id
-                        GROUP BY p.id, pn.name, status, zone, model, kyo_num
-                        ORDER BY zone, pn.name
+                        GROUP BY p.id, p.name, status, zone, model, kyo_num
+                        ORDER BY zone, p.name
                         """
                 cursor.execute(query)
                 response = jsonify_printer_rows(cursor.fetchall())
