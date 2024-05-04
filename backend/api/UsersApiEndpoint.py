@@ -10,9 +10,8 @@ def jsonify_rows(data) -> Response:
             "id": tuple[0],
             "first": tuple[1],
             "last": tuple[2],
-            "loc": tuple[3],
-            "role": tuple[4],
-            "email": tuple[5]
+            "role": tuple[3],
+            "email": tuple[4]
         }
         out.append(formatted_tuple)
     return jsonify(out)

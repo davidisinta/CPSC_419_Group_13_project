@@ -38,7 +38,7 @@ class UserTasksApiEndpoint(Resource):
                         FROM tasks t
                         LEFT JOIN users u on t.employee_id = u.id
                         LEFT JOIN location l on t.loc_id = l.id
-                        WHERE s.u_id = %s AND t.completed is NULL
+                        WHERE t.employee_id = %s AND t.completed is NULL
                         ORDER BY t.assigned
                         """
                 param_list = (data['user_id'])
