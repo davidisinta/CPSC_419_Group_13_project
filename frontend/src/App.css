@@ -82,11 +82,13 @@
   justify-content: center;
   color: #000026FF;
 
+
 }
 
 .inputContainer > .errorLabel {
   color: red;
   font-size: 12px;
+
 }
 
 .inputBox {
@@ -154,14 +156,13 @@
   transform: scale(1.1);
   color: #000026FF;
   background-color:white ;
-  border-style: solid;
+
 
 }
 
 .inputButton{
 
-  background-color: #000026FF;
-
+     background-color: #000026FF;
 }
 
 
@@ -229,7 +230,8 @@
 
 
     .logout-button, .login-button {
-    background-color: #000026FF; /* Bootstrap primary blue */
+    background-color: #000026FF;
+
     color: white;
     padding: 10px 20px;
     font-size: 16px;
@@ -248,6 +250,9 @@
 
 
     .welcome-user{
-        color:white;
+       font-family: 'Arial', sans-serif;
+        font-size: 14px; /* Adjust font size as needed */
+        color: rgb(255, 255, 255); /* Shiny gold color */
+        /*text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);*/
     }
 
