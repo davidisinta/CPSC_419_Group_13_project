@@ -12,11 +12,17 @@
     "@testing-library/user-event": "^13.5.0",
     "@tremor/react": "^3.14.1",
     "axios": "^1.6.8",
+
+    "js-cookie": "^3.0.5",
+    "passport-cas": "^0.1.1",
+
     "dotenv": "^16.4.5",
     "cross-spawn": "^7.0.3",
+
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
     "react-dom": "^18.2.0",
+    "react-icons": "^5.2.0",
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
     "scripts": "^0.1.0",
@@ -50,6 +56,6 @@
     "@tailwindcss/forms": "^0.5.7",
     "autoprefixer": "^10.4.17",
     "postcss": "^8.4.35",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.3"
   }
 }

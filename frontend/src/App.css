@@ -1,3 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -30,7 +34,8 @@
 /* Login page styling*/
 
 .sign-up, .sign-in, .log-out{
-  color: cornflowerblue;
+  color: #000026FF;
+
 }
 .mainContainer {
   flex-direction: column;
@@ -39,6 +44,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  padding: 10px;
 }
 
 .titleContainer {
@@ -74,6 +80,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: #000026FF;
 
 }
 
@@ -117,4 +124,130 @@
     flex: 1;
 
 }
+
+
+.profile-icon:hover{
+  opacity: 100%;
+
+}
+
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 6px;
+  background:
+    conic-gradient(from 135deg at top,currentColor 90deg, #0000 0) 0 calc(50% - 4px)/17px 8.5px,
+    radial-gradient(farthest-side at bottom left,#0000 calc(100% - 6px),currentColor calc(100% - 5px) 99%,#0000) top right/50%  50% content-box content-box,
+    radial-gradient(farthest-side at top        ,#0000 calc(100% - 6px),currentColor calc(100% - 5px) 99%,#0000) bottom   /100% 50% content-box content-box;
+  background-repeat: no-repeat;
+  animation: l11 1s infinite linear;
+}
+@keyframes l11{
+  100%{transform: rotate(1turn)}
+}
+
+
+
+.inputButton:hover{
+
+  transform: scale(1.1);
+  color: #000026FF;
+  background-color:white ;
+  border-style: solid;
+
+}
+
+.inputButton{
+
+  background-color: #000026FF;
+
+}
+
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 40px;
+  aspect-ratio: 1;
+  color: #000026FF;
+  position: relative;
+  background:
+    conic-gradient(from 134deg at top   ,currentColor 92deg,#0000 0) top,
+    conic-gradient(from -46deg at bottom,currentColor 92deg,#0000 0) bottom;
+  background-size: 100% 50%;
+  background-repeat: no-repeat;
+}
+
+
+
+.loader2:before {
+  content:'';
+  position: absolute;
+  inset: 0;
+  --g:currentColor 14.5px,#0000 0 calc(100% - 14.5px),currentColor 0;
+  background:
+    linear-gradient( 45deg,var(--g)),
+    linear-gradient(-45deg,var(--g));
+   animation: l7 1.5s infinite cubic-bezier(0.3,1,0,1);
+}
+@keyframes l7 {
+   33%  {inset:-10px;transform: rotate(0deg)}
+   66%  {inset:-10px;transform: rotate(90deg)}
+   100% {inset:0    ;transform: rotate(90deg)}
+}
+
+
+.outer-div {
+  display: flex; /* Set display to flex */
+}
+
+.inner-div {
+
+  flex-shrink: 1;
+}
+
+
+.socials-container{
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  /*height: 200px; !* Example height *!*/
+  /*border: 1px solid black; !* Just for visualization *!*/
+}
+
+
+    .github, .linkedin {
+        flex: 1; /* Each child takes half of the container */
+        height: 30px; /* Example height */
+        /*border: 1px solid red; !* Just for visualization *!*/
+    }
+
+    .nav-item{
+        flex:1;
+    }
+
+
+
+    .logout-button, .login-button {
+    background-color: #000026FF; /* Bootstrap primary blue */
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: white;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+        border-style: solid;
+}
+
+    .logout-button:hover,.login-button:hover{
+      background-color: white;
+      color: #000026FF;
+      border-style: solid;
+    }
+
+
+    .welcome-user{
+        color:white;
+    }
 

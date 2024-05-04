@@ -87,7 +87,8 @@ export function PrinterMap() {
                     {markers}
                 </GoogleMap>
             </LoadScript>) :
-            (<div>Loading</div>)
+            (<div className="loader">
+            </div>)
             }
             {selectedPrinter && (
             <LocationDialog item={selectedPrinter} onClose={handleDialogClose} />

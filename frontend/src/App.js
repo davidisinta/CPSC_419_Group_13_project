@@ -5,11 +5,13 @@ import NavBar from './components/navbar';
 import Home from './components/pages/home';
 import Update from './components/pages/update';
 import Footer from './components/footer';
-import Profile from "./components/pages/profile";
-import Report from "./components/pages/report";
+import Login from "./components/pages/Login";
 import About from "./components/pages/about";
+import Map from "./components/pages/map"
+import Profile from "./components/pages/profile";
 import Map from "./components/pages/map";
 import Shift from "./components/pages/shift";
+
 
 
 function App() {
@@ -31,13 +33,14 @@ function App() {
       <Router>
         <NavBar handleZoneChange={handleZoneChange} setLoginStatus={handleLoginStatus} loginStatus={isLoggedIn} />
         <Routes>
-          <Route path="/" element={<Home currentZone={displayZone} />} />
-          <Route path="/report" element={<Report />} />
-          <Route path="/update/:id" element={<Update />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/map" element={<Map />} />
-          <Route path="/shift" element={<Shift />} />
-          <Route path="/profile" element={<Profile setLoginStatus={handleLoginStatus} loginStatus={isLoggedIn} />} />
+
+          <Route path="/" element={<Home currentZone={displayZone}/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/profile" element={<Profile/>} />
+          <Route path="/update/:id" element={<Update/>} />
+          <Route path="/about" element={<About/>} />
+          <Route path="/map" element={<Map/>}/>
+
         </Routes>
         <Footer />
       </Router>
