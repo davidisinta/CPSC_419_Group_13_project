@@ -88,7 +88,7 @@ const About = () => {
 
 
 
-                                <a href="#" className="text-gray-600 hover:text-blue-500 mr-4 h-50 github"> <VscGithub size={30}/> </a>
+                                <a href="https://github.com/MUN3N3Z" className="text-gray-600 hover:text-blue-500 mr-4 h-50 github"> <VscGithub size={30}/> </a>
                                 <a href="#" className="text-gray-600 hover:text-blue-500 linkedin"> <LuLinkedin size={30}/> </a>
 
                             </div>
