@@ -35,13 +35,13 @@ class UserTasksApiEndpoint(Resource):
                 cursor = connection.cursor()
                 query = """
                         SELECT u.first_name, u.last_name, t.type, l.name, t.assigned, t.completed, t.desc
-                        FROM tasks t
+                        FROM task t
                         LEFT JOIN users u on t.employee_id = u.id
                         LEFT JOIN location l on t.loc_id = l.id
-                        WHERE s.u_id = %s WHERE t.completed is NULL
+                        WHERE t.u_id = %s AND t.completed is NULL
                         ORDER BY t.assigned
                         """
-                param_list = (data['user_id'])
+                param_list = (data['user_id'],)
                 cursor.execute(query, param_list)
                 response = jsonify_rows(cursor.fetchall())
                 response.status_code = 200
