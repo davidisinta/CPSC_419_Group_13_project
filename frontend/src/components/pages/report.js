@@ -1,6 +1,8 @@
+
 import ReportForm from "../reportForm";
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+
 
 export default function Report() {
     const location = useLocation(); 

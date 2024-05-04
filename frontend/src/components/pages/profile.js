@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 
-const Profile = () => {
+export default function Profile() {
     const navigate = useNavigate();
 
     // Function to check if the user is authenticated
