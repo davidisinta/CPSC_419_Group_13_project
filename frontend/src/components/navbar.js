@@ -72,7 +72,8 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
                                             <SelectItem value="4" className="cursor-pointer">Zone 4</SelectItem>
                                         </Select>}
 
-
+                                    <Link to="/inventory"
+                                        className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Inventory</Link>
                                     <Link to="/map"
                                           className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Map</Link>
                                     <Link to="/about"
