@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 import InventoryTable from "../inventory_table"
 import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
 import {useEffect} from "react";
-=======
-import InventoryTable from "../inventory_table";
->>>>>>> main
+
 
 export default function Home({ currentZone }) {
 
