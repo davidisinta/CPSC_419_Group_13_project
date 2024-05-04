@@ -62,7 +62,7 @@ const About = () => {
                     </div>
                 </div>
                 <div className="max-w-4xl mx-auto px-4 py-8">
-                    <h2 className="text-3xl font-bold text-gray-800 mb-4">Meet Our Team</h2>
+                    <h2 className="text-3xl font-bold mb-4 text-slate-50">Meet Our Team</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
 
                         {/* Profile 1 */}

@@ -11,7 +11,7 @@ import Map from "./components/pages/map";
 import Shift from "./components/pages/shift";
 import Inventory from './components/pages/inventory';
 import Percent from './components/pages/percent';
-import Login from './components/pages/login';
+import Login from './components/pages/Login';
 
 
 
