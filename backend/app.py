@@ -31,5 +31,7 @@ def create_app(config_name='default'):
     stc_app.register_blueprint(auth_app)
     stc_app.register_blueprint(cas_auth, url_prefix='/cas')
 
+    #non
+
 
     return stc_app
