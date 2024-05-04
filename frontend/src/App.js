@@ -11,6 +11,8 @@ import Map from "./components/pages/map"
 import Profile from "./components/pages/profile";
 import Map from "./components/pages/map";
 import Shift from "./components/pages/shift";
+import Inventory from './components/pages/inventory';
+import Percent from './components/pages/percent';
 
 
 
@@ -33,14 +35,15 @@ function App() {
       <Router>
         <NavBar handleZoneChange={handleZoneChange} setLoginStatus={handleLoginStatus} loginStatus={isLoggedIn} />
         <Routes>
-
-          <Route path="/" element={<Home currentZone={displayZone}/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/profile" element={<Profile/>} />
-          <Route path="/update/:id" element={<Update/>} />
-          <Route path="/about" element={<About/>} />
-          <Route path="/map" element={<Map/>}/>
-
+          <Route path="/" element={<Home currentZone={displayZone} />} />
+          <Route path="/report" element={<Report />} />
+          <Route path="/percent" element={<Percent />} />
+          <Route path="/update/:id" element={<Update />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/map" element={<Map />} />
+          <Route path="/shift" element={<Shift />} />
+          <Route path="/inventory" element={<Inventory currentZone={displayZone} />} />
+          <Route path="/profile" element={<Profile setLoginStatus={handleLoginStatus} loginStatus={isLoggedIn} />} />
         </Routes>
         <Footer />
       </Router>

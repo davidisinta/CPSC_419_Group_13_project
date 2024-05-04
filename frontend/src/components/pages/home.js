@@ -1,7 +1,9 @@
+
 import InventoryTable from "../inventory_table"
 import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
 import {useEffect} from "react";
+import PrinterTable from "../printerTable";
 
 
 export default function Home({ currentZone }) {
@@ -31,7 +33,7 @@ export default function Home({ currentZone }) {
     }, [navigate]);
     return (
         <div className="home-page">
-            <InventoryTable currentZone={ currentZone }/>
+            <PrinterTable currentZone={ currentZone }/>
         </div>
     )
 };
