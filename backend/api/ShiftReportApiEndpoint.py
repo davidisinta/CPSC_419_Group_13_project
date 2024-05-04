@@ -6,7 +6,7 @@ def jsonify_rows(data) -> Response:
     """ Returns a jsonified output from a list of tuples (database query result).
         Shift:
             id (int)
-            activityies (list)
+            activities (list)
         
         Activity:
             type
@@ -32,6 +32,15 @@ def jsonify_rows(data) -> Response:
     return jsonify(list(shifts.values()))
 
 class ShiftReportApiEndpoint(Resource):
+    """
+        Function for getting a shift report for a given user id.
+
+        Parameters: 
+            user_id: user id to get shift report on
+        
+        Returns:
+            Jsonified shift report as formatted above.
+    """
     def get(self):
         data = request.get_json()['body']
         try:

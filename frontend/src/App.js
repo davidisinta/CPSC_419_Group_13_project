@@ -5,13 +5,15 @@ import NavBar from './components/navbar';
 import Home from './components/pages/home';
 import Update from './components/pages/update';
 import Footer from './components/footer';
-import Profile from "./components/pages/profile";
-import Report from "./components/pages/report";
+import Login from "./components/pages/Login";
 import About from "./components/pages/about";
+import Map from "./components/pages/map"
+import Profile from "./components/pages/profile";
 import Map from "./components/pages/map";
 import Shift from "./components/pages/shift";
 import Inventory from './components/pages/inventory';
 import Percent from './components/pages/percent';
+
 
 
 function App() {
