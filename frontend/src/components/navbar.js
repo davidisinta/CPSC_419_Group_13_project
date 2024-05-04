@@ -81,6 +81,15 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
                                           className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Map</Link>
                                     <Link to="/about"
                                           className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">About</Link>
+
+                                    <div className="outer-div">
+                                            <span className="welcome-user" style={{whiteSpace: 'nowrap'}}>
+                                            welcome {Cookies.get('username')}
+                                        </span>
+
+                                    </div>
+
+
                                     <div>
                                         {isLoggedIn() ? (
                                             <button className="logout-button" onClick={logout}>
