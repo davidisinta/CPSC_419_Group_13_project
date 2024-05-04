@@ -50,7 +50,7 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
                                         <SelectItem value="4" className="cursor-pointer">Zone 4</SelectItem>
                                     </Select>}
                                     <Link to="/about" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">About</Link>
-                                    <Link to="/report" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Report</Link>
+                                    <Link to="/inventory" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Inventory</Link>
                                     <Link to="/profile" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Profile</Link>
                                     <Link to="/map" className="text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Map</Link>
                                     {loginStatus ?
@@ -80,7 +80,7 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
                 <div className={`${click ? 'block' : 'hidden'} md:hidden`}>
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex-col text-center">
                         <Link to="/about" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">About</Link>
-                        <Link to="/report" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">Report</Link>
+                        <Link to="/inventory" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">Inventory</Link>
                         <Link to="/profile" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">Profile</Link>
                         <Link to="/map" className="text-white block px-3 py-2 rounded-md text-base font-medium hover:border-b border-white">Map</Link>
                         {loginStatus ?

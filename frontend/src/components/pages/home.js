@@ -1,9 +1,9 @@
-import InventoryTable from "../inventory_table";
+import PrinterTable from "../printerTable";
 
 export default function Home({ currentZone }) {
     return (
         <div className="home-page">
-            <InventoryTable currentZone={ currentZone }/>
+            <PrinterTable currentZone={ currentZone }/>
         </div>
     )
 };

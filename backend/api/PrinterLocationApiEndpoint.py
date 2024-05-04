@@ -9,8 +9,7 @@ def jsonify_printer_rows(data) -> Response:
         formatted_tuple = {
             "id": tuple[0],
             "loc": tuple[1], #name
-            "addr": tuple[2] + ', New Haven, CT',
-            "status": tuple[3]
+            "addr": tuple[2] + ', New Haven, CT'
         }
         out.append(formatted_tuple)
     return jsonify(out)
@@ -31,9 +30,10 @@ class PrinterLocationApiEndpoint(Resource):
             with establish_connection() as connection:
                 cursor = connection.cursor()
                 query = """
-                        SELECT l.id, l.name, l.addr, p.status
-                        FROM printer p
-                        LEFT JOIN location l on p.loc_id = l.id
+                        SELECT l.id, ln.name, la.addr
+                        FROM location l
+                        LEFT JOIN location_name ln on ln.id = l.id
+                        LEFT JOIN location_addr la on la.id = l.id
                         """
                 cursor.execute(query)
                 response = jsonify_printer_rows(cursor.fetchall())

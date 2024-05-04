@@ -10,6 +10,8 @@ import Report from "./components/pages/report";
 import About from "./components/pages/about";
 import Map from "./components/pages/map";
 import Shift from "./components/pages/shift";
+import Inventory from './components/pages/inventory';
+import Percent from './components/pages/percent';
 
 
 function App() {
@@ -33,10 +35,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home currentZone={displayZone} />} />
           <Route path="/report" element={<Report />} />
+          <Route path="/percent" element={<Percent />} />
           <Route path="/update/:id" element={<Update />} />
           <Route path="/about" element={<About />} />
           <Route path="/map" element={<Map />} />
           <Route path="/shift" element={<Shift />} />
+          <Route path="/inventory" element={<Inventory currentZone={displayZone} />} />
           <Route path="/profile" element={<Profile setLoginStatus={handleLoginStatus} loginStatus={isLoggedIn} />} />
         </Routes>
         <Footer />
