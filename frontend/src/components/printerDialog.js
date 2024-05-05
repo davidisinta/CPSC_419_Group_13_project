@@ -8,6 +8,7 @@ import {
   TabPanels } from '@tremor/react';
 import { Link } from 'react-router-dom';
 import React from 'react';
+import Cookies from 'js-cookie';
 
 
 export default function PrinterDialog({ item, onClose }) {
