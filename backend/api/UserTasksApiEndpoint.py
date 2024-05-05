@@ -13,7 +13,8 @@ def jsonify_rows(data) -> Response:
             "loc": tuple[3],
             "assigned": tuple[4],
             "completed": tuple[5],
-            "desc": tuple[6]
+            "desc": tuple[6],
+            "id": tuple[7]
         }
         out.append(formatted_tuple)
     return jsonify(out)
@@ -29,19 +30,19 @@ class UserTasksApiEndpoint(Resource):
             Jsonified task list as formatted above.
     """
     def get(self):
-        data = request.get_json()['body']
+        data = request.args.get('employee_id')
         try:
             with establish_connection() as connection:
                 cursor = connection.cursor()
                 query = """
-                        SELECT u.first_name, u.last_name, t.type, l.name, t.assigned, t.completed, t.desc
-                        FROM tasks t
+                        SELECT u.first_name, u.last_name, t.type, l.name, t.assigned, t.completed, t.desc, t.id
+                        FROM task t
                         LEFT JOIN users u on t.employee_id = u.id
                         LEFT JOIN location l on t.loc_id = l.id
-                        WHERE s.u_id = %s AND t.completed is NULL
+                        WHERE t.employee_id = %s AND t.completed is NULL
                         ORDER BY t.assigned
                         """
-                param_list = (data['user_id'])
+                param_list = (data,)
                 cursor.execute(query, param_list)
                 response = jsonify_rows(cursor.fetchall())
                 response.status_code = 200

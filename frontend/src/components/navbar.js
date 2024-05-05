@@ -12,6 +12,7 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
     // Default setting for burger menu
     const [click, setClick] = useState(false);
     const [displayZone, setDisplayZone] = useState(false);
+    const [empStatus, setStatus] = useState(false);
     //  Menu onClick function
     const handleClick = () => setClick(!click);
     // Selectively display zone dropdown
@@ -21,6 +22,7 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
     function isLoggedIn() {
         return !!Cookies.get('username');
     }
+    
 
     // Handle CAS logout
     const handleCasLogout = async () => {
@@ -45,6 +47,27 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
 
     useEffect(() => {
         location.pathname === '/' ? setDisplayZone(true) : setDisplayZone(false);
+        const isSTC = async () => {
+            const msg = {
+                id: Cookies.get('username')
+            };
+            try {
+                await axios.post("http://127.0.0.1:5000/is_stc", msg, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+                })
+                .then(response => {
+                    const isSTCResult = response.data.isSTC[0][0];
+                    setStatus(isSTCResult);
+                    console.log('empStatus:', isSTCResult);
+                });
+            }
+            catch (error) {
+                console.error('Error:', error);
+            }
+        } 
+        isSTC();
     }, [location]);
 
 
@@ -65,7 +88,7 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
                                 <div className="ml-10 flex items-center space-x-2">
                                     {displayZone &&
                                         <Select className="tremor-content-emphasis nav-item" placeholder="All Zones"
-                                            onValueChange={handleZoneChange}>
+                                                onValueChange={handleZoneChange}>
                                             <SelectItem value="all" className="cursor-pointer">All Zones</SelectItem>
                                             <SelectItem value="1" className="cursor-pointer">Zone 1</SelectItem>
                                             <SelectItem value="2" className="cursor-pointer">Zone 2</SelectItem>
@@ -73,19 +96,50 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
                                             <SelectItem value="4" className="cursor-pointer">Zone 4</SelectItem>
                                         </Select>}
 
-                                    <Link to="/inventory"
-                                        className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Inventory</Link>
+                                    {empStatus === true ? (
+                                    <>
+                                    <Link to="/inventory" 
+                                        className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium"> Inventory</Link>
+                                    <Link to="/tasks" className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Tasks</Link>
                                     <Link to="/profile"
                                         className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium"> Profile</Link>
+                                    </>
+                                    ) : null}
+
                                     <Link to="/map"
-                                        className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Map</Link>
+                                          className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Map</Link>
                                     <Link to="/about"
-                                        className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">About</Link>
+                                          className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">About</Link>
+
+
+
+
+
                                     <div>
                                         {isLoggedIn() ? (
-                                            <Button variant="primary" onClick={logout}>Logout</Button>
+                                            <div className="outer-div">
+                                        <div className="vertical-line"></div>
+                                        <span className="welcome-user" style={{whiteSpace: 'nowrap'}}>
+                                            welcome {Cookies.get('username')}
+                                        </span>
+
+                                    </div>
+
                                         ) : (
-                                            <Button variant="secondary">Login</Button>
+                                           <div> </div>
+                                        )}
+                                    </div>
+
+
+                                    <div>
+                                        {isLoggedIn() ? (
+                                            <button className="logout-button" onClick={logout}>
+                                                Logout
+                                            </button>
+                                        ) : (
+                                            <button className="login-button">
+                                                Login
+                                            </button>
                                         )}
                                     </div>
 
@@ -97,7 +151,7 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
                         {/* Mobile menu button */}
                         <div className="-mr-2 flex md:hidden">
                             <button onClick={handleClick} type="button"
-                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                                    className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                 <span className="sr-only">Open main menu</span>
                                 <svg className={`${click ? 'hidden' : 'block'} h-6 w-6`}
                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -119,10 +173,15 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
                 {/* Mobile menu, show/hide based on menu state */}
                 <div className={`${click ? 'block' : 'hidden'} md:hidden`}>
                     <div className="flex flex-col items-center pt-2 pb-3 space-y-2 sm:px-3">
-                        <Link to="/inventory"
-                            className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Inventory</Link>
-                        <Link to="/profile"
-                            className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium"> Profile</Link>
+                        {empStatus === true ? (
+                                    <>
+                                    <Link to="/inventory" 
+                                        className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium"> Inventory</Link>
+                                    <Link to="/tasks" className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Tasks</Link>
+                                    <Link to="/profile"
+                                        className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium"> Profile</Link>
+                                    </>
+                                    ) : null}
                         <Link to="/map"
                             className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Map</Link>
                         <Link to="/about"

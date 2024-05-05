@@ -35,7 +35,7 @@ export default function Profile() {
     };
     // Main component content for authenticated users
     return (
-        <div className="flex pt-16 flex-col text-center justify-center">
+        <div className="flex pt-16 flex-col text-center justify-center mainContainer">
             <div className="px-2 pt-2 pb-3 space-y-5 flex-col text-center">
                 <UserProfileCard />
                 <ShiftLog />
