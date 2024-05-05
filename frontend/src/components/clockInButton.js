@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 
 export default function ClockInButton() {
     const [open, setOpen] = useState(false);
-    const [clockedIn, setClockedIn] = useState(false);
+    const [clockedIn, setClockedIn] = useState(Cookies.get('clockedIn'));
 
     const reportActivity = async (activity) => {
         // 0 = Clock-in, 1 = Clock-out
