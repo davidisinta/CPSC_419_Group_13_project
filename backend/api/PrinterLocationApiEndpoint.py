@@ -30,10 +30,8 @@ class PrinterLocationApiEndpoint(Resource):
             with establish_connection() as connection:
                 cursor = connection.cursor()
                 query = """
-                        SELECT l.id, ln.name, la.addr
+                        SELECT l.id, l.name, l.addr
                         FROM location l
-                        LEFT JOIN location_name ln on ln.id = l.id
-                        LEFT JOIN location_addr la on la.id = l.id
                         """
                 cursor.execute(query)
                 response = jsonify_printer_rows(cursor.fetchall())

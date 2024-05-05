@@ -42,7 +42,7 @@ class ShiftReportApiEndpoint(Resource):
             Jsonified shift report as formatted above.
     """
     def get(self):
-        data = request.get_json()['body']
+        user_id = request.args.get('user_id')
         try:
             with establish_connection() as connection:
                 cursor = connection.cursor()
@@ -54,7 +54,7 @@ class ShiftReportApiEndpoint(Resource):
                         WHERE s.user_id = %s
                         ORDER BY a.shift_id, a.time
                         """
-                param_list = (data['user_id'])
+                param_list = (user_id,)
                 cursor.execute(query, param_list)
                 response = jsonify_rows(cursor.fetchall())
                 response.status_code = 200

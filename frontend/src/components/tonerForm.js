@@ -16,7 +16,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 
-export default function InventoryForm({ printer }) {
+export default function TonerForm({ printer }) {
     // Declaring state variables
     const navigate = useNavigate();
     const [tonerCounts, setTonerCounts] = useState({

@@ -1,7 +1,8 @@
-import PrinterTable from "../printerTable";
 import {useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
 import {useEffect} from "react";
+import PrinterTable from "../printerTable";
+
 
 export default function Home({ currentZone }) {
 
