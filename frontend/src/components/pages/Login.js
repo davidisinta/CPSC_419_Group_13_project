@@ -103,16 +103,16 @@ const Login = () => {
           <div>Login</div>
         </div>
         <input
-          value={email}
-          placeholder="yale email"
-          onChange={handleChange}
-          className={'inputBox'}
+            value={email}
+            placeholder="yale email"
+            onChange={handleChange}
+            className={'inputBox'}
         />
         {emailError && <label className="errorLabel">{emailError}</label>}
 
 
         <div className={'inputContainer'}>
-          <Button variant="primary" onClick={handleCasLogin}> Login with CAS </Button>
+          <input className={'inputButton'} type="button" onClick={handleCasLogin} value={'Next'}/>
         </div>
       </div>
     </div>
