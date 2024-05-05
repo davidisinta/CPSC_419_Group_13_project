@@ -52,13 +52,9 @@ const About = () => {
                         <h1 className="text-4xl font-bold text-gray-800 mb-4">About Our App</h1>
                         <p className="text-lg text-gray-700 mb-8">Our web application streamlines inventory management
                             and
-                            technician assignments for campus clusters. By automating location assignments based on
-                            factors
-                            like recent visits and proximity, we optimize resource allocation and save time for cluster
-                            technicians. With a user-friendly interface and a robust tech stack including React JS,
+                            technician assignments for Yale campus computer clusters. With a user-friendly interface and a robust tech stack including React JS,
                             PostgreSQL, and Flask, our app empowers users at every level to efficiently manage inventory
-                            and
-                            assignments.</p>
+                            and perform tasks more efficiently.</p>
                     </div>
                 </div>
                 <div className="max-w-4xl mx-auto px-4 py-8">

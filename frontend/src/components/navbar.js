@@ -75,9 +75,9 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
 
                                     <Link to="/inventory"
 
-                                        className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Inventory</Link>
+                                          className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Inventory</Link>
                                     <Link to="/tasks"
-                                        className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Tasks</Link>
+                                          className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Tasks</Link>
                                     <Link to="/profile"
                                           className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium"> Profile</Link>
                                     <Link to="/map"
@@ -85,11 +85,23 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
                                     <Link to="/about"
                                           className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">About</Link>
 
-                                    <div className="outer-div">
-                                            <span className="welcome-user" style={{whiteSpace: 'nowrap'}}>
+
+
+
+
+                                    <div>
+                                        {isLoggedIn() ? (
+                                            <div className="outer-div">
+                                        <div className="vertical-line"></div>
+                                        <span className="welcome-user" style={{whiteSpace: 'nowrap'}}>
                                             welcome {Cookies.get('username')}
                                         </span>
 
+                                    </div>
+
+                                        ) : (
+                                           <div> </div>
+                                        )}
                                     </div>
 
 

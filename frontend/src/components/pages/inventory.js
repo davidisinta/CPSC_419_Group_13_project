@@ -39,7 +39,7 @@ export default function Iventory({currentZone}) {
 
 
     return (
-        <div className="printer-page mainContainer">
+        <div className="printer-page">
             <InventoryTable currentZone={ currentZone }/>
         </div>
     )
