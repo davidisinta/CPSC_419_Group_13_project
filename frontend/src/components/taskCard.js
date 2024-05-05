@@ -31,7 +31,7 @@ export default function TaskCard({employee_id}){
 
     useEffect(() => {
         getTaskList();
-    }, [taskList]);
+    }, []);
 
     const handleClick = async (task) => {
         console.log("completed task:", task);

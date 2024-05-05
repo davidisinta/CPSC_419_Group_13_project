@@ -41,7 +41,7 @@ export default function ClockInButton() {
             if (response.status === 200) {
                 console.log('Clocked in successfully');
                 // Set shift_id cookie
-                Cookies.set('shift_id', response.data.shift_id, { expires: 1 });
+                Cookies.set('shift_id', response.data.shift_id);
                 // Close dialog
                 setOpen(!open);
                 // Update clockedIn state 
@@ -58,6 +58,7 @@ export default function ClockInButton() {
 
     const handleClockOut = async () => {
         // Send time stamp to backend
+        console.log('shift id:', Cookies.get('shift_id'))
         await axios.post('http://127.0.0.1:5000/clock_out', {
             body: {
                 time: new Date().toISOString(),
@@ -67,8 +68,6 @@ export default function ClockInButton() {
         .then((response) => {
             if (response.status === 200) {
                 console.log('Clocked out successfully');
-                // Remove shift_id cookie
-                Cookies.remove('shift_id');
                 // Close dialog
                 setOpen(!open);
                 // Update clockedIn state 
