@@ -23,7 +23,8 @@ from backend.api.CheckRoleApiEndpoint import CheckRoleApiEndpoint
 from backend.api.CompleteTaskApiEndpoint import CompleteTaskApiEndpoint
 
 from backend.authentication.cas_auth import cas_auth    
-
+from backend.api.UserTasksApiEndpoint import UserTasksApiEndpoint
+from backend.api.UserProfileDataApiEndpoint import UserProfileDataApiEndpoint
 
 
 def create_app(config_name='default'):
@@ -51,6 +52,7 @@ def create_app(config_name='default'):
     api.add_resource(ResolveReportApiEndpoint, '/resolve')
     api.add_resource(GetReportsApiEndpoint, '/get_reports')
     api.add_resource(AssignTaskApiEndpoint, '/assign')
+    api.add_resource(UserProfileDataApiEndpoint, '/profile')
     api.add_resource(CheckRoleApiEndpoint, '/is_stc')
     api.add_resource(CompleteTaskApiEndpoint, '/complete')
 
