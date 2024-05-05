@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import ShiftLog from '../shiftLog';
 import UserProfileCard from '../userProfileCard';
+import TaskCard from '../taskCard';
 
 export default function Profile() {
     // Declare variables
@@ -31,6 +32,7 @@ export default function Profile() {
         <div className="flex pt-16 flex-col text-center justify-center">
             <div className="px-2 pt-2 pb-3 space-y-5 flex-col text-center">
                 <UserProfileCard />
+                <TaskCard employee_id={Cookies.get('username')}/>
                 <ShiftLog />
             </div>
         </div>
