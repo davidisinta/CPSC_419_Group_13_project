@@ -21,6 +21,7 @@ from backend.api.GetReportsApiEndpoint import GetReportsApiEndpoint
 from backend.api.AssignTaskApiEndpoint import AssignTaskApiEndpoint
 from backend.api.CheckRoleApiEndpoint import CheckRoleApiEndpoint
 from backend.api.CompleteTaskApiEndpoint import CompleteTaskApiEndpoint
+
 from backend.authentication.cas_auth import cas_auth    
 
 
@@ -52,6 +53,7 @@ def create_app(config_name='default'):
     api.add_resource(AssignTaskApiEndpoint, '/assign')
     api.add_resource(CheckRoleApiEndpoint, '/is_stc')
     api.add_resource(CompleteTaskApiEndpoint, '/complete')
+
 
     # Register Flask-Blueprint resources
     stc_app.register_blueprint(cas_auth, url_prefix='/cas')
