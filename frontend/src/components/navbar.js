@@ -51,20 +51,22 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
             const msg = {
                 id: Cookies.get('username')
             };
-            try {
-                await axios.post("http://127.0.0.1:5000/is_stc", msg, {
-                headers: {
-                    'Content-Type': 'application/json'
+            if (isLoggedIn()){
+                try {
+                    await axios.post("http://127.0.0.1:5000/is_stc", msg, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                    })
+                    .then(response => {
+                        const isSTCResult = response.data.isSTC[0][0];
+                        setStatus(isSTCResult);
+                        console.log('empStatus:', isSTCResult);
+                    });
                 }
-                })
-                .then(response => {
-                    const isSTCResult = response.data.isSTC[0][0];
-                    setStatus(isSTCResult);
-                    console.log('empStatus:', isSTCResult);
-                });
-            }
-            catch (error) {
-                console.error('Error:', error);
+                catch (error) {
+                    console.error('Error:', error);
+                }
             }
         } 
         isSTC();
