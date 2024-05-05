@@ -8,6 +8,7 @@ import {
   TabPanels } from '@tremor/react';
 import { Link } from 'react-router-dom';
 import React from 'react';
+import TaskCard from './taskCard';
 
 
 export default function TaskDialog({ item, onClose }) {
@@ -15,7 +16,7 @@ export default function TaskDialog({ item, onClose }) {
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="rounded-lg">
-        <Card className="mx-auto max-w-xs">
+        <Card className="mx-auto max-w-xxl">
           <p className="text-2xl text-center text-tremor-content-strong dark:text-dark-tremor-content">{item.loc}</p>
           <p className="text-l text-center text-tremor-content-strong dark:text-dark-tremor-content">{item.addr}</p>
           <div className="flex justify-center space-x-5 pt-5">
@@ -27,7 +28,12 @@ export default function TaskDialog({ item, onClose }) {
                 </TabList>
                 <TabPanels>
                   <TabPanel>
-                    {/*code here*/}
+                  <div className="flex justify-center space-x-4">
+                    <TaskCard employee_id={item.id} />
+                  </div>
+                  <div className="flex justify-center mt-4">
+                    <Button size='xs' variant="secondary" onClick={onClose}>Close</Button>
+                  </div>
                   </TabPanel>
                   <TabPanel>
                     <div className='pb-2'>
