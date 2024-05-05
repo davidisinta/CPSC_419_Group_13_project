@@ -12,6 +12,7 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
     // Default setting for burger menu
     const [click, setClick] = useState(false);
     const [displayZone, setDisplayZone] = useState(false);
+    const [empStatus, setStatus] = useState(false);
     //  Menu onClick function
     const handleClick = () => setClick(!click);
     // Selectively display zone dropdown
@@ -21,6 +22,7 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
     function isLoggedIn() {
         return !!Cookies.get('username');
     }
+    
 
     // Handle CAS logout
     const handleCasLogout = async () => {
@@ -45,6 +47,27 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
 
     useEffect(() => {
         location.pathname === '/' ? setDisplayZone(true) : setDisplayZone(false);
+        const isSTC = async () => {
+            const msg = {
+                id: Cookies.get('username')
+            };
+            try {
+                await axios.post("http://127.0.0.1:5000/is_stc", msg, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+                })
+                .then(response => {
+                    const isSTCResult = response.data.isSTC[0][0];
+                    setStatus(isSTCResult);
+                    console.log('empStatus:', isSTCResult);
+                });
+            }
+            catch (error) {
+                console.error('Error:', error);
+            }
+        } 
+        isSTC();
     }, [location]);
 
 
@@ -73,13 +96,16 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
                                             <SelectItem value="4" className="cursor-pointer">Zone 4</SelectItem>
                                         </Select>}
 
-                                    <Link to="/inventory"
-
-                                          className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Inventory</Link>
-                                    <Link to="/tasks"
-                                          className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Tasks</Link>
+                                    {empStatus === true ? (
+                                    <>
+                                    <Link to="/inventory" 
+                                        className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium"> Inventory</Link>
+                                    <Link to="/tasks" className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Tasks</Link>
                                     <Link to="/profile"
-                                          className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium"> Profile</Link>
+                                        className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium"> Profile</Link>
+                                    </>
+                                    ) : null}
+
                                     <Link to="/map"
                                           className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Map</Link>
                                     <Link to="/about"
@@ -147,10 +173,15 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
                 {/* Mobile menu, show/hide based on menu state */}
                 <div className={`${click ? 'block' : 'hidden'} md:hidden`}>
                     <div className="flex flex-col items-center pt-2 pb-3 space-y-2 sm:px-3">
-                        <Link to="/inventory"
-                            className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Inventory</Link>
-                        <Link to="/profile"
-                            className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium"> Profile</Link>
+                        {empStatus === true ? (
+                                    <>
+                                    <Link to="/inventory" 
+                                        className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium"> Inventory</Link>
+                                    <Link to="/tasks" className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Tasks</Link>
+                                    <Link to="/profile"
+                                        className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium"> Profile</Link>
+                                    </>
+                                    ) : null}
                         <Link to="/map"
                             className="nav-item text-white hover:border-b border-white px-3 py-2 rounded-md text-sm font-medium">Map</Link>
                         <Link to="/about"
