@@ -33,7 +33,7 @@ export default function UserProfileCard() {
         await axios.get('http://localhost:5000/tasks',
             {
                 params: {
-                    user_id: Cookies.get('username')
+                    employee_id: Cookies.get('username')
                 }
             })
             .then((response) => {
