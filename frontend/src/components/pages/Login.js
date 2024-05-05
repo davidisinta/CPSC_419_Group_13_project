@@ -97,29 +97,25 @@ const Login = () => {
   };
 
   return (
-      <div className={'mainContainer'}>
-        {loggedIn ? (
-            <div>Welcome {username}!!!</div>
-        ) : (
-            <div>
-              <div className={'titleContainer'}>
-                <div>Login</div>
-              </div>
-              <input
-                  value={email}
-                  placeholder="yale email"
-                  onChange={handleChange}
-                  className={'inputBox'}
-              />
-              {emailError && <label className="errorLabel">{emailError}</label>}
+    <div className={'mainContainer'}>
+      <div>
+        <div className={'titleContainer'}>
+          <div>Login</div>
+        </div>
+        <input
+          value={email}
+          placeholder="yale email"
+          onChange={handleChange}
+          className={'inputBox'}
+        />
+        {emailError && <label className="errorLabel">{emailError}</label>}
 
 
-              <div className={'inputContainer'}>
-                <input className={'inputButton'} type="button" onClick={handleCasLogin} value={'Next'}/>
-              </div>
-            </div>
-        )}
+        <div className={'inputContainer'}>
+          <Button variant="primary" onClick={handleCasLogin}> Login with CAS </Button>
+        </div>
       </div>
+    </div>
   );
 };
 

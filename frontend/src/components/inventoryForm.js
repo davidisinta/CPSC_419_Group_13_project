@@ -14,6 +14,7 @@ import {
 } from '@tremor/react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 
 export default function InventoryForm({ location }) {
@@ -51,6 +52,27 @@ export default function InventoryForm({ location }) {
             [equipmentType]: value
         });
     };
+    const reportActivity = async (activity) => {
+        // 2 = Toner change, 3 = Paper change, 4 = Equipment change
+        axios.post("http://127.0.0.1:5000/log_activity", {
+            body: {
+                shift_id: Cookies.get('shift_id'),
+                type: activity,
+                time: new Date().toISOString(),
+                loc_id: location.id
+            }
+        })
+        .then((response) => {
+            if (response.status === 200) {
+                if (activity === 2) console.log('Toner change activity logged successfully');
+                else if (activity === 3) console.log('Paper change activity logged successfully');
+                else console.log('Equipment change activity logged successfully');
+            }
+        })
+        .catch((error) => {
+            console.error(`Error logging activity ${activity} ${error})`);
+        });
+    };
     // Function to handle form submission
     let endpoint = 'http://127.0.0.1:5000/';
     const handleSubmit = async (event) => {
@@ -61,21 +83,23 @@ export default function InventoryForm({ location }) {
             paper_count: paperCount,
             equipment: equipment,
         };
-        console.log(msg);
         endpoint = endpoint + 'update_inventory';
         try {
-            await axios.post(endpoint, {
-                body: msg
-            })
-            .then(response => {
-                console.log('Success:', response);
-            });
-        }
-        catch (error) {
-            console.error('Error:', error);
+            const response = await axios.post(endpoint, { body: msg });
+            console.log('Success submitting inventory form:', response);
+            try {
+                await reportActivity(2);
+                await reportActivity(3);
+                await reportActivity(4);
+            } catch (error) {
+                console.error('Error reporting inventory form activity:', error);
+            }
+        } catch (error) {
+            console.error('Error submitting inventory form:', error);
         }
         navigate('/inventory');
     };
+
     // Fetch toner types from the backend on page load
     useEffect(() => {
         const fetchTonerTypes = async () => {
