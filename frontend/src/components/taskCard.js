@@ -6,9 +6,9 @@ export default function TaskCard({employee_id}){
     const [taskList, setTaskList] = useState([]);
     const typeMap = {
         0: "Printer Offline",
-        0: "Low Toner",
-        0: "Low Paper",
-        0: "Other"
+        1: "Low Toner",
+        2: "Low Paper",
+        3: "Other"
     }
     const getTaskList = async () => {
         await axios.get('http://localhost:5000/tasks',
@@ -31,7 +31,7 @@ export default function TaskCard({employee_id}){
 
     useEffect(() => {
         getTaskList();
-    }, [taskList]);
+    }, []);
 
     const handleClick = async (task) => {
         console.log("completed task:", task);
