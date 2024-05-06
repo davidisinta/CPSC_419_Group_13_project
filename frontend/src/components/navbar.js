@@ -118,9 +118,13 @@ export default function NavBar({ handleZoneChange, setLoginStatus, loginStatus }
                                     <div>
                                         {isLoggedIn() ? (
                                             <div className="outer-div">
-                                                <div className="vertical-line"></div>
+                                                <div className="vertical-line">    </div>
+                                                <pre>
+                                                   <div>  </div>
+
+                                               </pre>
                                                 <span className="welcome-user" style={{whiteSpace: 'nowrap'}}>
-                                            welcome {Cookies.get('username')}
+                                             welcome {Cookies.get('username')}
                                         </span>
 
                                             </div>
