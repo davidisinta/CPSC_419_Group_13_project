@@ -1,4 +1,4 @@
-## Navigation Links
+## Table Of Contents
 - [CPSC 419 Project Overview](#cpsc-419-project-overview)
 - [Proposed Tech Stack](#proposed-tech-stack)
 - [Additional Features](#additional-features)
@@ -7,7 +7,7 @@
 
 ---
 
-## CPSC 419 Project Overview
+## Project Overview
 
 We are developing a web application with two primary objectives: to assist STC cluster technicians (CTs) in effectively managing inventory through an intuitive interface and to automate the process of assigning CTs to specific locations within a campus cluster. 
 
@@ -17,7 +17,7 @@ Traditionally, CTs determine their shift locations independently, visiting aroun
 
 We also provide a public interface for students to see Yale's printer statuses on a main dashboard and interactive map. Students can view toner levels and printer statuses as well as report any problems encountered.
 
-## Proposed Tech Stack
+## Tech Stack
 - **React JS**: Frontend User Interface
 - **PostgreSQL**: Database Management
 - **Flask**: Backend Development
@@ -26,6 +26,15 @@ We also provide a public interface for students to see Yale's printer statuses o
 - **General User Side**: Interface for users to see location statuses and upvote location priority.
 - **Cluster Tech Side**: Interface for CTs to view assigned locations and update inventory counts.
 - **Admin Side**: Interface for administrators to assign/modify tasks for cluster techs manually.
+
+## Running the Frontend
+
+To run the frontend locally, follow these steps:
+- From root directory, Navigate to the frontend directory `cd /frontend`.
+- Install project dependencies: `npm install`.
+- Build the app: `npm run build`.
+- Install serve package (if not already installed): `npm install -g serve`.
+- Serve the built application: `serve -s build -l 3000`. After running these commands, your frontend application should be accessible in a web browser at [http://localhost:3000](http://localhost:3000).
 
 ## Running the Backend
 
@@ -39,11 +48,4 @@ A copy of our database schema can be found in the stc.sql file in the backend di
 
 - **Admin Side**: Interface for administrators to interact with the location scheduling algorithm and manage system settings.
 
-## Running the Frontend
 
-To run the frontend locally, follow these steps:
-- From root directory, Navigate to the frontend directory `cd /frontend`.
-- Install project dependencies: `npm install`.
-- Build the app: `npm run build`.
-- Install serve package (if not already installed): `npm install -g serve`.
-- Serve the built application: `serve -s build -l 3000`. After running these commands, your frontend application should be accessible in a web browser at [http://localhost:3000](http://localhost:3000).
