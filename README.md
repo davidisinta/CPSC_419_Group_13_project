@@ -19,6 +19,7 @@ We also provide a public interface for students to see Yale's printer statuses o
 - **React JS**: Frontend User Interface
 - **PostgreSQL**: Database Management
 - **Flask**: Backend Development
+- **Docker**: Tooling (consistent builds across different machines)
 
 ## Additional Features
 - **General User Side**: Interface for users to see location statuses and upvote location priority.
