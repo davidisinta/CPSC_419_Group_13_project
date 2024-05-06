@@ -24,7 +24,7 @@ We also provide a public interface for students to see Yale's printer statuses o
 ## Additional Features
 - **General User Side**: Interface for users to see location statuses and upvote location priority.
 - **Cluster Tech Side**: Interface for CTs to view assigned locations and update inventory counts.
-- **Admin Side**: Interface for administrators to assign/modify tasks for cluster techs manually.
+- **Admin Side**: Interface for administrators to interact with the location scheduling algorithm and manage system settings.
 
 ## Running the Frontend
 
@@ -43,11 +43,10 @@ To run the frontend locally, follow these steps:
 - To run the app: `flask run`.
 
 
+## Sidenote
 We have granted Alan's netid admin privileges for full view of the capabilities of our app.
 Please reach out to fisher.marks@yale.edu for a quick response if there are any difficulties.
 
 A copy of our database schema can be found in the stc.sql file in the backend directory. The database is being hosted through neon, which can be found here: [neon](https://console.neon.tech/app/projects/frosty-darkness-11741169). Alan's email should have access to view the project for a more readable view of our database. There might be leftover rows in the shift table that don't make a lot of sense when testing with Postman, but doesn't affect the accuracy or functionality of the app so can be disregarded.
-
-- **Admin Side**: Interface for administrators to interact with the location scheduling algorithm and manage system settings.
 
 
