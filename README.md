@@ -2,8 +2,9 @@
 - [Project Overview](#project-overview)
 - [Tech Stack](#tech-stack)
 - [Additional Features](#additional-features)
-- [Running the Backend](#running-the-backend)
 - [Running the Frontend](#running-the-frontend)
+- [Running the Backend](#running-the-backend)
+
 
 ---
 
