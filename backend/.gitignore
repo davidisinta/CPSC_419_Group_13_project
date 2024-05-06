@@ -2,7 +2,6 @@
 /.venv
 
 # Ignore any local development settings
-*.env
 *.pyc
 
 # Ignore system-specific files
