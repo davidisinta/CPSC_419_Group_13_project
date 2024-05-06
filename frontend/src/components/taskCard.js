@@ -54,7 +54,7 @@ export default function TaskCard({employee_id}){
         catch (error) {
             console.error('Error:', error);
         }
-
+        getTaskList();
     };
     
 

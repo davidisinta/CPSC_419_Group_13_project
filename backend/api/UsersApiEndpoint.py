@@ -40,11 +40,9 @@ class UsersApiEndpoint(Resource):
             with establish_connection() as connection:
                 cursor = connection.cursor()
                 query = """
-                        SELECT u.id, u.first_name, u.last_name, u.role, u.email, COUNT(t.id) AS uncompleted_tasks
+                        SELECT u.id, u.first_name, u.last_name, u.role, u.email, 
+                            (SELECT COUNT(*) FROM task t WHERE t.employee_id = u.id AND t.completed IS NULL) AS uncompleted_tasks
                         FROM users u
-                        LEFT JOIN task t ON u.id = t.employee_id
-                        WHERE t.completed IS NULL
-                        GROUP BY u.id, u.first_name, u.last_name, u.role, u.email
                         ORDER BY u.role;
                         """
                 cursor.execute(query)
