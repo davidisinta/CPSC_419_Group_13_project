@@ -1,6 +1,6 @@
 ## Table Of Contents
-- [CPSC 419 Project Overview](#cpsc-419-project-overview)
-- [Proposed Tech Stack](#proposed-tech-stack)
+- [CPSC 419 Project Overview](#project-overview)
+- [Proposed Tech Stack](#tech-stack)
 - [Additional Features](#additional-features)
 - [Running the Backend](#running-the-backend)
 - [Running the Frontend](#running-the-frontend)
