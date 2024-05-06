@@ -22,8 +22,8 @@ In addition to location assignment automation, we aim to enhance inventory manag
 ## Running the Frontend
 
 To run the frontend locally, follow these steps:
-- Navigate to the directory containing your frontend code: `cd /path/to/your/frontend`.
+- From root directory, Navigate to the frontend directory `cd /frontend`.
 - Install project dependencies: `npm install`.
 - Build the app: `npm run build`.
 - Install serve package (if not already installed): `npm install -g serve`.
-- Serve the built application: `serve -s build -l 5000`. After running these commands, your frontend application should be accessible in a web browser at [http://localhost:5000](http://localhost:5000).
+- Serve the built application: `serve -s build -l 3000`. After running these commands, your frontend application should be accessible in a web browser at [http://localhost:3000](http://localhost:3000).
