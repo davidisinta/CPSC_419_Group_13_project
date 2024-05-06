@@ -39,9 +39,12 @@ To run the frontend locally, follow these steps:
 
 ## Running the Backend
 
-Requirements for the backend can be installed to your virtual environment using `pip install -r requirements.txt` in the backend directory.
-To run the app, run `flask run` in the backend directory.
-The app should pull up ready to use. 
+To run the frontend locally, follow these steps:
+- From root directory, Navigate to the backend directory `cd /backend`.
+- Install project dependencies: `pip install -r requirements.txt`.
+- To run the app: `flask run`.
+
+
 We have granted Alan's netid admin privileges for full view of the capabilities of our app.
 Please reach out to fisher.marks@yale.edu for a quick response if there are any difficulties.
 
