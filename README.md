@@ -17,3 +17,13 @@ In addition to location assignment automation, we aim to enhance inventory manag
 - **General User Side**: Interface for users to see location statuses and upvote location priority.
 - **Cluster Tech Side**: Interface for CTs to view assigned locations and update inventory counts.
 - **Admin Side**: Interface for administrators to interact with the location scheduling algorithm and manage system settings.
+
+
+## Running the Frontend
+
+To run the frontend locally, follow these steps:
+- Navigate to the directory containing your frontend code: `cd /path/to/your/frontend`.
+- Install project dependencies: `npm install`.
+- Build the app: `npm run build`.
+- Install serve package (if not already installed): `npm install -g serve`.
+- Serve the built application: `serve -s build -l 5000`. After running these commands, your frontend application should be accessible in a web browser at [http://localhost:5000](http://localhost:5000).
