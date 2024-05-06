@@ -21,9 +21,13 @@ We also provide a public interface for students to see Yale's printer statuses o
 
 
 
-## Running the app
+## Running the Backend
 
-Requirements for the backend can be installed to your virtual environment using `pip install -r requirements.txt` in the backend directory. Running `npm install` in the frontend directory installs necessary frontend libraries. To run the app, run `flask run` in the backend directory, then `npm start` in the frontend directory. The app should pull up ready to use. We have granted Alan's netid admin privileges for full view of the capabilities of our app. Please reach out to fisher.marks@yale.edu for a quick response if there are any difficulties.
+Requirements for the backend can be installed to your virtual environment using `pip install -r requirements.txt` in the backend directory.
+To run the app, run `flask run` in the backend directory.
+The app should pull up ready to use. 
+We have granted Alan's netid admin privileges for full view of the capabilities of our app.
+Please reach out to fisher.marks@yale.edu for a quick response if there are any difficulties.
 
 A copy of our database schema can be found in the stc.sql file in the backend directory. The database is being hosted through neon, which can be found here: https://console.neon.tech/app/projects/frosty-darkness-11741169. Alan's email should have access to view the project for a more readable view of our database. There might be leftover rows in the shift table that don't make a lot of sense when testing with Postman, but doesn't affect the accuracy or functionality of the app so can be disregarded.
 
